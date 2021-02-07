@@ -15,6 +15,11 @@ class Testcheckem(unittest.TestCase):
         res_md = cm.show_parsed_urls("urls.md")
         self.assertEqual(len(res_md), 6)
 
+    def test_visiting(self):
+        res, number_moved = cm.visit_urls("C:\\Users\\Nelg\\Desktop\\checkem\\urls.md")
+        self.assertEqual(number_moved, 3)
+
+
 
 
 if __name__ == "__main__":

@@ -10,7 +10,7 @@ def find_links(input_string):
     :return  Extracts links from MarkDown code
 
     """
-    matched_urls = re.sub(r"(\!|\[.*\])(\()(.*)(\))", "\\3", input_string)
+    matched_urls = re.sub(r"(\[.*\])(\()(.*)(\))", "\\3", input_string)
 
     return matched_urls
 
@@ -20,7 +20,7 @@ def find_links(input_string):
 def show_parsed_urls(input_file):
 
     input_file = open(input_file)
-    matched_urls = list(filter(None,[re.sub("\n", "", find_links(line)) for line in input_file]))
+    matched_urls = list(filter(None,[re.sub("\n|\!", "", find_links(line)) for line in input_file]))
     input_file.close()
     return matched_urls
 

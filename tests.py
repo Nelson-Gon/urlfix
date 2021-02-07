@@ -16,7 +16,7 @@ class Testcheckem(unittest.TestCase):
         self.assertEqual(len(res_md), 6)
 
     def test_visiting(self):
-        res, number_moved = cm.visit_urls("C:\\Users\\Nelg\\Desktop\\checkem\\urls.md")
+        res, number_moved = cm.visit_urls("urls.md")
         self.assertEqual(number_moved, 3)
 
 

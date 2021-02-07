@@ -17,7 +17,7 @@ class Testurlfix(unittest.TestCase):
 
     def test_visiting(self):
         res, number_moved = fix.visit_urls("urls.md")
-        self.assertEqual(number_moved, 4)
+        self.assertEqual(number_moved, 3)
 
 
 if __name__ == "__main__":

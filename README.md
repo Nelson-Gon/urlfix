@@ -16,6 +16,16 @@
 
 
 
+`checkem` aims to find all outdated URLs in a given file and fix them. 
+
+**Supported file formats**
+
+`checkem` currently fixes URLs given a file of the following types:
+
+- [x] MarkDown (.md)
+- [x] Plain Text files (.txt)
+
+
 **Installation**
 
 The simplest way to install the latest release is as follows:
@@ -58,6 +68,9 @@ python3 setup.py install
 from checkem import checkmate as cm 
 
 ```
+
+**Replacing URLs written in .md format**
+
 
 
 **Thank you very much**. 

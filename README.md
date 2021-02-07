@@ -1,6 +1,8 @@
 # checkem: Check and Fix Outdated URLs
 
+
 [![PyPI version fury.io](https://badge.fury.io/py/checkem.svg)](https://pypi.python.org/pypi/checkem/)
+[![DOI](https://zenodo.org/badge/336733328.svg)](https://zenodo.org/badge/latestdoi/336733328)
 [![Project Status](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active) 
 ![Test-Package](https://github.com/Nelson-Gon/checkem/workflows/Test-Package/badge.svg)
 ![Travis Build](https://travis-ci.com/Nelson-Gon/checkem.svg?branch=master)
@@ -33,7 +35,7 @@ Open the Terminal/CMD/Git bash/shell and enter
 pip install git+https://github.com/Nelson-Gon/checkem.git
 
 # or for the less stable dev version
-pip install git+https://github.com/Nelson-Gon/checkem.git@develop
+pip install git+https://github.com/Nelson-Gon/checkem.git@dev
 
 ```
 
@@ -60,7 +62,7 @@ from checkem import checkmate as cm
 
 **Thank you very much**. 
 
-> To report any issues, suggestions or improvement, please do so 
+To report any issues, suggestions or improvement, please do so 
 at [issues](https://github.com/Nelson-Gon/checkem/issues). 
 
 > “Before software can be reusable it first has to be usable.” – Ralph Johnson

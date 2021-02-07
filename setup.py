@@ -13,6 +13,6 @@ setup(name='checkem',
       packages=find_packages(),
       long_description=open('README.md', encoding="utf-8").read(),
       long_description_content_type='text/markdown',
-      install_requires=['urllib'],
+      install_requires=[],
       python_requires='>=3.6',
       zip_safe=False)

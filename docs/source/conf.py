@@ -23,7 +23,7 @@ copyright = '2021, Nelson Gonzabato'
 author = 'Nelson Gonzabato'
 
 # The full version, including alpha/beta/rc tags
-release = "0.1.0"
+release = "0.1.1"
 
 source_suffix = ['.rst', '.md']
 

@@ -1,11 +1,16 @@
 
-checkem: A python interface to FoodDataCentral
-==============================================
+checkem: Check and Fix Outdated URLs
+====================================
 
 
 .. image:: https://badge.fury.io/py/checkem.svg
    :target: https://pypi.python.org/pypi/checkem/
    :alt: PyPI version fury.io
+
+
+.. image:: https://zenodo.org/badge/336733328.svg
+   :target: https://zenodo.org/badge/latestdoi/336733328
+   :alt: DOI
 
 
 .. image:: http://www.repostatus.org/badges/latest/active.svg
@@ -76,7 +81,7 @@ Open the Terminal/CMD/Git bash/shell and enter
    pip install git+https://github.com/Nelson-Gon/checkem.git
 
    # or for the less stable dev version
-   pip install git+https://github.com/Nelson-Gon/checkem.git@develop
+   pip install git+https://github.com/Nelson-Gon/checkem.git@dev
 
 Otherwise:
 
@@ -96,10 +101,10 @@ Otherwise:
 
 **Thank you very much**. 
 
-..
+To report any issues, suggestions or improvement, please do so 
+at `issues <https://github.com/Nelson-Gon/checkem/issues>`_. 
 
-   To report any issues, suggestions or improvement, please do so 
-   at `issues <https://github.com/Nelson-Gon/checkem/issues>`_. 
+..
 
    “Before software can be reusable it first has to be usable.” – Ralph Johnson
 
@@ -108,4 +113,4 @@ Otherwise:
 
 If you would like to cite this work, please use:
 
-Nelson Gonzabato(2020) checkem: A python interface to FoodDataCentral, https://github.com/Nelson-Gon/checkem
+Nelson Gonzabato(2021) checkem: Check and Fix Outdated URLs https://github.com/Nelson-Gon/checkem

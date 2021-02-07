@@ -5,12 +5,10 @@ import re
 def find_links(input_string):
     """
 
-    Parameters
-    ----------
-    input_string String to search for markdown like links
 
-    Returns Extracts links from MarkDown code
-    -------
+    :param input_string String to search for markdown like links
+    :return  Extracts links from MarkDown code
+
 
     """
     matched_urls = re.sub(r"(\[.*\])(\()(.*)(\))", "\\3", input_string)
@@ -20,13 +18,11 @@ def find_links(input_string):
 def clean_url(string, remove_what):
     """
 
-    Parameters
-    ----------
-    string A string for which a replacement is needed
-    remove_what The pattern to replace
 
-    Returns Replacements as requested.
-    -------
+    :param string A string for which a replacement is needed
+    :param remove_what The pattern to replace
+    :return  Replacements as requested.
+
 
     """
     return re.sub(remove_what, "", string)
@@ -38,12 +34,10 @@ def clean_url(string, remove_what):
 def visit_urls(input_file):
     """
 
-    Parameters
-    ----------
-    input_file File whose links you need to replace or check.
+    :param input_file File whose links you need to replace or check.
 
-    Returns File with links replaced.
-    -------
+    :return  File with links replaced.
+
 
     """
     # TODO: Finalize string replacement in input file.

@@ -18,12 +18,12 @@ sys.path.insert(0, os.path.abspath('../../'))
 
 # -- Project information -----------------------------------------------------
 
-project = 'checkem'
+project = 'urlfix'
 copyright = '2021, Nelson Gonzabato'
 author = 'Nelson Gonzabato'
 
 # The full version, including alpha/beta/rc tags
-release = "0.1.1"
+release = "0.1.0"
 
 source_suffix = ['.rst', '.md']
 

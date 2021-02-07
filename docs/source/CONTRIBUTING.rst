@@ -1,8 +1,8 @@
 
-Contributing to checkem
-=======================
+Contributing to urlfix
+======================
 
-This document provides guidelines for contributions to ``checkem``.
+This document provides guidelines for contributions to ``urlfix``.
 
 **Kinds of contribution**
 
@@ -21,7 +21,7 @@ Please also update the docs using ``sphinx``
 
 
 * 
-  Please raise an issue for discussion and reproducibility checks at `issues <https://github.com/Nelson-Gon/checkem/issues>`_
+  Please raise an issue for discussion and reproducibility checks at `issues <https://github.com/Nelson-Gon/urlfix/issues>`_
 
 * 
   Once the bug/enhancement is approved, please create a Git branch for the pull request.
@@ -40,13 +40,6 @@ Please also update the docs using ``sphinx``
    bash scripts/mkdocs.sh
 
 
-* Test that the sample script (\ ``sample.py``\ ) works as expected:
-
-.. code-block:: shell
-
-   python sample.py
-
-
 * Release with ``release.py`` if necessary 
 
 .. code-block:: shell
@@ -61,6 +54,6 @@ The above does the following:
 * Uploads ``dist`` to test.pypi.org with ``twine upload --repository-url https://test.pypi.org/legacy/ dist/*``
 * If everything looks good, asks you to upload to pypi.org with ``twine upload dist/*``
 
-Please note that the 'checkem' project is released with a
-`Contributor Code of Conduct <https://github.com/Nelson-Gon/checkem/.github/CODE_OF_CONDUCT.md>`_.
+Please note that the 'urlfix' project is released with a
+`Contributor Code of Conduct <https://github.com/Nelson-Gon/urlfix/.github/CODE_OF_CONDUCT.md>`_.
 By contributing to this project, you agree to abide by its terms.

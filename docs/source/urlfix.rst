@@ -1,13 +1,13 @@
-checkem package
+urlfix package
 ===============
 
 Submodules
 ----------
 
-checkem.checkmate module
+urlfix.fixurls module
 ------------------------
 
-.. automodule:: checkem.checkmate
+.. automodule:: urlfix.fixurls
    :members:
    :undoc-members:
    :show-inheritance:
@@ -15,7 +15,7 @@ checkem.checkmate module
 Module contents
 ---------------
 
-.. automodule:: checkem
+.. automodule:: urlfix
    :members:
    :undoc-members:
    :show-inheritance:

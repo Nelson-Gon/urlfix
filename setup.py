@@ -1,11 +1,11 @@
 from setuptools import setup, find_packages
 
 
-setup(name='checkem',
-      version="0.1.1",
+setup(name='urlfix',
+      version="0.1.0",
       description='Check and Fix Outdated URLs',
-      url="http://www.github.com/Nelson-Gon/checkem",
-      download_url="https://github.com/Nelson-Gon/checkem/archive/v0.1.0.zip",
+      url="http://www.github.com/Nelson-Gon/urlfix",
+      download_url="https://github.com/Nelson-Gon/urlfix/archive/v0.1.0.zip",
       author='Nelson Gonzabato',
       author_email='gonzabato@hotmail.com',
       license='MIT',

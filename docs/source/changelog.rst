@@ -1,8 +1,8 @@
 
-Welcome to checkem's changelog
-==============================
+Welcome to urlfix's changelog
+=============================
 
-**checkem 0.1.1**
+**urlfix 0.1.0**
 
 
 * 
@@ -15,11 +15,10 @@ Welcome to checkem's changelog
   Made expected formats and return types more explicit. 
 
 * 
-  Intial support for tests. 
+  Initial support for tests. 
 
 * 
   Fixed issues with installation
 
-**checkem 0.1.0**
 
-Initial release to preserve name on PyPI.
+* Initial release to preserve name on PyPI.

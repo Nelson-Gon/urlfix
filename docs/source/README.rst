@@ -1,10 +1,10 @@
 
-checkem: Check and Fix Outdated URLs
-====================================
+urlfix: Check and Fix Outdated URLs
+===================================
 
 
-.. image:: https://badge.fury.io/py/checkem.svg
-   :target: https://pypi.python.org/pypi/checkem/
+.. image:: https://badge.fury.io/py/urlfix.svg
+   :target: https://pypi.python.org/pypi/urlfix/
    :alt: PyPI version fury.io
 
 
@@ -18,61 +18,61 @@ checkem: Check and Fix Outdated URLs
    :alt: Project Status
  
 
-.. image:: https://codecov.io/gh/Nelson-Gon/checkem/branch/master/graph/badge.svg
-   :target: https://codecov.io/gh/Nelson-Gon/checkem?branch=master
+.. image:: https://codecov.io/gh/Nelson-Gon/urlfix/branch/master/graph/badge.svg
+   :target: https://codecov.io/gh/Nelson-Gon/urlfix?branch=master
    :alt: Codecov
 
 
-.. image:: https://github.com/Nelson-Gon/checkem/workflows/Test-Package/badge.svg
-   :target: https://github.com/Nelson-Gon/checkem/workflows/Test-Package/badge.svg
+.. image:: https://github.com/Nelson-Gon/urlfix/workflows/Test-Package/badge.svg
+   :target: https://github.com/Nelson-Gon/urlfix/workflows/Test-Package/badge.svg
    :alt: Test-Package
 
 
-.. image:: https://travis-ci.com/Nelson-Gon/checkem.svg?branch=master
-   :target: https://travis-ci.com/Nelson-Gon/checkem.svg?branch=master
+.. image:: https://travis-ci.com/Nelson-Gon/urlfix.svg?branch=master
+   :target: https://travis-ci.com/Nelson-Gon/urlfix.svg?branch=master
    :alt: Travis Build
 
 
-.. image:: https://img.shields.io/pypi/l/checkem.svg
-   :target: https://pypi.python.org/pypi/checkem/
+.. image:: https://img.shields.io/pypi/l/urlfix.svg
+   :target: https://pypi.python.org/pypi/urlfix/
    :alt: PyPI license
 
 
-.. image:: https://readthedocs.org/projects/checkem/badge/?version=latest
-   :target: https://checkem.readthedocs.io/en/latest/?badge=latest
+.. image:: https://readthedocs.org/projects/urlfix/badge/?version=latest
+   :target: https://urlfix.readthedocs.io/en/latest/?badge=latest
    :alt: Documentation Status
 
 
-.. image:: https://img.shields.io/pypi/dm/checkem.svg
-   :target: https://pypi.python.org/pypi/checkem/
+.. image:: https://img.shields.io/pypi/dm/urlfix.svg
+   :target: https://pypi.python.org/pypi/urlfix/
    :alt: PyPI Downloads Month
 
 
 .. image:: https://img.shields.io/badge/Maintained%3F-yes-green.svg
-   :target: https://GitHub.com/Nelson-Gon/checkem/graphs/commit-activity
+   :target: https://GitHub.com/Nelson-Gon/urlfix/graphs/commit-activity
    :alt: Maintenance
 
 
-.. image:: https://img.shields.io/github/last-commit/Nelson-Gon/checkem.svg
-   :target: https://github.com/Nelson-Gon/checkem/commits/master
+.. image:: https://img.shields.io/github/last-commit/Nelson-Gon/urlfix.svg
+   :target: https://github.com/Nelson-Gon/urlfix/commits/master
    :alt: GitHub last commit
 
 
-.. image:: https://img.shields.io/github/issues/Nelson-Gon/checkem.svg
-   :target: https://GitHub.com/Nelson-Gon/checkem/issues/
+.. image:: https://img.shields.io/github/issues/Nelson-Gon/urlfix.svg
+   :target: https://GitHub.com/Nelson-Gon/urlfix/issues/
    :alt: GitHub issues
 
 
-.. image:: https://img.shields.io/github/issues-closed/Nelson-Gon/checkem.svg
-   :target: https://GitHub.com/Nelson-Gon/checkem/issues?q=is%3Aissue+is%3Aclosed
+.. image:: https://img.shields.io/github/issues-closed/Nelson-Gon/urlfix.svg
+   :target: https://GitHub.com/Nelson-Gon/urlfix/issues?q=is%3Aissue+is%3Aclosed
    :alt: GitHub issues-closed
 
 
-``checkem`` aims to find all outdated URLs in a given file and fix them. 
+``urlfix`` aims to find all outdated URLs in a given file and fix them. 
 
 **Supported file formats**
 
-``checkem`` currently fixes URLs given a file of the following types:
+``urlfix`` fixes URLs given a file of the following types:
 
 
 * [x] MarkDown (.md)
@@ -84,7 +84,7 @@ The simplest way to install the latest release is as follows:
 
 .. code-block:: shell
 
-   pip install checkem
+   pip install urlfix
 
 To install the development version:
 
@@ -93,18 +93,18 @@ Open the Terminal/CMD/Git bash/shell and enter
 .. code-block:: shell
 
 
-   pip install git+https://github.com/Nelson-Gon/checkem.git
+   pip install git+https://github.com/Nelson-Gon/urlfix.git
 
    # or for the less stable dev version
-   pip install git+https://github.com/Nelson-Gon/checkem.git@dev
+   pip install git+https://github.com/Nelson-Gon/urlfix.git@dev
 
 Otherwise:
 
 .. code-block:: shell
 
    # clone the repo
-   git clone git@github.com:Nelson-Gon/checkem.git
-   cd checkem
+   git clone git@github.com:Nelson-Gon/urlfix.git
+   cd urlfix
    python3 setup.py install
 
 **Sample usage**
@@ -112,14 +112,14 @@ Otherwise:
 .. code-block:: python
 
 
-   from checkem.checkem import checkmate as cm
+   from urlfix import fixurls as fix
 
 **Replacing URLs written in .md format**
 
 **Thank you very much**. 
 
 To report any issues, suggestions or improvement, please do so 
-at `issues <https://github.com/Nelson-Gon/checkem/issues>`_. 
+at `issues <https://github.com/Nelson-Gon/urlfix/issues>`_. 
 
 ..
 
@@ -130,4 +130,4 @@ at `issues <https://github.com/Nelson-Gon/checkem/issues>`_.
 
 If you would like to cite this work, please use:
 
-Nelson Gonzabato(2021) checkem: Check and Fix Outdated URLs https://github.com/Nelson-Gon/checkem
+Nelson Gonzabato(2021) urlfix: Check and Fix Outdated URLs https://github.com/Nelson-Gon/urlfix

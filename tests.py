@@ -6,7 +6,7 @@ os.chdir(os.path.dirname(os.path.abspath(__file__)))
 print("Working in {}".format(os.getcwd()))
 
 
-class Testcheckem(unittest.TestCase):
+class Testurlfix(unittest.TestCase):
     def test_input_format(self):
         # Check that the RegEx works as expected
         res_txt = fix.show_parsed_urls("urls.txt")
@@ -17,7 +17,7 @@ class Testcheckem(unittest.TestCase):
 
     def test_visiting(self):
         res, number_moved = fix.visit_urls("urls.md")
-        self.assertEqual(number_moved, 3)
+        self.assertEqual(number_moved, 4)
 
 
 if __name__ == "__main__":

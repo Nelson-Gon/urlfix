@@ -2,7 +2,7 @@
 
 
 [![PyPI version fury.io](https://badge.fury.io/py/urlfix.svg)](https://pypi.python.org/pypi/urlfix/)
-[![DOI](https://zenodo.org/badge/336733328.svg)](https://zenodo.org/badge/latestdoi/336733328)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4515212.svg)](https://doi.org/10.5281/zenodo.4515212)
 [![Project Status](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active) 
 [![Codecov](https://codecov.io/gh/Nelson-Gon/urlfix/branch/master/graph/badge.svg)](https://codecov.io/gh/Nelson-Gon/urlfix?branch=master)
 ![Test-Package](https://github.com/Nelson-Gon/urlfix/workflows/Test-Package/badge.svg)

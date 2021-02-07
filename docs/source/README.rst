@@ -8,8 +8,8 @@ urlfix: Check and Fix Outdated URLs
    :alt: PyPI version fury.io
 
 
-.. image:: https://zenodo.org/badge/336733328.svg
-   :target: https://zenodo.org/badge/latestdoi/336733328
+.. image:: https://zenodo.org/badge/DOI/10.5281/zenodo.4515212.svg
+   :target: https://doi.org/10.5281/zenodo.4515212
    :alt: DOI
 
 

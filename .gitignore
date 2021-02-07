@@ -1,0 +1,14 @@
+# Some say PyCharm is the best Python IDE
+.idea/
+docs/build
+# Build related info
+*.egg
+*.egg-info
+dist
+eggs
+sdist
+develop-eggs
+#make.bat
+build*
+#Makefile
+__pycache__

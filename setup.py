@@ -1,0 +1,18 @@
+from setuptools import setup, find_packages
+
+
+setup(name='checkem',
+      version="0.1.0",
+      description='Check and Fix Outdated URLs',
+      url="http://www.github.com/Nelson-Gon/checkem",
+      download_url="https://github.com/Nelson-Gon/checkem/archive/v0.1.0.zip",
+      author='Nelson Gonzabato',
+      author_email='gonzabato@hotmail.com',
+      license='MIT',
+      keywords="development url https markdown web",
+      packages=find_packages(),
+      long_description=open('README.md', encoding="utf-8").read(),
+      long_description_content_type='text/markdown',
+      install_requires=['urllib'],
+      python_requires='>=3.6',
+      zip_safe=False)

@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='checkem',
-      version="0.1.0",
+      version="0.1.1",
       description='Check and Fix Outdated URLs',
       url="http://www.github.com/Nelson-Gon/checkem",
       download_url="https://github.com/Nelson-Gon/checkem/archive/v0.1.0.zip",

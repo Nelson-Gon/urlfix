@@ -1,4 +1,5 @@
-# checkem: A python interface to FoodDataCentral
+# checkem: Check and Fix Outdated URLs
+
 [![PyPI version fury.io](https://badge.fury.io/py/checkem.svg)](https://pypi.python.org/pypi/checkem/)
 [![Project Status](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active) 
 ![Test-Package](https://github.com/Nelson-Gon/checkem/workflows/Test-Package/badge.svg)
@@ -68,6 +69,6 @@ at [issues](https://github.com/Nelson-Gon/checkem/issues).
 
 If you would like to cite this work, please use:
 
-Nelson Gonzabato(2020) checkem: A python interface to FoodDataCentral, https://github.com/Nelson-Gon/checkem
+Nelson Gonzabato(2021) checkem: Check and Fix Outdated URLs https://github.com/Nelson-Gon/checkem
 
 

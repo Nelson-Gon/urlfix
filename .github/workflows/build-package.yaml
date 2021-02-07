@@ -30,4 +30,12 @@ jobs:
     - name: Install package
       run: python3 setup.py install
 
+    - name: Run Tests
+      run: python tests.py
+
+    - name: Show coverage on the command line
+      run: coverage run tests.py && coverage report -m
+
+    - name: Upload reports to codecov
+      run: bash <(curl -s https://codecov.io/bash)
 

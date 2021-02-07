@@ -65,7 +65,7 @@ python3 setup.py install
 
 ```python
 
-from checkem import checkmate as cm 
+from checkem.checkem import checkmate as cm 
 
 ```
 

@@ -107,7 +107,7 @@ Otherwise:
 .. code-block:: python
 
 
-   from checkem import checkmate as cm
+   from checkem.checkem import checkmate as cm
 
 **Replacing URLs written in .md format**
 

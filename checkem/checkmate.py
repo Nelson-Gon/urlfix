@@ -21,6 +21,7 @@ def show_parsed_urls(input_file):
 
     input_file = open(input_file)
     matched_urls = list(filter(None,[re.sub("\n", "", find_links(line)) for line in input_file]))
+    input_file.close()
     return matched_urls
 
 

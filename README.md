@@ -4,6 +4,7 @@
 [![PyPI version fury.io](https://badge.fury.io/py/checkem.svg)](https://pypi.python.org/pypi/checkem/)
 [![DOI](https://zenodo.org/badge/336733328.svg)](https://zenodo.org/badge/latestdoi/336733328)
 [![Project Status](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active) 
+[![Codecov](https://codecov.io/gh/Nelson-Gon/checkem/branch/master/graph/badge.svg)](https://codecov.io/gh/Nelson-Gon/checkem?branch=master)
 ![Test-Package](https://github.com/Nelson-Gon/checkem/workflows/Test-Package/badge.svg)
 ![Travis Build](https://travis-ci.com/Nelson-Gon/checkem.svg?branch=master)
 [![PyPI license](https://img.shields.io/pypi/l/checkem.svg)](https://pypi.python.org/pypi/checkem/)

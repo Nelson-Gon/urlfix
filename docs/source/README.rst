@@ -18,6 +18,11 @@ checkem: Check and Fix Outdated URLs
    :alt: Project Status
  
 
+.. image:: https://codecov.io/gh/Nelson-Gon/checkem/branch/master/graph/badge.svg
+   :target: https://codecov.io/gh/Nelson-Gon/checkem?branch=master
+   :alt: Codecov
+
+
 .. image:: https://github.com/Nelson-Gon/checkem/workflows/Test-Package/badge.svg
    :target: https://github.com/Nelson-Gon/checkem/workflows/Test-Package/badge.svg
    :alt: Test-Package

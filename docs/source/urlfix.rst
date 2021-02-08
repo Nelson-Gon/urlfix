@@ -1,11 +1,11 @@
 urlfix package
-===============
+==============
 
 Submodules
 ----------
 
 urlfix.fixurls module
-------------------------
+---------------------
 
 .. automodule:: urlfix.fixurls
    :members:

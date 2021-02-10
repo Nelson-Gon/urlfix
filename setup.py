@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='urlfix',
-      version="0.1.0",
+      version="0.1.1",
       description='Check and Fix Outdated URLs',
       url="http://www.github.com/Nelson-Gon/urlfix",
       download_url="https://github.com/Nelson-Gon/urlfix/archive/v0.1.0.zip",

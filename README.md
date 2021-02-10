@@ -72,7 +72,19 @@ from urlfix import urlfix
 
 **Replacing URLs written in .md format**
 
+Given a file in which URLs are written in `.md` format, we can replace outdated URLs as follows:
 
+```python
+urlfix.replace_urls("C:\\Users\\Nelg\\Desktop\\testurls.md")
+
+```
+
+The above uses default arguments and will not replace a file inplace. This is a safety mechanism to ensure one does not
+damage their files. If you are confident enough, you can simply set `inplace` to `True`.
+
+```python
+urlfix.replace_urls("C:\\Users\\Nelg\\Desktop\\testurls.md", inplace=True) 
+```
 
 **Thank you very much**. 
 

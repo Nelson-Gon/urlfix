@@ -131,20 +131,19 @@ If you are confident enough, you can simply set ``inplace`` to ``True``.
 
 .. code-block:: python
 
+
    urlfix.replace_urls("testurls.md", inplace=True)
 
-**Thank you very much**. 
+----
 
-To report any issues, suggestions or improvement, please do so 
-at `issues <https://github.com/Nelson-Gon/urlfix/issues>`_. 
+To report any issues, suggestions or improvement, please do so at `issues <https://github.com/Nelson-Gon/urlfix/issues>`_. 
+
+If you would like to cite this work, please use:
+Nelson Gonzabato (2021) urlfix: Check and Fix Outdated URLs https://github.com/Nelson-Gon/urlfix
+
+**Thank you very much**. 
 
 ..
 
    “Before software can be reusable it first has to be usable.” – Ralph Johnson
 
-
-----
-
-If you would like to cite this work, please use:
-
-Nelson Gonzabato(2021) urlfix: Check and Fix Outdated URLs https://github.com/Nelson-Gon/urlfix

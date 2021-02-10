@@ -6,6 +6,9 @@ Welcome to urlfix's changelog
 
 
 * 
+  ``fixurls`` was renamed to ``urlfix``.
+
+* 
   ``check_url`` was removed but may be replaced. 
 
 * 

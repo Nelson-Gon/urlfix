@@ -66,7 +66,7 @@ python3 setup.py install
 
 ```python
 
-from urlfix import fixurls as fix
+from urlfix import urlfix 
 
 ```
 

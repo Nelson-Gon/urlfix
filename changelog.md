@@ -3,6 +3,8 @@
 
 **urlfix 0.1.0**
 
+* `fixurls` was renamed to `urlfix`.
+
 * `check_url` was removed but may be replaced. 
 
 * Add more sanity checks to ensure that the regular expressions used work as detected.

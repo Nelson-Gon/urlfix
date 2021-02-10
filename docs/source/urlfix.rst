@@ -4,10 +4,10 @@ urlfix package
 Submodules
 ----------
 
-urlfix.fixurls module
+urlfix.urlfix module
 ---------------------
 
-.. automodule:: urlfix.fixurls
+.. automodule:: urlfix.urlfix
    :members:
    :undoc-members:
    :show-inheritance:

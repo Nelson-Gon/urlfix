@@ -112,7 +112,7 @@ Otherwise:
 .. code-block:: python
 
 
-   from urlfix import fixurls as fix
+   from urlfix import urlfix
 
 **Replacing URLs written in .md format**
 

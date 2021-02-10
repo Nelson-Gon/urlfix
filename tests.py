@@ -16,7 +16,8 @@ class Testurlfix(unittest.TestCase):
         self.assertEqual(len(res_md), 6)
 
     def test_visiting(self):
-        res, number_moved = urlfix.replace_urls("urls.md")
+        # Use known changed URLs doc
+        res, number_moved = urlfix.replace_urls("testurls.md")
         self.assertEqual(number_moved, 3)
 
 

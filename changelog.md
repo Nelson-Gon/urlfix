@@ -3,6 +3,9 @@
 
 **urlfix 0.1.1**
 
+
+* Extended sanity tests to ensure that input and output files exist. 
+
 * `returned_matched` was dropped in `replace_urls`. Use `show_parsed_urls` for low level returns. 
 
 * `verbose` in `replace_urls` is now more human friendly by providing the actual name of the output file.

@@ -2,6 +2,7 @@ import urllib.request
 import re
 from itertools import chain
 from urllib.request import Request
+import os
 
 
 def find_links(input_string):
@@ -59,6 +60,9 @@ def replace_urls(input_file, output_file="replacement.txt", inplace=False, verbo
 
     # TODO: Speed up file writing and URL checks, avoid unnecessary loops
     # TODO: Work with several files in a directory
+
+    if not all(os.path.isfile(x) for x in [input_file, output_file]):
+        raise FileNotFoundError("input_file and output_file should be valid files.")
 
     matched_urls = show_parsed_urls(input_file)
     number_moved = 0

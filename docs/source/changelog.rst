@@ -6,6 +6,9 @@ Welcome to urlfix's changelog
 
 
 * 
+  Extended sanity tests to ensure that input and output files exist. 
+
+* 
   ``returned_matched`` was dropped in ``replace_urls``. Use ``show_parsed_urls`` for low level returns. 
 
 * 

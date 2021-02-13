@@ -12,7 +12,7 @@ class Testurlfix(unittest.TestCase):
         res_txt = urlfix.show_parsed_urls("urls.txt")
         self.assertEqual(len(res_txt), 6)
         # What happens if we have .md format
-        res_md = urlfix.show_parsed_urls("urls.md")
+        res_md = urlfix.show_parsed_urls("testurls.md")
         self.assertEqual(len(res_md), 6)
 
     def test_visiting(self):

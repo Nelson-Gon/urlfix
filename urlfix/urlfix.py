@@ -1,5 +1,7 @@
 import urllib.request
 import re
+from itertools import chain
+from urllib.request import Request
 
 
 def find_links(input_string):
@@ -9,9 +11,18 @@ def find_links(input_string):
     :return  Extracts links from MarkDown code
 
     """
-    matched_urls = re.sub(r"(\[.*\])(\()(.*)(\))", "\\3", input_string)
+    # Better markdown link matching  taken from https://stackoverflow.com/a/23395483/10323798
 
-    return matched_urls
+    link_text = "[^]]+"
+    # http:// or https:// followed by anything but a closing paren
+    actual_link = "http[s]?://[^)]+"
+    # TODO: Include non markdown match in combined_regex
+    combined_regex = f"\[({link_text})]\(\s*({actual_link})\s*\)"
+
+    matched_urls = re.findall(combined_regex, input_string)
+    # return 1 since actual URLs are at position one
+
+    return [x[1] for x in matched_urls]
 
 
 def show_parsed_urls(input_file):
@@ -21,9 +32,9 @@ def show_parsed_urls(input_file):
     :return: URLs in the target file
     """
     input_file = open(input_file)
-    matched_urls = list(filter(None, [re.sub("\n|\!", "", find_links(line)) for line in input_file]))
+    matched_urls = [find_links(line) for line in input_file]
     input_file.close()
-    return matched_urls
+    return list(chain(*matched_urls))
 
 
 # Keep url, replacement as pair and replace downstream?
@@ -52,7 +63,8 @@ def replace_urls(input_file, output_file="replacement.txt", inplace=False, verbo
     matched_urls = show_parsed_urls(input_file)
     number_moved = 0
     for index, target_url in enumerate(matched_urls):
-        visited = urllib.request.urlopen(target_url)
+
+        visited = urllib.request.urlopen(Request(target_url, headers={'User-Agent': 'Mozilla'}))
         url_used = visited.geturl()
 
         if url_used != target_url:

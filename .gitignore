@@ -13,3 +13,4 @@ build*
 #Makefile
 __pycache__
 .coverage
+replacement.txt

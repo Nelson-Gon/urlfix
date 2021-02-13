@@ -83,6 +83,6 @@ def replace_urls(input_file, output_file="replacement.txt", inplace=False, verbo
                         print(f"{matched_url} replaced with {url_used} in {out_f.name}")
                 out_f.write(line.replace(matched_url, url_used))
 
-    information = "URLS have changed" if number_moved != 1 else "URL has changed"
+    information = "URLs have changed" if number_moved != 1 else "URL has changed"
     print(f"{number_moved} {information}")
     return number_moved

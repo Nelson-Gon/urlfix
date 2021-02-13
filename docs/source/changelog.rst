@@ -6,6 +6,9 @@ Welcome to urlfix's changelog
 
 
 * 
+  The regular expression in ``find_links`` was replaced with a more robust one. 
+
+* 
   ``visit_urls`` was renamed to ``replace_urls`` and extended to allow inplace replacement (or not)
   as well as writing to an output file.
 

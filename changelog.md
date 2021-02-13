@@ -3,6 +3,12 @@
 
 **urlfix 0.1.1**
 
+* `returned_matched` was dropped in `replace_urls`. Use `show_parsed_urls` for low level returns. 
+
+* `verbose` in `replace_urls` is now more human friendly by providing the actual name of the output file.
+
+* Updated `testurls.md` to ensure only markdown like links are replaced.
+
 * The regular expression in `find_links` was replaced with a more robust one. 
 
 * `visit_urls` was renamed to `replace_urls` and extended to allow inplace replacement (or not)

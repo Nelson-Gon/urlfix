@@ -17,8 +17,8 @@ class Testurlfix(unittest.TestCase):
 
     def test_visiting(self):
         # Use known changed URLs doc
-        res, number_moved = urlfix.replace_urls("testurls.md")
-        self.assertEqual(number_moved, 3)
+        number_moved = urlfix.replace_urls("testurls.md", verbose=1)
+        self.assertEqual(number_moved, 2)
 
 
 if __name__ == "__main__":

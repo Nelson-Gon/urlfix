@@ -6,6 +6,12 @@ Welcome to urlfix's changelog
 
 
 * 
+  ``show_parsed_urls`` is no longer necessary and may be dropped in future versions. 
+
+* 
+  ``replace_urls`` was refactored to avoid unnecessary loops that would otherwise slow down the process.
+
+* 
   Extended sanity tests to ensure that input and output files exist. 
 
 * 

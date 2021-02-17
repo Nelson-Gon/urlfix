@@ -114,25 +114,51 @@ Otherwise:
 
    from urlfix import urlfix
 
-**Replacing URLs written in .md format**
-
-Given a file in which URLs are written in ``.md`` format, we can replace outdated URLs as follows:
+**Create an object of class URLFix**
 
 .. code-block:: python
 
 
-   urlfix.replace_urls("testurls.md")
+   urlfix_object = URLFix("testurls.txt", output_file="replacement.txt", input_format="txt")
+
+**Replacing URLs**
+
+After creating our object, we can replace outdated URLs as follows:
+
+.. code-block:: python
+
+
+   urlfix_object.replace_urls(verbose=1)
 
 The above uses default arguments and will not replace a file inplace. This is a safety mechanism to ensure one does not
-damage their files. By default, files are written to a ``replacement.txt`` file which can be overridden with the name of 
-choice.
+damage their files. 
 
-If you are confident enough, you can simply set ``inplace`` to ``True``.
+Since we set ``verbose`` to ``True``\ , we get the following output:
+
+.. code-block:: shell
+
+   urlfix_object.replace_urls()
+   https://cran.r-project.org/package=manymodelr replaced with https://cran.r-project.org/web/packages/manymodelr/index.html in replacement.txt
+   https://tidyverse.org/lifecycle/#maturing replaced with https://lifecycle.r-lib.org/articles/stages.html in replacement.txt
+   2 URLs have changed
+   2
+
+To replace silently, simply set verbose to ``False`` (which is the default). 
+
+.. code-block:: python
+
+   urlfix_object.replace_urls()
+   2 URLs have changed
+   2
+
+**Inplace Replacement**
+
+If you are confident enough, you can set ``inplace`` to ``True`` in ``replace_urls`` to replace links inplace.
 
 .. code-block:: python
 
 
-   urlfix.replace_urls("testurls.md", inplace=True)
+   urlfix_object.replace_urls(inplace=True)
 
 ----
 

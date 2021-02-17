@@ -1,7 +1,0 @@
-https://www.r-pkg.org/badges/version/manymodelr
-https://cran.r-project.org/package=manymodelr
-https://travis-ci.org/Nelson-Gon/manymodelr.png?branch=master
-https://travis-ci.org/Nelson-Gon/manymodelr
-https://tidyverse.org/lifecycle/#maturing
-https://github.com/Nelson-Gon
-

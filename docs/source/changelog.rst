@@ -6,6 +6,15 @@ Welcome to urlfix's changelog
 
 
 * 
+  ``show_parsed_urls`` was dropped. Future plans to find a better way to validate matched URLs.
+
+* 
+  ``find_links`` was dropped. Everything is now done under ``replace_urls``.
+
+* 
+  ``URLFix`` is a new class to make it easier to write class methods and access class variables.
+
+* 
   ``show_parsed_urls`` is no longer necessary and may be dropped in future versions. 
 
 * 

@@ -2,7 +2,7 @@
 Welcome to urlfix's changelog
 =============================
 
-**urlfix 0.1.1**
+**urlfix 0.2.0**
 
 
 * 

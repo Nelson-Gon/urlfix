@@ -1,7 +1,7 @@
 # Welcome to urlfix's changelog 
 
 
-**urlfix 0.1.1**
+**urlfix 0.2.0**
 
 * `show_parsed_urls` was dropped. Future plans to find a better way to validate matched URLs.
 

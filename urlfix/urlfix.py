@@ -55,7 +55,8 @@ class URLFix(object):
                     matched_url = matched_url[0][1] if self.input_format == "md" else matched_url[0]
 
                     # This printing step while unnecessary may be useful to make sure things work as expected
-                    #print(f"Found {matched_url}, now validating..")
+                    if verbose:
+                        print(f"Found {matched_url}, now validating..")
                     visited_url = urllib.request.urlopen(Request(matched_url, headers={'User-Agent': 'XYZ/3.0'}))
                     url_used = visited_url.geturl()
                     if url_used != matched_url:

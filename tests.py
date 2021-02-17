@@ -16,13 +16,16 @@ class Testurlfix(unittest.TestCase):
     def test_instance_creation(self):
         self.assertTrue(isinstance(use_object, URLFix))
         self.assertTrue(isinstance(use_object_txt, URLFix))
+        with self.assertRaises(ValueError) as err:
+            URLFix(input_file=use_file, input_format="md").replace_urls()
+        self.assertEqual(str(err.exception), "Please provide an output file to write to.")
 
     def test_replace_urls(self):
         # Use known changed URLs doc
         with self.assertRaises(FileNotFoundError) as err:
             use_object_non_existent.replace_urls()
         self.assertEqual(str(err.exception), "input_file and output_file should be valid files.")
-        number_moved = use_object.replace_urls(verbose=1)
+        number_moved = use_object.replace_urls(verbose=0)
         self.assertEqual(number_moved, 1)
         number_moved_txt = use_object_txt.replace_urls(verbose=1)
         self.assertEqual(number_moved_txt, 2)
@@ -30,5 +33,3 @@ class Testurlfix(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
-
-

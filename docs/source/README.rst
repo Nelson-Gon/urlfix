@@ -43,9 +43,19 @@ urlfix: Check and Fix Outdated URLs
    :alt: Documentation Status
 
 
-.. image:: https://img.shields.io/pypi/dm/urlfix.svg
-   :target: https://pypi.python.org/pypi/urlfix/
-   :alt: PyPI Downloads Month
+.. image:: https://pepy.tech/badge/urlfix
+   :target: https://pepy.tech/project/urlfix
+   :alt: Total Downloads
+
+
+.. image:: https://pepy.tech/badge/urlfix/month
+   :target: https://pepy.tech/project/urlfix
+   :alt: Monthly Downloads
+
+
+.. image:: https://pepy.tech/badge/urlfix/week
+   :target: https://pepy.tech/project/urlfix
+   :alt: Weekly Downloads
 
 
 .. image:: https://img.shields.io/badge/Maintained%3F-yes-green.svg

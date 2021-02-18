@@ -68,7 +68,7 @@ python3 setup.py install
 
 ```python
 
-from urlfix import urlfix 
+from urlfix import * 
 
 ```
 

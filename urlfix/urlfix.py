@@ -3,6 +3,7 @@ import re
 from itertools import chain
 from urllib.request import Request
 import os
+from pathlib import Path
 
 
 class URLFix(object):
@@ -69,3 +70,29 @@ class URLFix(object):
         print(f"{number_moved} {information}")
         return number_moved
 
+
+class DirURLFix(object):
+    def __init__(self, input_dir):
+        """
+        
+        :param input_dir: Path to input_dir.
+        
+        """
+        self.input_dir = input_dir
+    
+    def __replace_by_format(self, input_format):
+        for input_file in Path(self.input_dir).glob(f'*.{input_format}'):
+            if '_output' in str(input_file): continue  # skip output files
+            output_file = str(input_file).replace(f'.{input_format}', f'_output.{input_format}')
+            if not os.path.exists(output_file):  # skip files that's already been fixed
+                with open(output_file, 'w'): pass  # create an empty output file
+                URLFix(input_file, output_file).replace_urls()
+    
+    def replace_urls(self):
+        if not os.path.exists(self.input_dir):
+            raise OSError('Path does not exist!')
+        if not os.path.isdir(self.input_dir):
+            raise NotADirectoryError('Input path must be a directory!')
+        for input_format in ('md', 'txt'):
+            self.__replace_by_format(input_format)
+        print('Done.')

@@ -7,18 +7,21 @@ from pathlib import Path
 
 class URLFix(object):
 
-    def __init__(self, input_file, output_file=None, input_format="md"):
+    def __init__(self, input_file, output_file=None):
         """
 
         :param input_file: Path to input_file
         :param output_file: Path to output_file
-        :param input_format: One of "md" or "txt" for markdown or txt files, respectively.
 
         """
 
         self.input_file = input_file
         self.output_file = output_file
-        self.input_format = input_format
+        # automatically detect input file format
+        format_pattern = r'.+\.(\w+)'
+        matches = re.findall(format_pattern, self.input_file)
+        self.input_format = matches[0] if len(matches) > 0 else ''
+
 
     def replace_urls(self, inplace=False, verbose=False):
         """

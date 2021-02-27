@@ -1,6 +1,5 @@
 import urllib.request
 import re
-from itertools import chain
 from urllib.request import Request
 import os
 from pathlib import Path

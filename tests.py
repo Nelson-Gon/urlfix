@@ -53,7 +53,7 @@ class TestDirURLFix(unittest.TestCase):
         # We expect only one file to have moved
         number_moved_list = use_files_dir.replace_urls()
         self.assertEqual(number_moved_list[0], 1)
-        self.assertEqual(number_moved_list[1], 0)
+        self.assertEqual(number_moved_list[1], 2)
         # Check skipping --> check that files are created in the above steps
         use_files_dir.replace_urls()
         # Probably better to warn so text can be tested against?

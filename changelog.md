@@ -2,6 +2,8 @@
 
 **urlfix 0.2.1**
 
+* Added support for automatic detection of file extensions negating the need to manually specify file formats. 
+
 * Initial support for directory replacements, thanks to [nirolada](https://github.com/nirolada). 
 
 **urlfix 0.2.0**

@@ -5,7 +5,11 @@ Welcome to urlfix's changelog
 **urlfix 0.2.1**
 
 
-* Initial support for directory replacements, thanks to `nirolada <https://github.com/nirolada>`_. 
+* 
+  Added support for automatic detection of file extensions negating the need to manually specify file formats. 
+
+* 
+  Initial support for directory replacements, thanks to `nirolada <https://github.com/nirolada>`_. 
 
 **urlfix 0.2.0**
 

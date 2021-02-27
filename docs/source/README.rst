@@ -129,7 +129,7 @@ Otherwise:
 .. code-block:: python
 
 
-   urlfix_object = URLFix("testurls.txt", output_file="replacement.txt", input_format="txt")
+   urlfix_object = URLFix("testurls.txt", output_file="replacement.txt")
 
 **Replacing URLs**
 

@@ -16,4 +16,4 @@ sys.path.append(os.path.dirname(os.path.realpath(__file__)))
 
 
 __author__ = "Nelson Gonzabato"
-__all__ = ["fixurls"]
+__all__ = ["urlfix"]

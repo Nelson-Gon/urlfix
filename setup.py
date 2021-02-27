@@ -2,10 +2,10 @@ from setuptools import setup, find_packages
 
 
 setup(name='urlfix',
-      version="0.2.0",
+      version="0.2.1",
       description='Check and Fix Outdated URLs',
       url="http://www.github.com/Nelson-Gon/urlfix",
-      download_url="https://github.com/Nelson-Gon/urlfix/archive/v0.2.0.zip",
+      download_url="https://github.com/Nelson-Gon/urlfix/archive/v0.2.1.zip",
       author='Nelson Gonzabato',
       author_email='gonzabato@hotmail.com',
       license='MIT',

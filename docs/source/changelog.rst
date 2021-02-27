@@ -2,6 +2,11 @@
 Welcome to urlfix's changelog
 =============================
 
+**urlfix 0.2.1**
+
+
+* Initial support for directory replacements, thanks to `nirolada <https://github.com/nirolada>`_. 
+
 **urlfix 0.2.0**
 
 

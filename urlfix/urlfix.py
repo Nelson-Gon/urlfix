@@ -3,6 +3,7 @@ import re
 from itertools import chain
 from urllib.request import Request
 import os
+from pathlib import Path
 
 
 class URLFix(object):
@@ -66,6 +67,45 @@ class URLFix(object):
                     out_f.write(line.replace(matched_url, url_used))
 
         information = "URLs have changed" if number_moved != 1 else "URL has changed"
-        print(f"{number_moved} {information}")
+        print(f"{number_moved} {information} in {self.input_file}")
         return number_moved
 
+
+class DirURLFix(object):
+    def __init__(self, input_dir):
+        """
+        
+        :param input_dir: Path to input_dir.
+        
+        """
+        self.input_dir = input_dir
+
+    def __replace_by_format(self, input_format):
+        """
+
+        :param input_format: Input format of the files. Currently supports md and txt
+        :return: File with outdated URLs replaced.
+
+        """
+
+        for input_file in Path(self.input_dir).glob(f'*.{input_format}'):
+            if '_output' in str(input_file):
+                print(f"File already updated in {input_file}")
+                continue  # skip output files
+            output_file = str(input_file).replace(f'.{input_format}', f'_output.{input_format}')
+            if not os.path.exists(output_file):  # skip file that's already been fixed
+                with open(output_file, 'w'):
+                    pass  # create an empty output file
+                return URLFix(input_file, output_file).replace_urls()
+
+    def replace_urls(self):
+        number_moved = []
+        if not os.path.exists(self.input_dir):
+            raise OSError('Path does not exist!')
+        if not os.path.isdir(self.input_dir):
+            raise NotADirectoryError('Input path must be a directory!')
+        for input_format in ('md', 'txt'):
+            number_moved.append(self.__replace_by_format(input_format))
+
+        print('All files have been updated, thank you for using urlfix.')
+        return number_moved

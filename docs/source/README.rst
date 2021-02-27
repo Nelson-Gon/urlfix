@@ -170,6 +170,26 @@ If you are confident enough, you can set ``inplace`` to ``True`` in ``replace_ur
 
    urlfix_object.replace_urls(inplace=True)
 
+**Replacing several files in a directory**
+
+To replace several files in a directory, we can use ``DirURLFix`` as follows.
+
+
+* Instantiate an object of class ``DirURLFix``
+
+.. code-block:: python
+
+
+   replace_in_dir = DirURLFix("path_to_dir")
+
+
+* Call ``replace_urls``
+
+.. code-block:: python
+
+
+   replace_in_dir.replace_urls()
+
 ----
 
 To report any issues, suggestions or improvement, please do so at `issues <https://github.com/Nelson-Gon/urlfix/issues>`_. 

@@ -54,6 +54,9 @@ class TestDirURLFix(unittest.TestCase):
         number_moved_list = use_files_dir.replace_urls()
         self.assertEqual(number_moved_list[0], 1)
         self.assertEqual(number_moved_list[1], 0)
+        # Check skipping --> check that files are created in the above steps
+        self.assertTrue(os.path.isfile(os.path.join(dir_path, "testfiles", "testurls_output.txt")))
+        self.assertTrue(os.path.isfile(os.path.join(dir_path, "testfiles", "testurls_output.md")))
 
 
 if __name__ == "__main__":

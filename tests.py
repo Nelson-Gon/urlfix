@@ -8,8 +8,8 @@ dir_path = os.path.dirname(os.path.abspath(__file__))
 use_file = os.path.join(dir_path, "testurls.md")
 use_file_txt = os.path.join(dir_path, "testurls.txt")
 
-use_object = URLFix(input_file=use_file, output_file="replacement.txt", input_format="md")
-use_object_txt = URLFix(input_file=use_file_txt, output_file="replacement.txt", input_format="txt")
+use_object = URLFix(input_file=use_file, output_file="replacement.txt")
+use_object_txt = URLFix(input_file=use_file_txt, output_file="replacement.txt")
 use_object_non_existent = URLFix(input_file=use_file, output_file="not_valid.txt")
 
 use_dir_object = DirURLFix(dir_path)
@@ -23,7 +23,7 @@ class Testurlfix(unittest.TestCase):
         self.assertTrue(isinstance(use_object, URLFix))
         self.assertTrue(isinstance(use_object_txt, URLFix))
         with self.assertRaises(ValueError) as err:
-            URLFix(input_file=use_file, input_format="md").replace_urls()
+            URLFix(input_file=use_file).replace_urls()
         self.assertEqual(str(err.exception), "Please provide an output file to write to.")
 
     def test_replace_urls(self):
@@ -53,7 +53,7 @@ class TestDirURLFix(unittest.TestCase):
         # We expect only one file to have moved
         number_moved_list = use_files_dir.replace_urls()
         self.assertEqual(number_moved_list[0], 1)
-        self.assertEqual(number_moved_list[1], 0)
+        self.assertEqual(number_moved_list[1], 2)
         # Check skipping --> check that files are created in the above steps
         use_files_dir.replace_urls()
         # Probably better to warn so text can be tested against?

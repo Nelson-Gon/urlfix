@@ -55,6 +55,8 @@ class TestDirURLFix(unittest.TestCase):
         self.assertEqual(number_moved_list[0], 1)
         self.assertEqual(number_moved_list[1], 0)
         # Check skipping --> check that files are created in the above steps
+        use_files_dir.replace_urls()
+        # Probably better to warn so text can be tested against?
         self.assertTrue(os.path.isfile(os.path.join(dir_path, "testfiles", "testurls_output.txt")))
         self.assertTrue(os.path.isfile(os.path.join(dir_path, "testfiles", "testurls_output.md")))
 

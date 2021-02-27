@@ -6,7 +6,6 @@ from pathlib import Path
 
 
 class URLFix(object):
-
     def __init__(self, input_file, output_file=None):
         """
 
@@ -22,7 +21,6 @@ class URLFix(object):
         matches = re.findall(format_pattern, self.input_file)
         self.input_format = matches[0] if len(matches) > 0 else ''
 
-
     def replace_urls(self, inplace=False, verbose=False):
         """
         :param inplace Logical. Determines if you need to replace URLs inplace. Defaults to False.
@@ -30,6 +28,9 @@ class URLFix(object):
         :return  Replaces outdated URL and writes to the specified file. It also returns the number of URLs that have
         changed. The latter is useful for tests.
         """
+        if self.input_format not in ('md', 'txt'):
+            print(f'File format not supported in {self.input_file}')
+            return 0
         link_text = "[^]]+"
         # Better markdown link matching  taken from https://stackoverflow.com/a/23395483/10323798
         # http:// or https:// followed by anything but a closing paren
@@ -82,19 +83,20 @@ class DirURLFix(object):
         """
         self.input_dir = input_dir
 
-    def __replace_by_format(self, input_format):
+    def __replace_by_format(self, _format):
         """
 
-        :param input_format: Input format of the files. Currently supports md and txt
+        :param _format: Input format of the files. Currently supports md and txt
         :return: File with outdated URLs replaced.
 
         """
 
-        for input_file in Path(self.input_dir).glob(f'*.{input_format}'):
-            if '_output' in str(input_file):
+        for input_file in Path(self.input_dir).glob(f'*.{_format}'):
+            input_file = str(input_file)  # convert object to path string
+            if '_output' in input_file:
                 print(f"File already updated in {input_file}")
                 continue  # skip output files
-            output_file = str(input_file).replace(f'.{input_format}', f'_output.{input_format}')
+            output_file = input_file.replace(f'.{_format}', f'_output.{_format}')
             if not os.path.exists(output_file):  # skip file that's already been fixed
                 with open(output_file, 'w'):
                     pass  # create an empty output file
@@ -106,8 +108,8 @@ class DirURLFix(object):
             raise OSError('Path does not exist!')
         if not os.path.isdir(self.input_dir):
             raise NotADirectoryError('Input path must be a directory!')
-        for input_format in ('md', 'txt'):
-            number_moved.append(self.__replace_by_format(input_format))
+        for _format in ('md', 'txt'):
+            number_moved.append(self.__replace_by_format(_format))
 
         print('All files have been updated, thank you for using urlfix.')
         return number_moved

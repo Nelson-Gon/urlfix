@@ -15,6 +15,7 @@ use_object_non_existent = URLFix(input_file=use_file, output_file="not_valid.txt
 use_dir_object = DirURLFix(dir_path)
 use_dir_non_existent = DirURLFix('non_existent')
 use_dir_non_dir = DirURLFix(use_file)
+use_files_dir = DirURLFix(os.path.join(dir_path, "testfiles"))
 
 
 class Testurlfix(unittest.TestCase):
@@ -48,6 +49,11 @@ class TestDirURLFix(unittest.TestCase):
         with self.assertRaises(NotADirectoryError) as err:
             use_dir_non_dir.replace_urls()
         self.assertEqual(str(err.exception), "Input path must be a directory!")
+
+        # We expect only one file to have moved
+        number_moved_list = use_files_dir.replace_urls()
+        self.assertEqual(number_moved_list[0], 1)
+        self.assertEqual(number_moved_list[1], 0)
 
 
 if __name__ == "__main__":

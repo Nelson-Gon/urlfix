@@ -6,6 +6,9 @@ Welcome to urlfix's changelog
 
 
 * 
+  Replacement of files now supports adding exceptions that is URLs whose links are known to be valid. 
+
+* 
   Added support for automatic detection of file extensions negating the need to manually specify file formats. 
 
 * 

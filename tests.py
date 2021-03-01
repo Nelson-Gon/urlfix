@@ -1,7 +1,6 @@
 import unittest
 from urlfix.urlfix import *
 import os
-from pathlib import Path
 
 dir_path = os.path.dirname(os.path.abspath(__file__))
 # Use the above to make paths to files, avoid changing directory just for tests.
@@ -50,15 +49,23 @@ class TestDirURLFix(unittest.TestCase):
             use_dir_non_dir.replace_urls()
         self.assertEqual(str(err.exception), "Input path must be a directory!")
 
-        # We expect only one file to have moved
-        number_moved_list = use_files_dir.replace_urls()
+        # Check that if a known URL is provided, it is skipped
+        # Checking twice won't work since output files will exist already
+        number_moved_list = use_files_dir.replace_urls(correct_urls=["https://doi.org/10.5281/zenodo.3891106"],
+                                                       verbose=True)
+        # Since we have three files, assert that the length returned is 3
+        self.assertEqual(len(number_moved_list), 3)
+
         self.assertEqual(number_moved_list[0], 1)
-        self.assertEqual(number_moved_list[1], 2)
+        self.assertEqual(number_moved_list[1], 1)
+        # 1 since we provided correct URLs. TODO: Figure out how to run both tests
+        self.assert_(number_moved_list[2], 1)
         # Check skipping --> check that files are created in the above steps
         use_files_dir.replace_urls()
         # Probably better to warn so text can be tested against?
-        self.assertTrue(os.path.isfile(os.path.join(dir_path, "testfiles", "testurls_output.txt")))
+        self.assertTrue(os.path.isfile(os.path.join(dir_path, "testfiles", "testcorrect_output.md")))
         self.assertTrue(os.path.isfile(os.path.join(dir_path, "testfiles", "testurls_output.md")))
+        self.assertTrue(os.path.isfile(os.path.join(dir_path, "testfiles", "txturls_output.txt")))
 
 
 if __name__ == "__main__":

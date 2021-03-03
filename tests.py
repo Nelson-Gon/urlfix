@@ -72,6 +72,17 @@ class TestDirURLFix(unittest.TestCase):
         self.assertTrue(os.path.isfile(os.path.join(dir_path, "testfiles", "testurls_output.md")))
         self.assertTrue(os.path.isfile(os.path.join(dir_path, "testfiles", "txturls_output.txt")))
 
+        # Clean test folder of results so tests can be repeated.
+        testfiles_path = os.path.join(dir_path, "testfiles")
+        garbage_test_files = [os.path.join(testfiles_path, "testcorrect_output.md"),
+                              os.path.join("testurls_output.md"),
+                              os.path.join("txturls_output.txt") ]
+
+        for file in garbage_test_files:
+            try:
+                os.remove(file)
+            except:
+                pass
 
 if __name__ == "__main__":
     unittest.main()

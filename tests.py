@@ -6,7 +6,6 @@ dir_path = os.path.dirname(os.path.abspath(__file__))
 # Use the above to make paths to files, avoid changing directory just for tests.
 use_file = os.path.join(dir_path, "testurls.md")
 use_file_txt = os.path.join(dir_path, "testurls.txt")
-
 use_object = URLFix(input_file=use_file, output_file="replacement.txt")
 use_object_txt = URLFix(input_file=use_file_txt, output_file="replacement.txt")
 use_object_non_existent = URLFix(input_file=use_file, output_file="not_valid.txt")

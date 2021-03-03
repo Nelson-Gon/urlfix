@@ -28,7 +28,7 @@ class URLFix(object):
         changed. The latter is useful for tests.
         """
         if self.input_format not in ("md", "txt"):
-                raise NotImplementedError(f"File format {self.input_format} is not yet supported.")
+            raise NotImplementedError(f"File format {self.input_format} is not yet supported.")
         else:
             pass
 
@@ -61,15 +61,14 @@ class URLFix(object):
                     matched_url = matched_url[0][1] if self.input_format == "md" else matched_url[0]
 
                     # make sure 'correct_urls' parameter is a sequence
-                    if isinstance(correct_urls, Sequence):
+                    if isinstance(correct_urls, Sequence) and matched_url in correct_urls:
                         # skip current url if it's in 'correct_urls'
-                        if matched_url in correct_urls:
-                            print(f'{matched_url} is already valid.')
-                            continue
+                        print(f'{matched_url} is already valid.')
+                        continue
 
                     # This printing step while unnecessary may be useful to make sure things work as expected
                     if verbose:
-                        print(f"Found {matched_url}, now validating..")
+                        print(f"Found {matched_url} in {input_f.name}, now validating.. ")
                     visited_url = urllib.request.urlopen(Request(matched_url, headers={'User-Agent': 'XYZ/3.0'}))
                     url_used = visited_url.geturl()
                     if url_used != matched_url:

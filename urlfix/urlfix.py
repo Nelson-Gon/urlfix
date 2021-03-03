@@ -19,9 +19,8 @@ class URLFix(object):
         matches = re.findall(format_pattern, self.input_file)
         self.input_format = matches[0] if len(matches) > 0 else ''
 
-    def replace_urls(self, inplace=False, verbose=False, correct_urls=None):
+    def replace_urls(self, verbose=False, correct_urls=None):
         """
-        :param inplace Logical. Determines if you need to replace URLs inplace. Defaults to False.
         :param verbose Logical. Should you be notified of what URLs have moved? Defaults to False.
         :param correct_urls. A sequence of urls known to be correct.
         :return  Replaces outdated URL and writes to the specified file. It also returns the number of URLs that have
@@ -43,12 +42,10 @@ class URLFix(object):
 
         number_moved = 0
         number_of_urls = 0
-        if inplace:
-            output_file = self.input_file
-        else:
-            if self.output_file is None:
-                raise ValueError("Please provide an output file to write to.")
-            output_file = self.output_file
+
+        if self.output_file is None:
+            raise ValueError("Please provide an output file to write to.")
+        output_file = self.output_file
 
         if not all(os.path.isfile(x) for x in [self.input_file, output_file]):
             raise FileNotFoundError("input_file and output_file should be valid files.")

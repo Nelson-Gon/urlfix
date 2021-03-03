@@ -42,6 +42,7 @@ class URLFix(object):
         final_regex = "http[s]?://[^\s]+" if self.input_format == "txt" else combined_regex
 
         number_moved = 0
+        number_of_urls = 0
         if inplace:
             output_file = self.input_file
         else:
@@ -59,8 +60,10 @@ class URLFix(object):
 
                 if len(matched_url) != 0:
                     matched_url = matched_url[0][1] if self.input_format == "md" else matched_url[0]
+                    number_of_urls += 1
 
                     # make sure 'correct_urls' parameter is a sequence
+
                     if isinstance(correct_urls, Sequence) and matched_url in correct_urls:
                         # skip current url if it's in 'correct_urls'
                         print(f'{matched_url} is already valid.')
@@ -78,7 +81,7 @@ class URLFix(object):
                     out_f.write(line.replace(matched_url, url_used))
 
         information = "URLs have changed" if number_moved != 1 else "URL has changed"
-        print(f"{number_moved} {information} in {self.input_file}")
+        print(f"{number_moved} {information} of the {number_of_urls} links found in {self.input_file}")
         return number_moved
 
 

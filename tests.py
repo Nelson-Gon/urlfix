@@ -2,6 +2,7 @@ import unittest
 from urlfix.urlfix import *
 import os
 
+
 dir_path = os.path.dirname(os.path.abspath(__file__))
 # Use the above to make paths to files, avoid changing directory just for tests.
 use_file = os.path.join(dir_path, "testurls.md")

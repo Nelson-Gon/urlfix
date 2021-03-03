@@ -10,6 +10,7 @@ use_file_txt = os.path.join(dir_path, "testurls.txt")
 use_object = URLFix(input_file=use_file, output_file="replacement.txt")
 use_object_txt = URLFix(input_file=use_file_txt, output_file="replacement.txt")
 use_object_non_existent = URLFix(input_file=use_file, output_file="not_valid.txt")
+not_supported_files = URLFix(input_file=os.path.join(dir_path, "testurls.rst"), output_file="replacement.txt")
 
 use_dir_object = DirURLFix(dir_path)
 use_dir_non_existent = DirURLFix('non_existent')
@@ -48,6 +49,10 @@ class TestDirURLFix(unittest.TestCase):
         with self.assertRaises(NotADirectoryError) as err:
             use_dir_non_dir.replace_urls()
         self.assertEqual(str(err.exception), "Input path must be a directory!")
+        # Check that non-supported formats are skipped and an error raised
+        with self.assertRaises(NotImplementedError) as err:
+            not_supported_files.replace_urls()
+        self.assertEqual(str(err.exception), "File format rst is not yet supported.")
 
         # Check that if a known URL is provided, it is skipped
         # Checking twice won't work since output files will exist already

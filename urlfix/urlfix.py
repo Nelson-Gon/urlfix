@@ -27,9 +27,11 @@ class URLFix(object):
         :return  Replaces outdated URL and writes to the specified file. It also returns the number of URLs that have
         changed. The latter is useful for tests.
         """
-        if self.input_format not in ('md', 'txt'):
-            print(f'File format not supported in {self.input_file}')
-            return 0
+        if self.input_format not in ("md", "txt"):
+                raise NotImplementedError(f"File format {self.input_format} is not yet supported.")
+        else:
+            pass
+
         link_text = "[^]]+"
         # Better markdown link matching  taken from https://stackoverflow.com/a/23395483/10323798
         # http:// or https:// followed by anything but a closing paren
@@ -51,7 +53,7 @@ class URLFix(object):
             raise FileNotFoundError("input_file and output_file should be valid files.")
 
         with open(self.input_file, "r") as input_f, open(output_file, "w") as out_f:
-            number_of_urls_found = []
+
             for line in input_f:
                 matched_url = re.findall(final_regex, line)
 
@@ -88,7 +90,6 @@ class DirURLFix(object):
         """
         self.input_dir = input_dir
         self.use_files = Path(self.input_dir)
-
 
     def __replace_by_format(self, _format, **kwargs):
         """

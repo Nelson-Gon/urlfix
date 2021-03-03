@@ -1,3 +1,1 @@
-We need to replace links in this document https://www.r-pkg.org/badges/version/manymodelr but it also needs to have
-some text not just links. https://cran.r-project.org/web/packages/manymodelr/index.html not just links. 
-https://lifecycle.r-lib.org/articles/stages.html like this. 
+[![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/manymodelr)](https://cran.r-project.org/package=manymodelr)

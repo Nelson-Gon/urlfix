@@ -1,7 +1,7 @@
 import unittest
 from urlfix.urlfix import *
 import os
-
+import glob
 
 dir_path = os.path.dirname(os.path.abspath(__file__))
 # Use the above to make paths to files, avoid changing directory just for tests.
@@ -72,9 +72,16 @@ class TestDirURLFix(unittest.TestCase):
         self.assertTrue(os.path.isfile(os.path.join(dir_path, "testfiles", "testurls_output.md")))
         self.assertTrue(os.path.isfile(os.path.join(dir_path, "testfiles", "txturls_output.txt")))
 
+        # Clean test folder of results so tests can be repeated.
+        testfiles_path = os.path.join(dir_path, "testfiles")
+        created_output_files = glob.glob(testfiles_path + "/*_output.*")
+
+        for output_file in created_output_files:
+            try:
+                os.remove(output_file)
+            except:
+                pass
+
 
 if __name__ == "__main__":
     unittest.main()
-
-
-

@@ -1,7 +1,7 @@
 import unittest
 from urlfix.urlfix import *
 import os
-
+import glob
 
 dir_path = os.path.dirname(os.path.abspath(__file__))
 # Use the above to make paths to files, avoid changing directory just for tests.
@@ -74,18 +74,14 @@ class TestDirURLFix(unittest.TestCase):
 
         # Clean test folder of results so tests can be repeated.
         testfiles_path = os.path.join(dir_path, "testfiles")
-        garbage_test_files = [os.path.join(testfiles_path, "testcorrect_output.md"),
-                              os.path.join("testurls_output.md"),
-                              os.path.join("txturls_output.txt") ]
+        created_output_files = glob.glob(testfiles_path + "/*_output.*")
 
-        for file in garbage_test_files:
+        for output_file in created_output_files:
             try:
-                os.remove(file)
+                os.remove(output_file)
             except:
                 pass
 
+
 if __name__ == "__main__":
     unittest.main()
-
-
-

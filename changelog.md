@@ -2,6 +2,10 @@
 
 **urlfix 0.2.1**
 
+* Fixed issues with tests failing when run [consecutively](https://github.com/Nelson-Gon/urlfix/pull/13) 
+
+* Inplace replacement is no longer supported via the `inplace=True` argument. 
+
 * Replacement of files now supports adding exceptions that is URLs whose links are known to be valid. 
 
 * Added support for automatic detection of file extensions negating the need to manually specify file formats. 

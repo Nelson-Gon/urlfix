@@ -11,6 +11,8 @@ use_object = URLFix(input_file=use_file, output_file="replacement.txt")
 use_object_txt = URLFix(input_file=use_file_txt, output_file="replacement.txt")
 use_object_non_existent = URLFix(input_file=use_file, output_file="not_valid.txt")
 not_supported_files = URLFix(input_file=os.path.join(dir_path, "testurls.rst"), output_file="replacement.txt")
+use_object_inplace = URLFix(input_file=use_file)
+
 
 use_dir_object = DirURLFix(dir_path)
 use_dir_non_existent = DirURLFix('non_existent')
@@ -35,6 +37,11 @@ class Testurlfix(unittest.TestCase):
         self.assertEqual(number_moved, 1)
         number_moved_txt = use_object_txt.replace_urls(verbose=1)
         self.assertEqual(number_moved_txt, 2)
+
+    def test_replace_urls_inplace(self):
+        #Test case for new inplace feature
+        number_moved = use_object_inplace.replace_urls(verbose=0,inplace=True)
+        self.assertEqual(number_moved, 1)
 
 
 class TestDirURLFix(unittest.TestCase):

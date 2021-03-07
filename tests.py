@@ -93,7 +93,7 @@ class TestDirURLFix(unittest.TestCase):
     def test_replace_urls_inplace(self):
         number_moved_list=use_files_dir_inplace.replace_urls(verbose=1, inplace=True)
         self.assertEqual(number_moved_list[0], 1)
-        self.assertEqual(number_moved_list[1], 1)
+        self.assertEqual(number_moved_list[1], 0)
         self.assertEqual(number_moved_list[2], 2)
 
 

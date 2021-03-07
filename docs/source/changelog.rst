@@ -6,6 +6,12 @@ Welcome to urlfix's changelog
 
 
 * 
+  Fixed issues with tests failing when run `consecutively <https://github.com/Nelson-Gon/urlfix/pull/13>`_ 
+
+* 
+  Inplace replacement is no longer supported via the ``inplace=True`` argument. 
+
+* 
   Replacement of files now supports adding exceptions that is URLs whose links are known to be valid. 
 
 * 

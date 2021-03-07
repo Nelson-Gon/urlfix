@@ -1,7 +1,7 @@
 import unittest
 from urlfix.urlfix import *
 import os
-
+import glob
 
 dir_path = os.path.dirname(os.path.abspath(__file__))
 # Use the above to make paths to files, avoid changing directory just for tests.
@@ -89,6 +89,3 @@ class TestDirURLFix(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
-
-
-

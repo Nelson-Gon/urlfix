@@ -122,7 +122,7 @@ Otherwise:
 .. code-block:: python
 
 
-   from urlfix import *
+   from urlfix.urlfix import *
 
 **Create an object of class URLFix**
 

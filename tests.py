@@ -18,6 +18,7 @@ use_dir_object = DirURLFix(dir_path)
 use_dir_non_existent = DirURLFix('non_existent')
 use_dir_non_dir = DirURLFix(use_file)
 use_files_dir = DirURLFix(os.path.join(dir_path, "testfiles"))
+use_files_dir_inplace = DirURLFix(os.path.join(dir_path, "testfiles"))
 
 
 class Testurlfix(unittest.TestCase):
@@ -78,6 +79,12 @@ class TestDirURLFix(unittest.TestCase):
         self.assertTrue(os.path.isfile(os.path.join(dir_path, "testfiles", "testcorrect_output.md")))
         self.assertTrue(os.path.isfile(os.path.join(dir_path, "testfiles", "testurls_output.md")))
         self.assertTrue(os.path.isfile(os.path.join(dir_path, "testfiles", "txturls_output.txt")))
+
+    def test_replace_urls_inplace(self):
+        number_moved_list=use_files_dir_inplace.replace_urls(verbose=1, inplace=True)
+        self.assertEqual(number_moved_list[0], 1)
+        self.assertEqual(number_moved_list[1], 1)
+        self.assertEqual(number_moved_list[2], 2)
 
 
 if __name__ == "__main__":

@@ -48,6 +48,8 @@ class Testurlfix(unittest.TestCase):
 class TestDirURLFix(unittest.TestCase):
     def test_instance_creation(self):
         self.assertTrue(isinstance(use_dir_object, DirURLFix))
+        # Clean test folder of results so tests can be repeated.
+
 
     def test_replace_urls(self):
         # Use known changed URLs doc
@@ -79,6 +81,14 @@ class TestDirURLFix(unittest.TestCase):
         self.assertTrue(os.path.isfile(os.path.join(dir_path, "testfiles", "testcorrect_output.md")))
         self.assertTrue(os.path.isfile(os.path.join(dir_path, "testfiles", "testurls_output.md")))
         self.assertTrue(os.path.isfile(os.path.join(dir_path, "testfiles", "txturls_output.txt")))
+        testfiles_path = os.path.join(dir_path, "testfiles")
+        created_output_files = glob.glob(testfiles_path + "/*_output.*")
+
+        for output_file in created_output_files:
+            try:
+                os.remove(output_file)
+            except:
+                pass
 
     def test_replace_urls_inplace(self):
         number_moved_list=use_files_dir_inplace.replace_urls(verbose=1, inplace=True)

@@ -2,6 +2,8 @@
 
 **urlfix 0.2.1**
 
+* Fixed issues with text loss in output markdown files. See [#16](https://github.com/Nelson-Gon/urlfix/issues/16) 
+
 * Fixed issues with tests failing when run [consecutively](https://github.com/Nelson-Gon/urlfix/pull/13) 
 
 * Inplace replacement is no longer supported via the `inplace=True` argument. 

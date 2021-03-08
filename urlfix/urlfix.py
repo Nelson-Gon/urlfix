@@ -34,7 +34,7 @@ class URLFix(object):
         link_text = "[^]]+"
         # Better markdown link matching  taken from https://stackoverflow.com/a/23395483/10323798
         # http:// or https:// followed by anything but a closing paren
-        actual_link = "http[s]?://[^)]+"
+        actual_link = "http[s]?://[^)|^\s]+"
         combined_regex = f"\[({link_text})]\(\s*({actual_link})\s*\)"
         # Match only links in a text file, do not text that follows.
         # Assumes that links will always be followed by a space.
@@ -54,6 +54,10 @@ class URLFix(object):
 
             for line in input_f:
                 matched_url = re.findall(final_regex, line)
+
+                if len(matched_url) == 0:
+                    # If no URL found, write this line so it is kept in the output file.
+                    out_f.write(line)
 
                 if len(matched_url) != 0:
                     matched_url = matched_url[0][1] if self.input_format == "md" else matched_url[0]

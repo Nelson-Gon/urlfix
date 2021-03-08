@@ -6,6 +6,9 @@ Welcome to urlfix's changelog
 
 
 * 
+  Fixed issues with text loss in output markdown files. See `#16 <https://github.com/Nelson-Gon/urlfix/issues/16>`_ 
+
+* 
   Fixed issues with tests failing when run `consecutively <https://github.com/Nelson-Gon/urlfix/pull/13>`_ 
 
 * 

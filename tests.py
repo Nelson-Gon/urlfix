@@ -56,8 +56,9 @@ class TestDirURLFix(unittest.TestCase):
 
         # Check that if a known URL is provided, it is skipped
         # Checking twice won't work since output files will exist already
-        number_moved_list = use_files_dir.replace_urls(correct_urls=["https://zenodo.org/badge/DOI/10.5281/zenodo.3891106.svg"],
-                                                       verbose=True)
+        number_moved_list = use_files_dir.replace_urls(
+            correct_urls=["https://zenodo.org/badge/DOI/10.5281/zenodo.3891106.svg"],
+            verbose=True)
         # Since we have three files, assert that the length returned is 3
         self.assertEqual(len(number_moved_list), 3)
 
@@ -68,6 +69,7 @@ class TestDirURLFix(unittest.TestCase):
         # Check skipping --> check that files are created in the above steps
         use_files_dir.replace_urls()
         # Probably better to warn so text can be tested against?
+        # TODO: Automate file detection for unit tests.
         self.assertTrue(os.path.isfile(os.path.join(dir_path, "testfiles", "testcorrect_output.md")))
         self.assertTrue(os.path.isfile(os.path.join(dir_path, "testfiles", "testurls_output.md")))
         self.assertTrue(os.path.isfile(os.path.join(dir_path, "testfiles", "txturls_output.txt")))
@@ -77,10 +79,11 @@ class TestDirURLFix(unittest.TestCase):
         created_output_files = glob.glob(testfiles_path + "/*_output.*")
 
         for output_file in created_output_files:
-            try:
+            # Avoid try-except-else, not trivial to test
+            # Use this for now
+            if os.path.isfile(output_file):
+                print(f"Removing no longer needed file: {output_file}")
                 os.remove(output_file)
-            except:
-                pass
 
 
 if __name__ == "__main__":

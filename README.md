@@ -115,6 +115,14 @@ urlfix_object.replace_urls()
 2
 ```
 
+If there are URLs known to be valid, pass these to the `correct_urls` argument to save some time.
+
+```python 
+
+urlfix_object.replace_urls(correct_urls=[urls_here]) # Use a Sequence eg tuple, list, etc
+
+```
+
 
 **Replacing several files in a directory**
 

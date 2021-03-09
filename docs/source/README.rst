@@ -166,6 +166,13 @@ To replace silently, simply set verbose to ``False`` (which is the default).
    2 URLs have changed of the 3 links found in testurls.txt
    2
 
+If there are URLs known to be valid, pass these to the ``correct_urls`` argument to save some time.
+
+.. code-block:: python
+
+
+   urlfix_object.replace_urls(correct_urls=[urls_here]) # Use a Sequence eg tuple, list, etc
+
 **Replacing several files in a directory**
 
 To replace several files in a directory, we can use ``DirURLFix`` as follows.

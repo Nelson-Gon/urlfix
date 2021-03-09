@@ -5,6 +5,8 @@ import glob
 
 dir_path = os.path.dirname(os.path.abspath(__file__))
 # Use the above to make paths to files, avoid changing directory just for tests.
+# ToDo: Create order in test files, add these to testfiles?
+# Todo: Avoid manually creating file paths.
 use_file = os.path.join(dir_path, "testurls.md")
 use_file_txt = os.path.join(dir_path, "testurls.txt")
 use_object = URLFix(input_file=use_file, output_file="replacement.txt")
@@ -70,20 +72,16 @@ class TestDirURLFix(unittest.TestCase):
         use_files_dir.replace_urls()
         # Probably better to warn so text can be tested against?
         # TODO: Automate file detection for unit tests.
-        self.assertTrue(os.path.isfile(os.path.join(dir_path, "testfiles", "testcorrect_output.md")))
-        self.assertTrue(os.path.isfile(os.path.join(dir_path, "testfiles", "testurls_output.md")))
-        self.assertTrue(os.path.isfile(os.path.join(dir_path, "testfiles", "txturls_output.txt")))
-
-        # Clean test folder of results so tests can be repeated.
         testfiles_path = os.path.join(dir_path, "testfiles")
         created_output_files = glob.glob(testfiles_path + "/*_output.*")
 
         for output_file in created_output_files:
             # Avoid try-except-else, not trivial to test
             # Use this for now
-            if os.path.isfile(output_file):
-                print(f"Removing no longer needed file: {output_file}")
-                os.remove(output_file)
+            # if this file exists and test passes, delete it
+            self.assertTrue(os.path.isfile(output_file))
+            print(f"Removing no longer needed file: {output_file}")
+            os.remove(output_file)
 
 
 if __name__ == "__main__":

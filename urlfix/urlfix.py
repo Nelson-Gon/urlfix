@@ -61,7 +61,7 @@ class URLFix(object):
                     out_f.write(line)
                 else:
                     for link in matched_url:
-                        actual_link = link[1] if self.input_format=="md" else link
+                        actual_link = link[1] if self.input_format == "md" else link
                         number_of_urls += 1
                         if isinstance(correct_urls, Sequence) and actual_link in correct_urls:
                             # skip current url if it's in 'correct_urls'
@@ -72,12 +72,14 @@ class URLFix(object):
                         if verbose:
                             print(f"Found {actual_link} in {input_f.name}, now validating.. ")
                         try:
-                            visited_url = urllib.request.urlopen(Request(actual_link, headers={'User-Agent': 'XYZ/3.0'}))
+                            visited_url = urllib.request.urlopen(
+                                Request(actual_link, headers={'User-Agent': 'XYZ/3.0'}))
                         except URLError as err:
                             # TODO: Figure out why getting the error code fails.
                             # Leave intact
                             warnings.warn(f"{actual_link} not updated. Reason: {err.reason}")
-                            # skip next steps for this url
+                            # Must be a way to skip, for now rewrite it in there
+                            pass
 
                         else:
                             url_used = visited_url.geturl()
@@ -85,7 +87,8 @@ class URLFix(object):
                                 number_moved += 1
                                 if verbose:
                                     print(f"{actual_link} replaced with {url_used} in {out_f.name}")
-                            out_f.write(line.replace(actual_link, url_used))
+                                line.replace(actual_link, url_used)
+                    out_f.write(line)
 
             information = "URLs have changed" if number_moved != 1 else "URL has changed"
             print(f"{number_moved} {information} of the {number_of_urls} links found in {self.input_file}")

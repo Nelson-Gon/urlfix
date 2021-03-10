@@ -6,8 +6,12 @@ Welcome to urlfix's changelog
 
 
 * 
+  Fixed issues with double text appearing in the replacement file. 
+  Related to `Issue 20 <https://github.com/Nelson-Gon/urlfix/issues/20>`_. 
+
+* 
   Fixed issues with URLs not being matched if they are on the same line. 
-  Issue [#20]https://github.com/Nelson-Gon/urlfix/issues/20). 
+  Issue `#20 <https://github.com/Nelson-Gon/urlfix/issues/20>`_. 
 
 * 
   Users are now warned if a target URL is outdated and no newer URL exists. 

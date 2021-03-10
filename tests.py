@@ -22,8 +22,8 @@ use_files_dir = DirURLFix(os.path.join(dir_path, "testfiles"))
 
 class Testurlfix(unittest.TestCase):
     def test_instance_creation(self):
-        self.assertTrue(isinstance(use_object, URLFix))
-        self.assertTrue(isinstance(use_object_txt, URLFix))
+        [self.assertTrue(isinstance(urlfix_object, URLFix)) for urlfix_object in [use_object, use_object_txt]]
+
         with self.assertRaises(ValueError) as err:
             URLFix(input_file=use_file).replace_urls()
         self.assertEqual(str(err.exception), "Please provide an output file to write to.")

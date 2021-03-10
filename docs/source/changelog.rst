@@ -6,6 +6,10 @@ Welcome to urlfix's changelog
 
 
 * 
+  Users are now warned if a target URL is outdated and no newer URL exists. 
+  See `#18 <https://github.com/Nelson-Gon/urlfix/issues/18>`_
+
+* 
   Fixed issues with text loss in output markdown files. See `#16 <https://github.com/Nelson-Gon/urlfix/issues/16>`_ 
 
 * 

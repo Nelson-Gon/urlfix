@@ -78,7 +78,10 @@ class URLFix(object):
                     try:
                         visited_url = urllib.request.urlopen(Request(matched_url, headers={'User-Agent': 'XYZ/3.0'}))
                     except URLError as err:
-                        warnings.warn(f"Failed to update {matched_url} with code: {err.code} and reason: {err.reason}")
+                        # TODO: Figure out why getting the error code fails.
+                        warnings.warn(f"{matched_url} not updated. Reason: {err.reason}")
+                        # skip next steps for this url
+                        continue
 
                     url_used = visited_url.geturl()
                     if url_used != matched_url:

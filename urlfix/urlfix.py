@@ -4,8 +4,7 @@ from pathlib import Path
 import re
 import urllib.request
 from urllib.request import Request
-from urllib.error import HTTPError
-from socket import timeout
+from urllib.error import URLError
 import warnings
 
 
@@ -78,11 +77,9 @@ class URLFix(object):
                         print(f"Found {matched_url} in {input_f.name}, now validating.. ")
                     try:
                         visited_url = urllib.request.urlopen(Request(matched_url, headers={'User-Agent': 'XYZ/3.0'}))
-                    except HTTPError as err:
-                        if err.code != 200:
-                            warnings.warn("URL is outdated")
-                    except timeout:
-                        warnings.warn("Response timed out")
+                    except URLError as err:
+                        warnings.warn(f"Failed to update {matched_url} with code: {err.code} and reason: {err.reason}")
+
                     url_used = visited_url.geturl()
                     if url_used != matched_url:
                         number_moved += 1

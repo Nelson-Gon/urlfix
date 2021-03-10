@@ -56,43 +56,40 @@ class URLFix(object):
 
             for line in input_f:
                 matched_url = re.findall(final_regex, line)
-
                 if len(matched_url) == 0:
                     # If no URL found, write this line so it is kept in the output file.
                     out_f.write(line)
+                else:
+                    for link in matched_url:
+                        actual_link = link[1] if self.input_format=="md" else link
+                        number_of_urls += 1
+                        if isinstance(correct_urls, Sequence) and actual_link in correct_urls:
+                            # skip current url if it's in 'correct_urls'
+                            print(f'{actual_link} is already valid.')
+                            continue
 
-                if len(matched_url) != 0:
-                    matched_url = matched_url[0][1] if self.input_format == "md" else matched_url[0]
-                    number_of_urls += 1
-
-                    # make sure 'correct_urls' parameter is a sequence
-
-                    if isinstance(correct_urls, Sequence) and matched_url in correct_urls:
-                        # skip current url if it's in 'correct_urls'
-                        print(f'{matched_url} is already valid.')
-                        continue
-
-                    # This printing step while unnecessary may be useful to make sure things work as expected
-                    if verbose:
-                        print(f"Found {matched_url} in {input_f.name}, now validating.. ")
-                    try:
-                        visited_url = urllib.request.urlopen(Request(matched_url, headers={'User-Agent': 'XYZ/3.0'}))
-                    except URLError as err:
-                        # TODO: Figure out why getting the error code fails.
-                        warnings.warn(f"{matched_url} not updated. Reason: {err.reason}")
-                        # skip next steps for this url
-                        continue
-
-                    url_used = visited_url.geturl()
-                    if url_used != matched_url:
-                        number_moved += 1
+                        # This printing step while unnecessary may be useful to make sure things work as expected
                         if verbose:
-                            print(f"{matched_url} replaced with {url_used} in {out_f.name}")
-                    out_f.write(line.replace(matched_url, url_used))
+                            print(f"Found {actual_link} in {input_f.name}, now validating.. ")
+                        try:
+                            visited_url = urllib.request.urlopen(Request(actual_link, headers={'User-Agent': 'XYZ/3.0'}))
+                        except URLError as err:
+                            # TODO: Figure out why getting the error code fails.
+                            # Leave intact
+                            warnings.warn(f"{actual_link} not updated. Reason: {err.reason}")
+                            # skip next steps for this url
 
-        information = "URLs have changed" if number_moved != 1 else "URL has changed"
-        print(f"{number_moved} {information} of the {number_of_urls} links found in {self.input_file}")
-        return number_moved
+                        else:
+                            url_used = visited_url.geturl()
+                            if url_used != actual_link:
+                                number_moved += 1
+                                if verbose:
+                                    print(f"{actual_link} replaced with {url_used} in {out_f.name}")
+                            out_f.write(line.replace(actual_link, url_used))
+
+            information = "URLs have changed" if number_moved != 1 else "URL has changed"
+            print(f"{number_moved} {information} of the {number_of_urls} links found in {self.input_file}")
+            return number_moved
 
 
 class DirURLFix(object):

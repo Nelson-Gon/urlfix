@@ -57,7 +57,7 @@ class TestDirURLFix(unittest.TestCase):
         self.assertEqual(str(err.exception), "File format rst is not yet supported.")
 
         # Check that if a known URL is provided, it is skipped
-        # Checking twice won't work since output files will exist already
+
         number_moved_list = use_files_dir.replace_urls(
             correct_urls=["https://zenodo.org/badge/DOI/10.5281/zenodo.3891106.svg"],
             verbose=True)

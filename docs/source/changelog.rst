@@ -6,6 +6,10 @@ Welcome to urlfix's changelog
 
 
 * 
+  Fixed issues with URLs not being matched if they are on the same line. 
+  Issue [#20]https://github.com/Nelson-Gon/urlfix/issues/20). 
+
+* 
   Users are now warned if a target URL is outdated and no newer URL exists. 
   See `#18 <https://github.com/Nelson-Gon/urlfix/issues/18>`_
 

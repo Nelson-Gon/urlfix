@@ -67,7 +67,8 @@ class TestDirURLFix(unittest.TestCase):
 
         self.assertEqual(number_moved_list[0], 3)
         # 1 since we provided correct URLs. TODO: Figure out how to run both tests
-        self.assertEqual(number_moved_list[1], 1)
+        # 3 since we match double links if []()[]()
+        self.assertEqual(number_moved_list[1], 3)
         self.assertEqual(number_moved_list[2], 2)
         # Check skipping --> check that files are created in the above steps
         use_files_dir.replace_urls()

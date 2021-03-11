@@ -58,22 +58,23 @@ class URLFix(object):
             for line in input_f:
                 matched_url = re.findall(final_regex, line)
                 # Drop empty strings
-                matched_url = [list(str(x) for x in texts_links if x != '') for texts_links in matched_url]
-                if len(matched_url) == 0:
-                    # If no URL found, write this line so it is kept in the output file.
-                    out_f.write(line)
-                    pass
-                else:
+                if self.input_format == "md":
+                    matched_url = [list(str(x) for x in texts_links if x != '') for texts_links in matched_url]
                     for link_texts in matched_url:
-
                         if len(link_texts) > 1:
                             link_texts = link_texts[1:]
                             # This is used because for some reason we match links twice if single md []()
                             # This isn't ideal
                             # TODO: Use better Regular Expression that matches the target links at once
-                            link_texts = list(filter(lambda x: ("https" or "http") in x, link_texts))
+                            matched_url = list(filter(lambda x: ("https" or "http") in x, link_texts))
+                if len(matched_url) == 0:
+                    # If no URL found, write this line so it is kept in the output file.
+                    out_f.write(line)
+                    pass
+                else:
 
-                        for final_link in link_texts:
+
+                        for final_link in matched_url:
                             number_of_urls += 1
                             if isinstance(correct_urls, Sequence) and final_link in correct_urls:
                                 # skip current url if it's in 'correct_urls'
@@ -99,7 +100,7 @@ class URLFix(object):
                                     if verbose:
                                         print(f"{final_link} replaced with {url_used} in {out_f.name}")
                                     line.replace(final_link, url_used)
-                    out_f.write(line)
+                        out_f.write(line)
         information = "URLs have changed" if number_moved != 1 else "URL has changed"
         print(f"{number_moved} {information} of the {number_of_urls} links found in {self.input_file}")
         return number_moved

@@ -6,6 +6,9 @@ Welcome to urlfix's changelog
 
 
 * 
+  ``dirurlfix`` is a new module dedicate to directory replacements. 
+
+* 
   Fixed issues with markdown links in the format ``[]()[]()`` not being fully matched. 
   See `#17 <https://github.com/Nelson-Gon/urlfix/issues/17>`_
 

@@ -68,7 +68,8 @@ python3 setup.py install
 
 ```python
 
-from urlfix.urlfix import * 
+from urlfix.urlfix import URLFix
+from urlfix.dirulrfix import DirURLFix
 
 ```
 
@@ -76,7 +77,7 @@ from urlfix.urlfix import *
 
 ```python
 
-urlfix_object = URLFix("testurls.txt", output_file="replacement.txt")
+urlfix_object = URLFix("testfiles/testurls.txt", output_file="replacement.txt")
 
 ```
 **Replacing URLs**

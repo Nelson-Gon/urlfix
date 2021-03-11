@@ -1,23 +1,26 @@
 import unittest
-from urlfix.urlfix import *
+from urlfix.urlfix import URLFix
+from urlfix.dirurlfix import DirURLFix
 import os
 import glob
 
 dir_path = os.path.dirname(os.path.abspath(__file__))
+dir_path = os.path.join("testfiles")
+replacement_file = os.path.join(dir_path,"replacement.txt")
 # Use the above to make paths to files, avoid changing directory just for tests.
 # ToDo: Create order in test files, add these to testfiles?
 # Todo: Avoid manually creating file paths.
 use_file = os.path.join(dir_path, "testurls.md")
 use_file_txt = os.path.join(dir_path, "testurls.txt")
-use_object = URLFix(input_file=use_file, output_file="replacement.txt")
-use_object_txt = URLFix(input_file=use_file_txt, output_file="replacement.txt")
+use_object = URLFix(input_file=use_file, output_file=replacement_file)
+use_object_txt = URLFix(input_file=use_file_txt, output_file=replacement_file)
 use_object_non_existent = URLFix(input_file=use_file, output_file="not_valid.txt")
-not_supported_files = URLFix(input_file=os.path.join(dir_path, "testurls.rst"), output_file="replacement.txt")
+not_supported_files = URLFix(input_file=os.path.join(dir_path, "testurls.rst"), output_file=replacement_file)
 
-use_dir_object = DirURLFix(dir_path)
+use_dir_object = DirURLFix(os.path.join(dir_path, "testdir"))
 use_dir_non_existent = DirURLFix('non_existent')
 use_dir_non_dir = DirURLFix(use_file)
-use_files_dir = DirURLFix(os.path.join(dir_path, "testfiles"))
+use_files_dir = DirURLFix(os.path.join(dir_path, "testdir"))
 
 
 class Testurlfix(unittest.TestCase):
@@ -74,7 +77,7 @@ class TestDirURLFix(unittest.TestCase):
         use_files_dir.replace_urls()
         # Probably better to warn so text can be tested against?
         # TODO: Automate file detection for unit tests.
-        testfiles_path = os.path.join(dir_path, "testfiles")
+        testfiles_path = os.path.join(dir_path, "testdir")
         created_output_files = glob.glob(testfiles_path + "/*_output.*")
 
         for output_file in created_output_files:

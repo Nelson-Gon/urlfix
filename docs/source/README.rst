@@ -122,14 +122,15 @@ Otherwise:
 .. code-block:: python
 
 
-   from urlfix.urlfix import *
+   from urlfix.urlfix import URLFix
+   from urlfix.dirurlfix import DirURLFix
 
 **Create an object of class URLFix**
 
 .. code-block:: python
 
 
-   urlfix_object = URLFix("testurls.txt", output_file="replacement.txt")
+   urlfix_object = URLFix("testfiles/testurls.txt", output_file="replacement.txt")
 
 **Replacing URLs**
 

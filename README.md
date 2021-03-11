@@ -69,7 +69,7 @@ python3 setup.py install
 ```python
 
 from urlfix.urlfix import URLFix
-from urlfix.dirulrfix import DirURLFix
+from urlfix.dirurlfix import DirURLFix
 
 ```
 

@@ -34,7 +34,8 @@ class Testurlfix(unittest.TestCase):
             use_object_non_existent.replace_urls()
         self.assertEqual(str(err.exception), "input_file and output_file should be valid files.")
         number_moved = use_object.replace_urls(verbose=0)
-        self.assertEqual(number_moved, 1)
+        # 3 out of 9 links should have moved.
+        self.assertEqual(number_moved, 3)
         number_moved_txt = use_object_txt.replace_urls(verbose=1)
         self.assertEqual(number_moved_txt, 2)
 
@@ -64,7 +65,7 @@ class TestDirURLFix(unittest.TestCase):
         # Since we have three files, assert that the length returned is 3
         self.assertEqual(len(number_moved_list), 3)
 
-        self.assertEqual(number_moved_list[0], 1)
+        self.assertEqual(number_moved_list[0], 3)
         # 1 since we provided correct URLs. TODO: Figure out how to run both tests
         self.assertEqual(number_moved_list[1], 1)
         self.assertEqual(number_moved_list[2], 2)

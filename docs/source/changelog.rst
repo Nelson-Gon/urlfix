@@ -6,6 +6,10 @@ Welcome to urlfix's changelog
 
 
 * 
+  Fixed issues with markdown links in the format ``[]()[]()`` not being fully matched. 
+  See `#17 <https://github.com/Nelson-Gon/urlfix/issues/17>`_
+
+* 
   Fixed issues with double text appearing in the replacement file. 
   Related to `Issue 20 <https://github.com/Nelson-Gon/urlfix/issues/20>`_. 
 

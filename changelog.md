@@ -2,6 +2,9 @@
 
 **urlfix 0.2.1**
 
+* Fixed issues with markdown links in the format `[]()[]()` not being fully matched. 
+ See [#17](https://github.com/Nelson-Gon/urlfix/issues/17)
+
 * Fixed issues with double text appearing in the replacement file. 
   Related to [Issue 20](https://github.com/Nelson-Gon/urlfix/issues/20). 
 

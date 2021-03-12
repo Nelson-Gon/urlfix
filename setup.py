@@ -1,15 +1,15 @@
 from setuptools import setup, find_packages
 
-
+from urlfix.version import __version__
 setup(name='urlfix',
-      version="0.2.1",
+      version=__version__,
       description='Check and Fix Outdated URLs',
       url="http://www.github.com/Nelson-Gon/urlfix",
       download_url="https://github.com/Nelson-Gon/urlfix/archive/v0.2.1.zip",
       author='Nelson Gonzabato',
       author_email='gonzabato@hotmail.com',
       license='MIT',
-      keywords="development url https markdown web",
+      keywords="development url https markdown web url-validation url-checker",
       packages=find_packages(),
       long_description=open('README.md', encoding="utf-8").read(),
       long_description_content_type='text/markdown',

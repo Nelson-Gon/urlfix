@@ -2,6 +2,8 @@
 
 **urlfix 0.2.1**
 
+* Versioning is now automated. You can now check version number via `urlfix.__version__`
+
 * `dirurlfix` is a new module dedicate to directory replacements. 
 
 * Fixed issues with markdown links in the format `[]()[]()` not being fully matched. 

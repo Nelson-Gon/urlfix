@@ -6,6 +6,9 @@ Welcome to urlfix's changelog
 
 
 * 
+  Versioning is now automated. You can now check version number via ``urlfix.__version__``
+
+* 
   ``dirurlfix`` is a new module dedicate to directory replacements. 
 
 * 

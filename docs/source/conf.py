@@ -19,9 +19,9 @@ project = 'urlfix'
 sys.path.insert(0, os.path.abspath('../../'))
 copyright = '2021, Nelson Gonzabato'
 author = 'Nelson Gonzabato'
-
+from urlfix.version import __version__
 # The full version, including alpha/beta/rc tags
-release = "0.2.1"
+release = __version__
 
 source_suffix = ['.rst', '.md']
 

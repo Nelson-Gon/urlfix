@@ -85,9 +85,6 @@ class TestDirURLFix(unittest.TestCase):
         # Check skipping --> check that files are created in the above steps
         use_files_dir.replace_urls()
         # Probably better to warn so text can be tested against?
-        self.assertTrue(os.path.isfile(os.path.join(dir_path, "testfiles", "testcorrect_output.md")))
-        self.assertTrue(os.path.isfile(os.path.join(dir_path, "testfiles", "testurls_output.md")))
-        self.assertTrue(os.path.isfile(os.path.join(dir_path, "testfiles", "txturls_output.txt")))
         # TODO: Automate file detection for unit tests.
         testfiles_path = os.path.join(dir_path, "testdir")
         created_output_files = glob.glob(testfiles_path + "/*_output.*")
@@ -102,8 +99,8 @@ class TestDirURLFix(unittest.TestCase):
 
     def test_replace_urls_inplace(self):
         number_moved_list=use_files_dir_inplace.replace_urls(verbose=1, inplace=True)
-        self.assertEqual(number_moved_list[0], 1)
-        self.assertEqual(number_moved_list[1], 0)
+        self.assertEqual(number_moved_list[0], 3)
+        self.assertEqual(number_moved_list[1], 3)
         self.assertEqual(number_moved_list[2], 2)
 
 

@@ -57,6 +57,9 @@ class URLFix(object):
         if not all(os.path.isfile(x) for x in [self.input_file, output_file]):
             raise FileNotFoundError("input_file and output_file should be valid files.")
 
+        number_moved = 0
+        number_of_urls = 0
+        
         with open(self.input_file, "r") as input_f, out_f:
             
             for line in input_f:

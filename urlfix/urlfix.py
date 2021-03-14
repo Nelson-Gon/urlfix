@@ -45,9 +45,6 @@ class URLFix(object):
         # Assumes that links will always be followed by a space.
         final_regex = "http[s]?://[^\s]+" if self.input_format == "txt" else combined_regex
 
-        number_moved = 0
-        number_of_urls = 0
-
         if not self.output_file and not inplace:
             raise ValueError("Please provide an output file to write to.")
         output_file = self.output_file
@@ -64,33 +61,6 @@ class URLFix(object):
             
             for line in input_f:
                 matched_url = re.findall(final_regex, line)
-
-                if len(matched_url) != 0:
-                    matched_url = matched_url[0][1] if self.input_format == "md" else matched_url[0]
-                    number_of_urls += 1
-
-                    # make sure 'correct_urls' parameter is a sequence
-
-                    if isinstance(correct_urls, Sequence) and matched_url in correct_urls:
-                        # skip current url if it's in 'correct_urls'
-                        print(f'{matched_url} is already valid.')
-                        continue
-
-                    # This printing step while unnecessary may be useful to make sure things work as expected
-                    if verbose:
-                        print(f"Found {matched_url} in {input_f.name}, now validating.. ")
-                    visited_url = urllib.request.urlopen(Request(matched_url, headers={'User-Agent': 'XYZ/3.0'}))
-                    url_used = visited_url.geturl()
-                    if url_used != matched_url:
-                        number_moved += 1
-                        if verbose:
-                            print(f"{matched_url} replaced with {url_used} in {out_f.name}")
-                    out_f.write(line.replace(matched_url, url_used))
-        if inplace:
-            with open(self.input_file, "r+") as input_f, open(output_file,'r') as out_f:
-                for line in out_f.read():
-                    input_f.write(line)
-            os.unlink(output_file)
                 # Drop empty strings
                 if self.input_format == "md":
                     matched_url = [list(str(x) for x in texts_links if x != '') for texts_links in matched_url]
@@ -135,6 +105,11 @@ class URLFix(object):
                                         print(f"{final_link} replaced with {url_used} in {out_f.name}")
                                     line.replace(final_link, url_used)
                         out_f.write(line)
+        if inplace:
+            with open(self.input_file, "r+") as input_f, open(output_file,'r') as out_f:
+                for line in out_f.read():
+                    input_f.write(line)
+            os.unlink(output_file)
         information = "URLs have changed" if number_moved != 1 else "URL has changed"
         print(f"{number_moved} {information} of the {number_of_urls} links found in {self.input_file}")
         return number_moved

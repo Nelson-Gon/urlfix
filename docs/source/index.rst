@@ -8,10 +8,11 @@ Welcome to urlfix's documentation!
    :maxdepth: 2
 
 
-   modules
    README
+   modules
    changelog
    CONTRIBUTING
+
 
 
 Indices and tables

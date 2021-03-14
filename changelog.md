@@ -2,6 +2,24 @@
 
 **urlfix 0.2.1**
 
+* Versioning is now automated. You can now check version number via `urlfix.__version__`
+
+* `dirurlfix` is a new module dedicate to directory replacements. 
+
+* Fixed issues with markdown links in the format `[]()[]()` not being fully matched. 
+ See [#17](https://github.com/Nelson-Gon/urlfix/issues/17)
+
+* Fixed issues with double text appearing in the replacement file. 
+  Related to [Issue 20](https://github.com/Nelson-Gon/urlfix/issues/20). 
+
+* Fixed issues with URLs not being matched if they are on the same line. 
+  Issue [#20](https://github.com/Nelson-Gon/urlfix/issues/20). 
+
+* Users are now warned if a target URL is outdated and no newer URL exists. 
+  See [#18](https://github.com/Nelson-Gon/urlfix/issues/18)
+
+* Fixed issues with text loss in output markdown files. See [#16](https://github.com/Nelson-Gon/urlfix/issues/16) 
+
 * Fixed issues with tests failing when run [consecutively](https://github.com/Nelson-Gon/urlfix/pull/13) 
 
 * Inplace replacement is no longer supported via the `inplace=True` argument. 

@@ -68,7 +68,8 @@ python3 setup.py install
 
 ```python
 
-from urlfix.urlfix import * 
+from urlfix.urlfix import URLFix
+from urlfix.dirurlfix import DirURLFix
 
 ```
 
@@ -76,7 +77,7 @@ from urlfix.urlfix import *
 
 ```python
 
-urlfix_object = URLFix("testurls.txt", output_file="replacement.txt")
+urlfix_object = URLFix("testfiles/testurls.txt", output_file="replacement.txt")
 
 ```
 **Replacing URLs**
@@ -99,7 +100,7 @@ Found https://www.r-pkg.org/badges/version/manymodelr in testurls.txt, now valid
 Found https://cran.r-project.org/package=manymodelr in testurls.txt, now validating.. 
 https://cran.r-project.org/package=manymodelr replaced with https://cran.r-project.org/web/packages/manymodelr/index.html 
 in replacement.txt
-Found https://tidyverse.org/lifecycle/#maturing in C:\Users\Nelg\Desktop\urlfix\testurls.txt, now validating.. 
+Found https://tidyverse.org/lifecycle/#maturing in testurls.txt, now validating.. 
 https://tidyverse.org/lifecycle/#maturing replaced with https://lifecycle.r-lib.org/articles/stages.html in 
 replacement.txt
 2 URLs have changed of the 3 links found in testurls.txt
@@ -113,6 +114,14 @@ To replace silently, simply set verbose to `False` (which is the default).
 urlfix_object.replace_urls()
 2 URLs have changed of the 3 links found in testurls.txt
 2
+```
+
+If there are URLs known to be valid, pass these to the `correct_urls` argument to save some time.
+
+```python 
+
+urlfix_object.replace_urls(correct_urls=[urls_here]) # Use a Sequence eg tuple, list, etc
+
 ```
 
 

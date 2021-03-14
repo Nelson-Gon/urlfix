@@ -1,10 +1,11 @@
 from collections.abc import Sequence
 import os
-from pathlib import Path
 import re
 import urllib.request
 from urllib.request import Request
 import tempfile
+from urllib.error import URLError
+import warnings
 
 
 class URLFix(object):
@@ -36,8 +37,10 @@ class URLFix(object):
         link_text = "[^]]+"
         # Better markdown link matching  taken from https://stackoverflow.com/a/23395483/10323798
         # http:// or https:// followed by anything but a closing paren
-        actual_link = "http[s]?://[^)]+"
-        combined_regex = f"\[({link_text})]\(\s*({actual_link})\s*\)"
+        actual_link = "http[s]?://[^)|^\s|?<=\]]+"
+        # Need to find more links if using double bracket Markdown hence define single md []() RegEx.
+        single_md = "\[([^]]+)\]\((http[s]?://[^\s|^\)]+)\)"
+        combined_regex = f"\[({link_text})\]\(({(actual_link)})\)\]\((http[s].*)\)|({single_md})"
         # Match only links in a text file, do not text that follows.
         # Assumes that links will always be followed by a space.
         final_regex = "http[s]?://[^\s]+" if self.input_format == "txt" else combined_regex
@@ -58,7 +61,7 @@ class URLFix(object):
             raise FileNotFoundError("input_file and output_file should be valid files.")
 
         with open(self.input_file, "r") as input_f, out_f:
-
+            
             for line in input_f:
                 matched_url = re.findall(final_regex, line)
 
@@ -88,6 +91,7 @@ class URLFix(object):
                 for line in out_f.read():
                     input_f.write(line)
             os.unlink(output_file)
+                # Drop empty strings
         information = "URLs have changed" if number_moved != 1 else "URL has changed"
         print(f"{number_moved} {information} of the {number_of_urls} links found in {self.input_file}")
         return number_moved

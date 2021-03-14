@@ -47,7 +47,7 @@ class Testurlfix(unittest.TestCase):
     def test_replace_urls_inplace(self):
         #Test case for new inplace feature
         number_moved = use_object_inplace.replace_urls(verbose=0,inplace=True)
-        self.assertEqual(number_moved, 1)
+        self.assertEqual(number_moved, 3)
 
 
 class TestDirURLFix(unittest.TestCase):

@@ -4,6 +4,7 @@ from pathlib import Path
 import re
 import urllib.request
 from urllib.request import Request
+import tempfile
 
 
 class URLFix(object):
@@ -48,15 +49,15 @@ class URLFix(object):
             raise ValueError("Please provide an output file to write to.")
         output_file = self.output_file
         if inplace:
-            output_file = "replacements_tmp.txt"
-            with open(output_file, "w"):
-                #Create temp file if temp file is not specified
-                pass
+            out_f = tempfile.NamedTemporaryFile(mode='r+', dir = os.getcwd(), delete=False)
+            output_file = out_f.name
+        else:
+            out_f = open(output_file, "w")
 
         if not all(os.path.isfile(x) for x in [self.input_file, output_file]):
             raise FileNotFoundError("input_file and output_file should be valid files.")
 
-        with open(self.input_file, "r") as input_f, open(output_file, "w") as out_f:
+        with open(self.input_file, "r") as input_f, out_f:
 
             for line in input_f:
                 matched_url = re.findall(final_regex, line)
@@ -82,14 +83,11 @@ class URLFix(object):
                         if verbose:
                             print(f"{matched_url} replaced with {url_used} in {out_f.name}")
                     out_f.write(line.replace(matched_url, url_used))
-
         if inplace:
-            os.remove(self.input_file)
-            if verbose:
-                print(f"{self.input_file} removed successfully")
-            os.rename(output_file, self.input_file)
-            if verbose:
-                print(f"{output_file} renamed with {self.input_file} successfully")
+            with open(self.input_file, "r+") as input_f, open(output_file,'r') as out_f:
+                for line in out_f.read():
+                    input_f.write(line)
+            os.unlink(output_file)
         information = "URLs have changed" if number_moved != 1 else "URL has changed"
         print(f"{number_moved} {information} of the {number_of_urls} links found in {self.input_file}")
         return number_moved
@@ -112,7 +110,7 @@ class DirURLFix(object):
         for input_file in self.use_files.glob(f'*.{_format}'):
             input_file = str(input_file) # convert object to path string
             if "inplace" in kwargs and kwargs["inplace"]:
-                output_file = "replacements_tmp.txt"
+                output_file = None
             else:
                 if '_output' in input_file:
                     print(f"File is a fix of another file: {input_file}")

@@ -3,6 +3,7 @@ import os
 import re
 import urllib.request
 from urllib.request import Request
+import tempfile
 from urllib.error import URLError
 import warnings
 
@@ -20,10 +21,11 @@ class URLFix(object):
         matches = re.findall(format_pattern, self.input_file)
         self.input_format = matches[0] if len(matches) > 0 else ''
 
-    def replace_urls(self, verbose=False, correct_urls=None):
+    def replace_urls(self, verbose=False, correct_urls=None, inplace=False):
         """
         :param verbose Logical. Should you be notified of what URLs have moved? Defaults to False.
         :param correct_urls. A sequence of urls known to be correct.
+        :param inplace. Flag for inplace update operation.
         :return  Replaces outdated URL and writes to the specified file. It also returns the number of URLs that have
         changed. The latter is useful for tests.
         """
@@ -44,16 +46,24 @@ class URLFix(object):
         final_regex = "http[s]?://[^\s]+" if self.input_format == "txt" else combined_regex
 
         if self.output_file is None:
-            raise ValueError("Please provide an output file to write to.")
-        output_file = self.output_file
+            if not inplace:
+                raise ValueError("Please provide an output file to write to.")
+            else:
+                # Get directory name from input file path
+                out_f = tempfile.NamedTemporaryFile(mode='r+', dir=os.path.dirname(self.input_file), delete=False)
+                output_file = out_f.name
+        else:
+            if not all(os.path.exists(x) for x in [self.input_file, self.output_file]):
+                raise FileNotFoundError("input_file and output_file should be valid files.")
 
-        if not all(os.path.isfile(x) for x in [self.input_file, output_file]):
-            raise FileNotFoundError("input_file and output_file should be valid files.")
+            output_file = self.output_file
+
 
         number_moved = 0
         number_of_urls = 0
-
-        with open(self.input_file, "r") as input_f, open(output_file, "w") as out_f:
+        
+        with open(self.input_file, "r") as input_f, open(output_file,"w") as out_f:
+            
             for line in input_f:
                 matched_url = re.findall(final_regex, line)
                 # Drop empty strings
@@ -71,36 +81,43 @@ class URLFix(object):
                     out_f.write(line)
                     pass
                 else:
+                    for final_link in matched_url:
+                        number_of_urls += 1
+                        if isinstance(correct_urls, Sequence) and final_link in correct_urls:
+                            # skip current url if it's in 'correct_urls'
+                            print(f'{final_link} is already valid.')
+                            continue
 
-
-                        for final_link in matched_url:
-                            number_of_urls += 1
-                            if isinstance(correct_urls, Sequence) and final_link in correct_urls:
-                                # skip current url if it's in 'correct_urls'
-                                print(f'{final_link} is already valid.')
-                                continue
-
-                            # This printing step while unnecessary may be useful to make sure things work as expected
-                            if verbose:
-                                print(f"Found {final_link} in {input_f.name}, now validating.. ")
-                            try:
-                                visited_url = urllib.request.urlopen(
+                        # This printing step while unnecessary may be useful to make sure things work as expected
+                        if verbose:
+                            print(f"Found {final_link} in {input_f.name}, now validating.. ")
+                        try:
+                            visited_url = urllib.request.urlopen(
                                     Request(final_link, headers={'User-Agent': 'XYZ/3.0'}))
-                            except URLError as err:
-                                # TODO: Figure out why getting the error code fails.
-                                # Leave intact
-                                warnings.warn(f"{final_link} not updated. Reason: {err.reason}")
-                                # Must be a way to skip, for now rewrite it in there
-                                pass
-                            else:
-                                url_used = visited_url.geturl()
-                                if url_used != final_link:
-                                    number_moved += 1
-                                    if verbose:
-                                        print(f"{final_link} replaced with {url_used} in {out_f.name}")
-                                    line.replace(final_link, url_used)
+                        except URLError as err:
+                            # TODO: Figure out why getting the error code fails.
+                            # Leave intact
+                            warnings.warn(f"{final_link} not updated. Reason: {err.reason}")
+                            # Must be a way to skip, for now rewrite it in there
+                            pass
+                        else:
+                            url_used = visited_url.geturl()
+                            if url_used != final_link:
+                                number_moved += 1
+                                if verbose:
+                                    print(f"{final_link} replaced with {url_used} in {out_f.name}")
+                                line.replace(final_link, url_used)
                         out_f.write(line)
+        if inplace:
+            # First do nothing
+            # TODO: Rename the temporary file with the original filename, avoid another loop
+            # Time complexity ^^
+            if verbose:
+                print(f"Renamed temporary file {output_file} as {self.input_file}")
+
+                os.replace(output_file, self.input_file)
+
+
         information = "URLs have changed" if number_moved != 1 else "URL has changed"
         print(f"{number_moved} {information} of the {number_of_urls} links found in {self.input_file}")
         return number_moved
-

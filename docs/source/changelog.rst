@@ -6,6 +6,10 @@ Welcome to urlfix's changelog
 
 
 * 
+  Restored inplace replacement. Using temporary files for now. See 
+  `#15 <https://github.com/Nelson-Gon/urlfix/pull/15>`_ and `#10 <https://github.com/Nelson-Gon/urlfix/issues/10>`_.
+
+* 
   Versioning is now automated. You can now check version number via ``urlfix.__version__``
 
 * 

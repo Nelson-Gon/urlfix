@@ -43,11 +43,11 @@ class Testurlfix(unittest.TestCase):
         number_moved_txt = use_object_txt.replace_urls(verbose=True)
         self.assertEqual(number_moved_txt, 2)
 
-    def test_replace_urls_inplace(self):
-        # Test inplace replacement
-        # TODO: Assert that we have the same number of lines as we expect.
-        number_moved = use_object_inplace.replace_urls(verbose=1,inplace=True)
-        self.assertEqual(number_moved, 2)
+    # def test_replace_urls_inplace(self):
+    #     # Test inplace replacement
+    #     # TODO: Assert that we have the same number of lines as we expect.
+    #     number_moved = use_object_inplace.replace_urls(verbose=1,inplace=True)
+    #     self.assertEqual(number_moved, 2)
 
 
 class TestDirURLFix(unittest.TestCase):

@@ -50,19 +50,20 @@ class URLFix(object):
                 raise ValueError("Please provide an output file to write to.")
             else:
                 # Get directory name from input file path
-                out_f = tempfile.NamedTemporaryFile(mode='r+', dir=os.path.dirname(self.input_file), delete=False)
-                output_file = out_f.name
+                output_file = tempfile.NamedTemporaryFile(dir=os.path.dirname(self.input_file), delete=False,
+                                                          mode="w")
+
         else:
             if not all(os.path.exists(x) for x in [self.input_file, self.output_file]):
                 raise FileNotFoundError("input_file and output_file should be valid files.")
 
-            output_file = self.output_file
+            output_file = open(self.output_file, "w")
 
 
         number_moved = 0
         number_of_urls = 0
         
-        with open(self.input_file, "r") as input_f, open(output_file,"w") as out_f:
+        with open(self.input_file, "r") as input_f, output_file as out_f:
             
             for line in input_f:
                 matched_url = re.findall(final_regex, line)
@@ -106,18 +107,18 @@ class URLFix(object):
                                 number_moved += 1
                                 if verbose:
                                     print(f"{final_link} replaced with {url_used} in {out_f.name}")
-                                line.replace(final_link, url_used)
-                        out_f.write(line)
-        if inplace:
-            # First do nothing
-            # TODO: Rename the temporary file with the original filename, avoid another loop
-            # Time complexity ^^
-            if verbose:
-                print(f"Renamed temporary file {output_file} as {self.input_file}")
+                            line.replace(final_link, url_used)
 
-                os.replace(output_file, self.input_file)
+            out_f.write(line)
+
+
 
 
         information = "URLs have changed" if number_moved != 1 else "URL has changed"
         print(f"{number_moved} {information} of the {number_of_urls} links found in {self.input_file}")
+        if inplace:
+            os.replace(out_f.name, self.input_file)
+            if verbose:
+                print(f"Renamed temporary file {output_file} as {self.input_file}")
+
         return number_moved

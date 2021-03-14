@@ -22,19 +22,23 @@ class DirURLFix(object):
         """
 
         for input_file in self.use_files.glob(f'*.{_format}'):
-            input_file = str(input_file)  # convert object to path string
-            if '_output' in input_file:
-                print(f"File is a fix of another file: {input_file}")
-                continue  # skip output files
+            input_file = str(input_file) # convert object to path string
+            if "inplace" in kwargs and kwargs["inplace"]:
+                output_file = None
+            else:
+                if '_output' in input_file:
+                    print(f"File is a fix of another file: {input_file}")
+                    continue  # skip output files
 
-            output_file = input_file.replace(f'.{_format}', f'_output.{_format}')
-            if os.path.exists(output_file):
-                print(f"File already fixed: {input_file}")
-                continue  # skip file that's already been fixed
+                output_file = input_file.replace(f'.{_format}', f'_output.{_format}')
+                if os.path.exists(output_file):
+                    print(f"File already fixed: {input_file}")
+                    continue  # skip file that's already been fixed
 
-            with open(output_file, 'w'):
-                pass  # create an empty output file
+                with open(output_file, 'w'):
+                    pass  # create an empty output file
             return URLFix(input_file, output_file).replace_urls(**kwargs)
+        
 
     def replace_urls(self, **kwargs):
         if not os.path.exists(self.input_dir):

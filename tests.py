@@ -96,7 +96,7 @@ class TestDirURLFix(unittest.TestCase):
             self.assertTrue(os.path.isfile(output_file))
             print(f"Removing no longer needed file: {output_file}")
             os.remove(output_file)
-    # FIXME: This currently produces double text in the file.
+    # # FIXME: This currently produces double text in the file.
     # def test_replace_urls_inplace(self):
     #     number_moved_list=use_files_dir.replace_urls(verbose=1, inplace=True)
     #     self.assertEqual(number_moved_list[0], 3)

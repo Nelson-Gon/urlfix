@@ -95,6 +95,8 @@ class URLFix(object):
                         try:
                             visited_url = urllib.request.urlopen(
                                     Request(final_link, headers={'User-Agent': 'XYZ/3.0'}))
+                            url_used = visited_url.geturl()
+
                         except URLError as err:
                             # TODO: Figure out why getting the error code fails.
                             # Leave intact
@@ -102,15 +104,13 @@ class URLFix(object):
                             # Must be a way to skip, for now rewrite it in there
                             pass
                         else:
-                            url_used = visited_url.geturl()
                             if url_used != final_link:
                                 number_moved += 1
+                                line=line.replace(final_link, url_used)
                                 if verbose:
                                     print(f"{final_link} replaced with {url_used} in {out_f.name}")
-                            line.replace(final_link, url_used)
 
-            out_f.write(line)
-
+                    out_f.write(line)
 
 
 

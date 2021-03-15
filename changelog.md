@@ -2,6 +2,8 @@
 
 **urlfix 0.2.1**
 
+* Fixed issues with links not being replaced following changes to directory replacement. 
+
 * Restored inplace replacement. Using temporary files for now. See 
   [#15](https://github.com/Nelson-Gon/urlfix/pull/15) and [#10](https://github.com/Nelson-Gon/urlfix/issues/10).
 

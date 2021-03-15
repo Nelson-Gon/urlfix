@@ -21,6 +21,7 @@ use_dir_object = DirURLFix(os.path.join(dir_path, "testdir"))
 use_dir_non_existent = DirURLFix('non_existent')
 use_dir_non_dir = DirURLFix(use_file)
 use_files_dir = DirURLFix(os.path.join(dir_path, "testdir"))
+use_inplace_dir = DirURLFix(os.path.join(dir_path,"testinplace"))
 
 
 
@@ -86,8 +87,7 @@ class TestDirURLFix(unittest.TestCase):
         use_files_dir.replace_urls()
         # Probably better to warn so text can be tested against?
         # TODO: Automate file detection for unit tests.
-        testfiles_path = os.path.join(dir_path, "testdir")
-        created_output_files = glob.glob(testfiles_path + "/*_output.*")
+        created_output_files = glob.glob(os.path.join(dir_path,"testdir")+"/*_output.*")
 
         for output_file in created_output_files:
             # Avoid try-except-else, not trivial to test
@@ -97,11 +97,12 @@ class TestDirURLFix(unittest.TestCase):
             print(f"Removing no longer needed file: {output_file}")
             os.remove(output_file)
     # # FIXME: This currently produces double text in the file.
-    # def test_replace_urls_inplace(self):
-    #     number_moved_list=use_files_dir.replace_urls(verbose=1, inplace=True)
-    #     self.assertEqual(number_moved_list[0], 3)
-    #     self.assertEqual(number_moved_list[1], 3)
-    #     self.assertEqual(number_moved_list[2], 2)
+    def test_replace_urls_inplace(self):
+        number_moved_list=use_inplace_dir.replace_urls(verbose=1, inplace=True)
+        # For some reason, this loops twice hence we have links already replaced.
+        self.assertEqual(number_moved_list[0], 3)
+        self.assertEqual(number_moved_list[1], 3)
+        self.assertEqual(number_moved_list[2], 2)
 
 
 if __name__ == "__main__":

@@ -25,14 +25,12 @@ class DirURLFix(object):
         for _format in ('md', 'txt'):
             for input_file in self.use_files.glob(f"*.{_format}"):
                 input_file = str(input_file)
+                if '_output' in input_file:
+                    print(f"File is a fix of another file: {input_file}")
+                    continue  # skip output files
                 if "inplace" in kwargs and kwargs["inplace"]:
-                    if "_output" in input_file:
-                        continue
                     number_moved.append(URLFix(input_file).replace_urls(**kwargs))
                 else:
-                    if '_output' in input_file:
-                        print(f"File is a fix of another file: {input_file}")
-                        continue  # skip output files
                     output_file = input_file.replace(f'.{_format}', f'_output.{_format}')
                     if os.path.exists(output_file):
                         print(f"File already fixed: {input_file}")

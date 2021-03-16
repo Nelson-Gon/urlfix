@@ -3,6 +3,7 @@ from urlfix.urlfix import URLFix
 from urlfix.dirurlfix import DirURLFix
 import os
 import glob
+from shutil import copytree, rmtree
 
 dir_path = os.path.dirname(os.path.abspath(__file__))
 dir_path = os.path.join("testfiles")
@@ -44,11 +45,6 @@ class Testurlfix(unittest.TestCase):
         number_moved_txt = use_object_txt.replace_urls(verbose=True)
         self.assertEqual(number_moved_txt, 2)
 
-    # def test_replace_urls_inplace(self):
-    #     # Test inplace replacement
-    #     # TODO: Assert that we have the same number of lines as we expect.
-    #     number_moved = use_object_inplace.replace_urls(verbose=1,inplace=True)
-    #     self.assertEqual(number_moved, 2)
 
 
 class TestDirURLFix(unittest.TestCase):
@@ -85,8 +81,7 @@ class TestDirURLFix(unittest.TestCase):
         self.assertEqual(number_moved_list[2], 2)
         # Check skipping --> check that files are created in the above steps
         use_files_dir.replace_urls()
-        # Probably better to warn so text can be tested against?
-        # TODO: Automate file detection for unit tests.
+
         created_output_files = glob.glob(os.path.join(dir_path,"testdir")+"/*_output.*")
 
         for output_file in created_output_files:
@@ -96,13 +91,24 @@ class TestDirURLFix(unittest.TestCase):
             self.assertTrue(os.path.isfile(output_file))
             print(f"Removing no longer needed file: {output_file}")
             os.remove(output_file)
-    # # FIXME: This currently produces double text in the file.
+
     def test_replace_urls_inplace(self):
         number_moved_list=use_inplace_dir.replace_urls(verbose=1, inplace=True)
         # For some reason, this loops twice hence we have links already replaced.
         self.assertEqual(number_moved_list[0], 3)
         self.assertEqual(number_moved_list[1], 3)
         self.assertEqual(number_moved_list[2], 2)
+
+        # If inplace replacement works, then these should all be zeros
+        after_inplace = use_inplace_dir.replace_urls(verbose=1,inplace=True)
+        [self.assertEqual(x, 0) for x in after_inplace]
+        # If tests pass, restore files in the target directory
+        test_files = os.path.join(dir_path,"testdir")
+        test_inplace_files = os.path.join(dir_path,"testinplace")
+        print("Restoring inplace replacement test files after tests....")
+        rmtree(test_inplace_files)
+        copytree(test_files, test_inplace_files)
+
 
 
 if __name__ == "__main__":

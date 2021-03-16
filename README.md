@@ -28,6 +28,23 @@
 - [x] MarkDown (.md)
 - [x] Plain Text files (.txt)
 
+- [ ] ReStructured Text (.rst)
+
+- [ ] PDF (.pdf)
+
+- [ ] Word (.docx)
+
+- [ ] ODF (.odf)
+
+**Features List**
+
+- [x] Replace outdated URLs/links in a single file
+
+- [x] Replace outdated URLs/links in a directory
+
+- [x] Replace outdated URLs/links in the same file or in the same files in a directory i.e inplace.
+
+- [ ] Replace files in nested directories
 
 **Installation**
 

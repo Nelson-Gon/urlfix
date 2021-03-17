@@ -91,7 +91,7 @@ To use at the commandline, please use:
 
 ```shell
 
-python main.py --mode "f" --verbose 0 --inplace 1 --input-file "testregex.md"
+python main.py --mode "f" --verbose 1 --inplace 1 --input-file "myfile.md"
 
 ```
 

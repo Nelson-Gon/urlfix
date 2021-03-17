@@ -2,6 +2,9 @@
 
 **urlfix 0.2.1**
 
+* A script mode has been added to enable commandline replacement of outdated links. See
+  [#22](https://github.com/Nelson-Gon/urlfix/issues/22). 
+
 * Fixed issues with links not being replaced following changes to directory replacement. 
 
 * Restored inplace replacement. Using temporary files for now. See 

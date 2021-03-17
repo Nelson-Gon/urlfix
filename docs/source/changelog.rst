@@ -6,6 +6,10 @@ Welcome to urlfix's changelog
 
 
 * 
+  A script mode has been added to enable commandline replacement of outdated links. See
+  `#22 <https://github.com/Nelson-Gon/urlfix/issues/22>`_. 
+
+* 
   Fixed issues with links not being replaced following changes to directory replacement. 
 
 * 

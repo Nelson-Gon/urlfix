@@ -38,6 +38,8 @@
 
 **Features List**
 
+- [x] Commandline and programmer-friendly modes. 
+
 - [x] Replace outdated URLs/links in a single file
 
 - [x] Replace outdated URLs/links in a directory
@@ -82,6 +84,38 @@ python3 setup.py install
 
 
 **Sample usage**
+
+**Script Mode**
+
+To use at the commandline, please use:
+
+```shell
+
+python main.py --mode "f" --verbose 0 --inplace 1 --input-file "testregex.md"
+
+```
+
+To get help:
+
+```shell
+python main.py -h 
+
+#usage: main.py [-h] -m MODE -in INPUT_FILE [-o OUTPUT_FILE] -v VERBOSE -i INPLACE
+#
+#optional arguments:
+#  -h, --help            show this help message and exit
+#  -m MODE, --mode MODE  Mode to use. One of f for file or d for directory
+#  -in INPUT_FILE, --input-file INPUT_FILE
+#                        Input file for which link updates are required.
+#  -o OUTPUT_FILE, --output-file OUTPUT_FILE
+#                        Output file to write to. Optional, only necessary if not replacing inplace
+#  -v VERBOSE, --verbose VERBOSE
+#                        Boolean to control verbosity. Defaults to True.
+#  -i INPLACE, --inplace INPLACE
+
+```
+
+**Programmer-Friendly Mode**
 
 ```python
 

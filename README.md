@@ -99,7 +99,7 @@ To get help:
 
 ```shell
 python main.py -h 
-
+#
 #usage: main.py [-h] -m MODE -in INPUT_FILE [-o OUTPUT_FILE] -v VERBOSE -i INPLACE
 #
 #optional arguments:
@@ -112,6 +112,9 @@ python main.py -h
 #  -v VERBOSE, --verbose VERBOSE
 #                        Boolean to control verbosity. Defaults to True.
 #  -i INPLACE, --inplace INPLACE
+#                        Should links be replaced inplace? This should be safe but to be sure, test with an 
+#                        output file first.
+
 
 ```
 

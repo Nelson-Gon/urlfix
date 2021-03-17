@@ -36,7 +36,9 @@ if __name__=="__main__":
                             default=True)
     # Inplace or not?
     arg_parser.add_argument("-i", "--inplace",type=bool,
-                            required=True, default=False)
+                            required=True, default=False,
+                            help="Should links be replaced inplace? This should be safe but to be sure"
+                                 ", test with an output file first.")
 
     # Parse arguments
     arguments = arg_parser.parse_args()

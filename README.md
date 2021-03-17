@@ -99,8 +99,8 @@ To get help:
 
 ```shell
 python main.py -h 
-#
-#usage: main.py [-h] -m MODE -in INPUT_FILE [-o OUTPUT_FILE] -v VERBOSE -i INPLACE
+
+#usage: main.py [-h] -m MODE -in INPUT_FILE [-o OUTPUT_FILE] -v {False,false,0,True,true,1} -i {False,false,0,True,true,1}
 #
 #optional arguments:
 #  -h, --help            show this help message and exit
@@ -109,11 +109,11 @@ python main.py -h
 #                        Input file for which link updates are required.
 #  -o OUTPUT_FILE, --output-file OUTPUT_FILE
 #                        Output file to write to. Optional, only necessary if not replacing inplace
-#  -v VERBOSE, --verbose VERBOSE
-#                        Boolean to control verbosity. Defaults to True.
-#  -i INPLACE, --inplace INPLACE
-#                        Should links be replaced inplace? This should be safe but to be sure, test with an 
-#                        output file first.
+#  -v {False,false,0,True,true,1}, --verbose {False,false,0,True,true,1}
+#                        String to control verbosity. Defaults to True.
+#  -i {False,false,0,True,true,1}, --inplace {False,false,0,True,true,1}
+#                        Should links be replaced inplace? This should be safe but to be sure, test with an output file first.
+
 
 
 ```

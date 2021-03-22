@@ -10,8 +10,7 @@ It is and will always be about the community.
 
 """
 
-
-if __name__=="__main__":
+def main():
     from argparse import ArgumentParser
     from urlfix import urlfix, dirurlfix
     arg_parser = ArgumentParser()
@@ -73,3 +72,6 @@ if __name__=="__main__":
 
 
     script_mode.replace_urls(verbose=make_bool(arguments.verbose), inplace=make_bool(arguments.inplace))
+
+if __name__=="__main__":
+    main()

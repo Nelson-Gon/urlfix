@@ -2,6 +2,8 @@
 
 **urlfix 0.2.1**
 
+* Download URL is now automated, please release new version as `v-version-number-here`.
+
 * Script mode has been added as a `__main__.py` module. You can now therefore call `urlfix` at the command line/Terminal 
   via `python -m urlfix`.
 

@@ -6,7 +6,11 @@ Welcome to urlfix's changelog
 
 
 * 
-  Script mode has been renamed to ``pyurlfix`` and can now be called at the command line/Terminal via ``python -m pyrulfix``.
+  Download URL is now automated, please release new version as ``v-version-number-here``.
+
+* 
+  Script mode has been added as a ``__main__.py`` module. You can now therefore call ``urlfix`` at the command line/Terminal 
+  via ``python -m urlfix``.
 
 * 
   A script mode has been added to enable commandline replacement of outdated links. See

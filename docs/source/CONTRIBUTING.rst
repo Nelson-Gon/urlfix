@@ -42,6 +42,16 @@ Please also update the docs using ``sphinx``
 
 * Releasing
 
+Before running this script, ensure you have done the following:
+
+
+* 
+  Updated ``version`` in ``version.py``
+
+* 
+  Released on GitHub with a version number that starts with ``v`` and ends with
+  the version number in ``version.py``\ , no spaces. 
+
 .. code-block:: shell
 
    bash scripts/release.sh

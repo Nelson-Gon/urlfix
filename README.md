@@ -91,14 +91,24 @@ To use at the commandline, please use:
 
 ```shell
 
-python main.py --mode "f" --verbose 1 --inplace 1 --input-file "myfile.md"
+python -m urlfix --mode "f" --verbose 1 --inplace 1 --input-file myfile.md
 
 ```
+
+If not replacing within the same file, then:
+
+```shell
+
+python -m urlfix --mode "f" --verbose 1 --inplace 0 --input-file myfile.md --output-file myoutputfile.md
+
+```
+
+
 
 To get help:
 
 ```shell
-python main.py -h 
+python -m urlfix -h 
 
 #usage: main.py [-h] -m MODE -in INPUT_FILE [-o OUTPUT_FILE] -v {False,false,0,True,true,1} -i {False,false,0,True,true,1}
 #

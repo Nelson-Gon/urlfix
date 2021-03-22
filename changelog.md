@@ -2,6 +2,8 @@
 
 **urlfix 0.2.1**
 
+* Script mode has been renamed to `pyurlfix` and can now be called at the command line/Terminal via `python -m pyrulfix`.
+
 * A script mode has been added to enable commandline replacement of outdated links. See
   [#22](https://github.com/Nelson-Gon/urlfix/issues/22). 
 

@@ -5,7 +5,11 @@ Welcome to urlfix's changelog
 **urlfix 0.2.2**
 
 
-* Initial support for recursive link updates. See `#24 <https://github.com/Nelson-Gon/urlfix/issues/24>`_.
+* 
+  Fixed a bug due to differences in file orders between Linux and Windows. 
+
+* 
+  Initial support for recursive link updates. See `#24 <https://github.com/Nelson-Gon/urlfix/issues/24>`_.
 
 **urlfix 0.2.1**
 

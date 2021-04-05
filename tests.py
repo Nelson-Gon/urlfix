@@ -4,7 +4,6 @@ from urlfix.dirurlfix import DirURLFix
 import os
 import glob
 from shutil import copytree, rmtree
-import platform
 
 dir_path = os.path.dirname(os.path.abspath(__file__))
 dir_path = os.path.join("testfiles")
@@ -24,10 +23,6 @@ use_dir_non_existent = DirURLFix('non_existent')
 use_dir_non_dir = DirURLFix(use_file)
 use_files_dir = DirURLFix(os.path.join(dir_path, "testdir"))
 use_inplace_dir = DirURLFix(os.path.join(dir_path, "testinplace"))
-
-
-
-
 
 
 class Testurlfix(unittest.TestCase):

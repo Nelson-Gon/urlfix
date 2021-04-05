@@ -11,6 +11,7 @@ class DirURLFix(object):
     def __init__(self, input_dir, recursive=False):
         """
         :param input_dir: Path to input_dir.
+        :param recursive: Should links be replaced in sub directories? defaults to False
         """
         self.input_dir = input_dir
         self.use_files = Path(self.input_dir)
@@ -24,10 +25,10 @@ class DirURLFix(object):
 
         for root, sub_dirs, root_files in os.walk(self.input_dir):
 
-            if root_files:
-                # Create an empty list to hold links that have changed
-                number_moved = []
-
+            # Create an empty list to hold links that have changed
+            number_moved = []
+            # TODO: figure out how to handle both root and sub-directory files.
+            if root_files and not self.recursive:
                 for root_file in root_files:
                     root_file = os.path.join(self.input_dir, root_file)
                     if file_format(root_file) not in ["md", "txt"]:
@@ -50,8 +51,6 @@ class DirURLFix(object):
                         with open(output_file, 'w'):
                             pass  # create an empty output file
                         number_moved.append(URLFix(root_file, output_file).replace_urls(**kwargs))
-                print('All files have been updated, thank you for using urlfix.')
-                return number_moved
 
             if sub_dirs:
                 print(f"Found the following sub-directories {','.join(sub_dirs)} in {self.input_dir}")
@@ -62,8 +61,10 @@ class DirURLFix(object):
                         # Add verbosity
                         print(f"Now updating files in {full_sub_dir_path}")
                         # Create new dirurlfix object and recurse
-                        self.input_dir = full_sub_dir_path
-                        self.replace_urls(**kwargs)
+                        # Do not sub-recurse in this directory
+                        number_moved.append(DirURLFix(full_sub_dir_path).replace_urls(**kwargs))
 
                 else:
                     print(f"Found sub-directories {','.join(sub_dirs)} but recursion was set to False")
+            print('All files have been updated, thank you for using urlfix.')
+            return number_moved

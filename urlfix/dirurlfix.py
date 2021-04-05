@@ -1,5 +1,4 @@
 from .urlfix import URLFix, file_format
-from pathlib import Path
 import os
 
 
@@ -14,7 +13,6 @@ class DirURLFix(object):
         :param recursive: Should links be replaced in sub directories? defaults to False
         """
         self.input_dir = input_dir
-        self.use_files = Path(self.input_dir)
         self.recursive = recursive
 
     def replace_urls(self, **kwargs):
@@ -29,6 +27,8 @@ class DirURLFix(object):
             number_moved = []
             # TODO: figure out how to handle both root and sub-directory files.
             if root_files and not self.recursive:
+                # sort root files such that changes are OS independent
+                root_files = sorted(root_files)
                 for root_file in root_files:
                     root_file = os.path.join(self.input_dir, root_file)
                     if file_format(root_file) not in ["md", "txt"]:

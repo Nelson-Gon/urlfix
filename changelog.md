@@ -1,8 +1,12 @@
 # Welcome to urlfix's changelog 
 
+**urlfix 0.2.2**
+
+* Initial support for recursive link updates. See [#24](https://github.com/Nelson-Gon/urlfix/issues/24).
+
 **urlfix 0.2.1**
 
-* Download URL is now automated, please release new version as `v-version-number-here`.
+* Download URL is now automated, please release new versions as `v-version-number-here`.
 
 * Script mode has been added as a `__main__.py` module. You can now therefore call `urlfix` at the command line/Terminal 
   via `python -m urlfix`.

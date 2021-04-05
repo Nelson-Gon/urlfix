@@ -8,6 +8,11 @@ from urllib.error import URLError
 import warnings
 
 
+def file_format(in_file):
+    format_pattern = r'.+\.(\w+)'
+    matches = re.findall(format_pattern, in_file)
+    return matches[0] if len(matches) > 0 else ''
+
 class URLFix(object):
     def __init__(self, input_file, output_file=None):
         """
@@ -17,9 +22,7 @@ class URLFix(object):
         self.input_file = input_file
         self.output_file = output_file
         # automatically detect input file format
-        format_pattern = r'.+\.(\w+)'
-        matches = re.findall(format_pattern, self.input_file)
-        self.input_format = matches[0] if len(matches) > 0 else ''
+        self.input_format = file_format(self.input_file)
 
     def replace_urls(self, verbose=False, correct_urls=None, inplace=False):
         """

@@ -1,4 +1,4 @@
-from .urlfix import URLFix
+from .urlfix import URLFix, file_format
 from pathlib import Path
 import os
 
@@ -8,37 +8,62 @@ class DirURLFix(object):
     Replace Outdated URLs given a directory of files.
     """
 
-    def __init__(self, input_dir):
+    def __init__(self, input_dir, recursive=False):
         """
         :param input_dir: Path to input_dir.
         """
         self.input_dir = input_dir
         self.use_files = Path(self.input_dir)
-
+        self.recursive = recursive
 
     def replace_urls(self, **kwargs):
         if not os.path.exists(self.input_dir):
             raise OSError('Path does not exist!')
         if not os.path.isdir(self.input_dir):
             raise NotADirectoryError('Input path must be a directory!')
-        number_moved = []
-        for _format in ('md', 'txt'):
-            for input_file in self.use_files.glob(f"*.{_format}"):
-                input_file = str(input_file)
-                if '_output' in input_file:
-                    print(f"File is a fix of another file: {input_file}")
-                    continue  # skip output files
-                if "inplace" in kwargs and kwargs["inplace"]:
-                    number_moved.append(URLFix(input_file).replace_urls(**kwargs))
+
+        for root, sub_dirs, root_files in os.walk(self.input_dir):
+
+            if root_files:
+                # Create an empty list to hold links that have changed
+                number_moved = []
+
+                for root_file in root_files:
+                    root_file = os.path.join(self.input_dir, root_file)
+                    if file_format(root_file) not in ["md", "txt"]:
+                        print(f"{root_file} is of an unsupported file format, skipping...")
+                        continue
+                        # Create full path
+
+                    if '_output' in root_file:
+                        print(f"File {root_file} is a fix of another file")
+                        continue  # skip output files
+                    if "inplace" in kwargs and kwargs["inplace"]:
+                        number_moved.append(URLFix(root_file).replace_urls(**kwargs))
+                    else:
+                        output_file = root_file.replace(f'.{file_format(root_file)}',
+                                                        f'_output.{file_format(root_file)}')
+                        if os.path.exists(output_file):
+                            print(f"File already fixed: {root_file}")
+                            continue  # skip file that's already been fixed
+
+                        with open(output_file, 'w'):
+                            pass  # create an empty output file
+                        number_moved.append(URLFix(root_file, output_file).replace_urls(**kwargs))
+                print('All files have been updated, thank you for using urlfix.')
+                return number_moved
+
+            if sub_dirs:
+                print(f"Found the following sub-directories {','.join(sub_dirs)} in {self.input_dir}")
+                if self.recursive:
+                    for sub_dir in sub_dirs:
+                        # Create full paths to sub directories
+                        full_sub_dir_path = os.path.join(self.input_dir, sub_dir)
+                        # Add verbosity
+                        print(f"Now updating files in {full_sub_dir_path}")
+                        # Create new dirurlfix object and recurse
+                        self.input_dir = full_sub_dir_path
+                        self.replace_urls(**kwargs)
+
                 else:
-                    output_file = input_file.replace(f'.{_format}', f'_output.{_format}')
-                    if os.path.exists(output_file):
-                        print(f"File already fixed: {input_file}")
-                        continue  # skip file that's already been fixed
-
-                    with open(output_file, 'w'):
-                        pass  # create an empty output file
-                    number_moved.append(URLFix(input_file, output_file).replace_urls(**kwargs))
-
-        print('All files have been updated, thank you for using urlfix.')
-        return number_moved
+                    print(f"Found sub-directories {','.join(sub_dirs)} but recursion was set to False")

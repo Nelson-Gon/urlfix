@@ -55,7 +55,7 @@ class TestDirURLFix(unittest.TestCase):
 
     def test_replace_urls(self):
         # Use known changed URLs doc
-        with self.assertRaises(IOError) as err:
+        with self.assertRaises(OSError) as err:
             use_dir_non_existent.replace_urls()
         self.assertEqual(str(err.exception), "Path does not exist!")
         with self.assertRaises(NotADirectoryError) as err:

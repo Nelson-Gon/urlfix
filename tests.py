@@ -29,6 +29,8 @@ use_inplace_dir = DirURLFix(os.path.join(dir_path, "testinplace"))
 # TODO: ^^^^^^^^^
 moved_file_testurls_txt = 2 if "Linux" in platform.platform() else 3
 
+print(os.listdir(os.path.join(dir_path, "testdir")))
+
 
 class Testurlfix(unittest.TestCase):
     def test_instance_creation(self):
@@ -76,6 +78,7 @@ class TestDirURLFix(unittest.TestCase):
             verbose=True)
         # Since we have three files, assert that the length returned is 3
         self.assertEqual(len(number_moved_list), 3)
+        # Check the order in which files are read in Linux
 
         self.assertEqual(number_moved_list[0], moved_file_testurls_txt)
         # 1 since we provided correct URLs. TODO: Figure out how to run both tests

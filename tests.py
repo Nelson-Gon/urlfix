@@ -92,7 +92,6 @@ class TestDirURLFix(unittest.TestCase):
 
     def test_replace_urls_inplace(self):
         number_moved_list = use_inplace_dir.replace_urls(verbose=1, inplace=True)
-        # For some reason, this loops twice hence we have links already replaced.
         self.assertEqual(number_moved_list[0], 3)
         self.assertEqual(number_moved_list[1], 3)
         self.assertEqual(number_moved_list[2], 2)
@@ -106,7 +105,6 @@ class TestDirURLFix(unittest.TestCase):
         print("Restoring inplace replacement test files after tests....")
         rmtree(test_inplace_files)
         copytree(test_files, test_inplace_files)
-
 
 
 if __name__ == "__main__":

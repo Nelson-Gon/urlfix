@@ -2,6 +2,8 @@
 
 **urlfix 0.2.2**
 
+* Refactored `dirurlfix`'s main replacement method to allow for greater flexibility in recursive replacements. 
+
 * Fixed a bug due to differences in file orders between Linux and Windows. 
 
 * Initial support for recursive link updates. See [#24](https://github.com/Nelson-Gon/urlfix/issues/24).

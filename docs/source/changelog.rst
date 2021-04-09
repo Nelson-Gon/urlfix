@@ -6,6 +6,9 @@ Welcome to urlfix's changelog
 
 
 * 
+  Refactored ``dirurlfix``\ 's main replacement method to allow for greater flexibility in recursive replacements. 
+
+* 
   Fixed a bug due to differences in file orders between Linux and Windows. 
 
 * 

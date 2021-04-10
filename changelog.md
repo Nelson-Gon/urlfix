@@ -2,6 +2,8 @@
 
 **urlfix 0.2.2**
 
+* `DirURLFix` is now fully recursive. 
+
 * Extended tests to ensure that recursion works as expected. 
 
 

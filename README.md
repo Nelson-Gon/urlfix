@@ -21,6 +21,20 @@
 
 `urlfix` aims to find all outdated URLs in a given file and fix them. 
 
+
+**Features List**
+
+- [x] Commandline and programmer-friendly modes. 
+
+- [x] Replace outdated URLs/links in a single file
+
+- [x] Replace outdated URLs/links in a directory
+
+- [x] Replace outdated URLs/links in the same file or in the same files in a directory i.e inplace.
+
+- [x] Replace files in nested directories
+- [ ] Replace files in sub-nested directories 
+
 **Supported file formats**
 
 `urlfix` fixes URLs given a file of the following types:
@@ -36,17 +50,7 @@
 
 - [ ] ODF (.odf)
 
-**Features List**
 
-- [x] Commandline and programmer-friendly modes. 
-
-- [x] Replace outdated URLs/links in a single file
-
-- [x] Replace outdated URLs/links in a directory
-
-- [x] Replace outdated URLs/links in the same file or in the same files in a directory i.e inplace.
-
-- [ ] Replace files in nested directories
 
 **Installation**
 

@@ -5,7 +5,11 @@ Welcome to urlfix's changelog
 **urlfix 0.2.2**
 
 
-* Extended tests to ensure that recursion works as expected. 
+* 
+  ``DirURLFix`` is now fully recursive. 
+
+* 
+  Extended tests to ensure that recursion works as expected. 
 
 
 * 

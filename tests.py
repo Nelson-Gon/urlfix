@@ -127,8 +127,16 @@ class TestDirURLFix(unittest.TestCase):
         # Next, we set recursion to true
         recursive_recursive_object = DirURLFix(recursive_path, recursive=True)
         number_moved_list_recurse = recursive_recursive_object.replace_urls(verbose=1)
-        # TODO: Make tests fully recursive by fixing issues with appending to final result
+        # The first two values are root files as above
+        # The second list contains recursive replacements
+        self.assertEqual(len(number_moved_list_recurse), 3)
+        # 3 because we have three files in the directory recursive/testdir
+        self.assertEqual(len(number_moved_list_recurse[2]), 3)
+        # Do not test since we have already tested the same directory before?
+
+        print(number_moved_list_recurse)
         remove_output_files("recursive/testdir")
+        remove_output_files("recursive")
 
 
 if __name__ == "__main__":

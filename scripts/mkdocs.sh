@@ -4,7 +4,6 @@
 # Next we run make.bat to build docs
 # Finally we push to GitHub following doc builds
 # Need to check that we are in the correct directory
-# input module name
 base_dir="$(realpath "$0")"
 file_location="$(dirname "$base_dir")"
 modules_location="$(dirname "$file_location")"

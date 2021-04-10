@@ -2,6 +2,7 @@ from .urlfix import URLFix, file_format
 import os
 from warnings import warn
 
+
 def replace_urls_root(in_dir, recursive=False, **kwargs):
     """
     :param in_dir:  Input directory
@@ -10,11 +11,10 @@ def replace_urls_root(in_dir, recursive=False, **kwargs):
     :return: Files with outdated links validated/replaced, as requested.
     """
 
-    # sort root files such that changes are OS independent
-
     for root, sub_dirs, root_files in os.walk(in_dir):
         number_moved = []  # Hold results
         if root_files:
+            # sort root files such that changes are OS independent
             root_files = sorted(root_files)
             for root_file in root_files:
                 root_file = os.path.join(in_dir, root_file)
@@ -37,21 +37,22 @@ def replace_urls_root(in_dir, recursive=False, **kwargs):
                     with open(output_file, 'w'):
                         pass  # create an empty output file
                     number_moved.append(URLFix(root_file, output_file).replace_urls(**kwargs))
-        if sub_dirs:
-            if not recursive:
-                use_grammar = "sub-directory" if len(sub_dirs) == 1 else "sub-directories"
-                warn(f"Found {use_grammar} {','.join(sub_dirs)} but recursion was set to False, exiting..")
+            if sub_dirs:
+                if not recursive:
+                    use_grammar = "sub-directory" if len(sub_dirs) == 1 else "sub-directories"
+                    warn(f"Found {use_grammar} {','.join(sub_dirs)} but recursion was set to False, exiting..")
 
-            else:
-                for sub_dir in sub_dirs:
-                    # Create full paths to sub directories
-                    full_sub_dir_path = os.path.join(in_dir, sub_dir)
-                    # Add verbosity
-                    print(f"Now updating files in {full_sub_dir_path}")
-                    # Create new dirurlfix object and recurse
-                    # Do not sub-recurse in this directory
-                    replace_urls_root(full_sub_dir_path, recursive=False, **kwargs)
+                else:
+                    for sub_dir in sub_dirs:
+                        # Create full paths to sub directories
+                        full_sub_dir_path = os.path.join(in_dir, sub_dir)
+                        # Add verbosity
+                        print(f"Now updating files in {full_sub_dir_path}")
+                        # Create new dirurlfix object and recurse
+                        # Do not sub-recurse in this directory
+                        number_moved.append(replace_urls_root(full_sub_dir_path, recursive=False, **kwargs))
         print('All files have been updated, thank you for using urlfix.')
+        # To flatten or not? For now, do not flatten so we know that the second and next are non-root replacements
         return number_moved
 
 

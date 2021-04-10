@@ -1,6 +1,6 @@
 from .urlfix import URLFix, file_format
 import os
-
+from warnings import warn
 
 def replace_urls_root(in_dir, recursive=False, **kwargs):
     """
@@ -39,8 +39,9 @@ def replace_urls_root(in_dir, recursive=False, **kwargs):
                     number_moved.append(URLFix(root_file, output_file).replace_urls(**kwargs))
         if sub_dirs:
             if not recursive:
-                print(f"Found sub-directories {','.join(sub_dirs)} but recursion was set to False, exiting..")
-                exit(0)
+                use_grammar = "sub-directory" if len(sub_dirs) == 1 else "sub-directories"
+                warn(f"Found {use_grammar} {','.join(sub_dirs)} but recursion was set to False, exiting..")
+
             else:
                 for sub_dir in sub_dirs:
                     # Create full paths to sub directories

@@ -25,6 +25,18 @@ use_files_dir = DirURLFix(os.path.join(dir_path, "testdir"))
 use_inplace_dir = DirURLFix(os.path.join(dir_path, "testinplace"))
 
 
+def remove_output_files(dir_used):
+    created_output_files = glob.glob(os.path.join(dir_path, dir_used) + "/*_output.*")
+
+    for output_file in created_output_files:
+        # Avoid try-except-else, not trivial to test
+        # Use this for now
+        # if this file exists and test passes, delete it
+        if os.path.isfile(output_file):
+            print(f"Removing no longer needed file: {output_file}")
+            os.remove(output_file)
+
+
 class Testurlfix(unittest.TestCase):
     def test_instance_creation(self):
         [self.assertTrue(isinstance(urlfix_object, URLFix)) for urlfix_object in [use_object, use_object_txt]]
@@ -81,15 +93,7 @@ class TestDirURLFix(unittest.TestCase):
         # Check skipping --> check that files are created in the above steps
         use_files_dir.replace_urls()
 
-        created_output_files = glob.glob(os.path.join(dir_path, "testdir") + "/*_output.*")
-
-        for output_file in created_output_files:
-            # Avoid try-except-else, not trivial to test
-            # Use this for now
-            # if this file exists and test passes, delete it
-            self.assertTrue(os.path.isfile(output_file))
-            print(f"Removing no longer needed file: {output_file}")
-            os.remove(output_file)
+        remove_output_files("testdir")
 
     def test_replace_urls_inplace(self):
         number_moved_list = use_inplace_dir.replace_urls(verbose=1, inplace=True)
@@ -107,6 +111,24 @@ class TestDirURLFix(unittest.TestCase):
         print("Restoring inplace replacement test files after tests....")
         rmtree(test_inplace_files)
         copytree(test_files, test_inplace_files)
+
+    def test_recursion(self):
+        # Make path to recursion tests
+        recursive_path = os.path.join(dir_path, "recursive")
+
+        recursive_object = DirURLFix(recursive_path, recursive=False)
+        number_moved_list = recursive_object.replace_urls(verbose=1)
+        # Since we have two root files, then non-recursive replacements should be of length 2
+        self.assertEqual(len(number_moved_list), 2)
+        # For the first file, we expect only 3 urls to have moved while for the second we expect 5
+        self.assertEqual(number_moved_list[0], 3)
+        self.assertEqual(number_moved_list[1], 5)
+        remove_output_files("recursive")
+        # Next, we set recursion to true
+        recursive_recursive_object = DirURLFix(recursive_path, recursive=True)
+        number_moved_list_recurse = recursive_recursive_object.replace_urls(verbose=1)
+        # TODO: Make tests fully recursive by fixing issues with appending to final result
+        remove_output_files("recursive/testdir")
 
 
 if __name__ == "__main__":

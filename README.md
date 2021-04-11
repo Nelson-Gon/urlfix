@@ -30,7 +30,7 @@
 
 - [x] Replace outdated URLs/links in a directory
 
-- [x] Replace outdated URLs/links in the same file or in the same files in a directory i.e inplace.
+- [x] Replace outdated URLs/links in the same file or in the same files in a directory i.e. inplace.
 
 - [x] Replace files in nested directories
 - [ ] Replace files in sub-nested directories 
@@ -162,26 +162,14 @@ damage their files.
 
 Since we set `verbose` to `True`, we get the following output:
 
-```shell
+```python
 urlfix_object.replace_urls()
-Found https://www.r-pkg.org/badges/version/manymodelr in testurls.txt, now validating.. 
-Found https://cran.r-project.org/package=manymodelr in testurls.txt, now validating.. 
-https://cran.r-project.org/package=manymodelr replaced with https://cran.r-project.org/web/packages/manymodelr/index.html 
-in replacement.txt
-Found https://tidyverse.org/lifecycle/#maturing in testurls.txt, now validating.. 
-https://tidyverse.org/lifecycle/#maturing replaced with https://lifecycle.r-lib.org/articles/stages.html in 
-replacement.txt
-2 URLs have changed of the 3 links found in testurls.txt
-2
-
 ```
 
 To replace silently, simply set verbose to `False` (which is the default). 
 
 ```python
 urlfix_object.replace_urls()
-2 URLs have changed of the 3 links found in testurls.txt
-2
 ```
 
 If there are URLs known to be valid, pass these to the `correct_urls` argument to save some time.
@@ -213,6 +201,24 @@ replace_in_dir.replace_urls()
 
 ```
 
+**Recursively replacing links in nested directories**
+
+To replace outdated links in several files located in several directories, we set `recursive` to `True`.
+Currently, replacing links in directories nested within nested directories is not (yet) supported.
+
+```python
+
+recursive_object = DirURLFix("path_to_root_directory", recursive=True)
+
+```
+
+We can then proceed as above
+
+```python
+
+recursive_object.replace_urls() # provide other arguments as you may wish. 
+
+```
 ---
 
 To report any issues, suggestions or improvement, please do so at [issues](https://github.com/Nelson-Gon/urlfix/issues). 

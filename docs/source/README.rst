@@ -93,7 +93,7 @@ urlfix: Check and Fix Outdated URLs
   [x] Replace outdated URLs/links in a directory
 
 * 
-  [x] Replace outdated URLs/links in the same file or in the same files in a directory i.e inplace.
+  [x] Replace outdated URLs/links in the same file or in the same files in a directory i.e. inplace.
 
 * 
   [x] Replace files in nested directories
@@ -217,26 +217,15 @@ damage their files.
 
 Since we set ``verbose`` to ``True``\ , we get the following output:
 
-.. code-block:: shell
+.. code-block:: python
 
    urlfix_object.replace_urls()
-   Found https://www.r-pkg.org/badges/version/manymodelr in testurls.txt, now validating.. 
-   Found https://cran.r-project.org/package=manymodelr in testurls.txt, now validating.. 
-   https://cran.r-project.org/package=manymodelr replaced with https://cran.r-project.org/web/packages/manymodelr/index.html 
-   in replacement.txt
-   Found https://tidyverse.org/lifecycle/#maturing in testurls.txt, now validating.. 
-   https://tidyverse.org/lifecycle/#maturing replaced with https://lifecycle.r-lib.org/articles/stages.html in 
-   replacement.txt
-   2 URLs have changed of the 3 links found in testurls.txt
-   2
 
 To replace silently, simply set verbose to ``False`` (which is the default). 
 
 .. code-block:: python
 
    urlfix_object.replace_urls()
-   2 URLs have changed of the 3 links found in testurls.txt
-   2
 
 If there are URLs known to be valid, pass these to the ``correct_urls`` argument to save some time.
 
@@ -264,6 +253,23 @@ To replace several files in a directory, we can use ``DirURLFix`` as follows.
 
 
    replace_in_dir.replace_urls()
+
+**Recursively replacing links in nested directories**
+
+To replace outdated links in several files located in several directories, we set ``recursive`` to ``True``.
+Currently, replacing links in directories nested within nested directories is not (yet) supported.
+
+.. code-block:: python
+
+
+   recursive_object = DirURLFix("path_to_root_directory", recursive=True)
+
+We can then proceed as above
+
+.. code-block:: python
+
+
+   recursive_object.replace_urls() # provide other arguments as you may wish.
 
 ----
 

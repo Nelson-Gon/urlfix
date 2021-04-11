@@ -6,6 +6,10 @@ Welcome to urlfix's changelog
 
 
 * 
+  A ``recursive`` argument was added to script mode. The argument ``input-file`` was renamed ``inpath`` to reflect that
+  this may be a file or directory. 
+
+* 
   ``DirURLFix`` is now fully recursive. 
 
 * 

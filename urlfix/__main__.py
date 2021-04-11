@@ -79,7 +79,7 @@ def main():
         script_mode = dirurlfix.DirURLFix(input_dir=arguments.inpath, recursive=arguments.recursive)
 
     if arguments.mode == "f":
-        script_mode = urlfix.URLFix(input_file=arguments.input, output_file=arguments.output_file)
+        script_mode = urlfix.URLFix(input_file=arguments.inpath, output_file=arguments.output_file)
 
     script_mode.replace_urls(verbose=make_bool(arguments.verbose), inplace=make_bool(arguments.inplace))
 

@@ -38,14 +38,15 @@ jobs:
     - name: Upload reports to codecov
       run: bash <(curl -s https://codecov.io/bash)
 
+    - name: Check that recursion works for script mode
+      run: python -m urlfix --mode d --verbose 1 --recurive 1 --inpath testfiles
+
     - name: Check that script mode works
       run:  |
        pushd testfiles && touch replacement.md
        python -m urlfix --mode f --verbose 1 --inplace 0 --output-file replacement.md --input-file testurls.md
        cat replacement.md && rm replacement.md && popd
-   - name: Check that recursion works for script mode
-     run:  |
-         python -m urlfix --mode d --verbose 1 --recurive 1 --inpath testfiles
+
 
 
 

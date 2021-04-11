@@ -44,7 +44,7 @@ jobs:
     - name: Check that script mode works
       run:  |
        pushd testfiles && touch replacement.md
-       python -m urlfix --mode f --verbose 1 --inplace 0 --output-file replacement.md --input-file testurls.md
+       python -m urlfix --mode f --verbose 1 --inplace 0 --output-file replacement.md --inpath testurls.md
        cat replacement.md && rm replacement.md && popd
 
 

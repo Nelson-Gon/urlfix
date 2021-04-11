@@ -159,14 +159,14 @@ To use at the commandline, please use:
 .. code-block:: shell
 
 
-   python -m urlfix --mode "f" --verbose 1 --inplace 1 --input-file myfile.md
+   python -m urlfix --mode "f" --verbose 1 --inplace 1 --inpath myfile.md
 
 If not replacing within the same file, then:
 
 .. code-block:: shell
 
 
-   python -m urlfix --mode "f" --verbose 1 --inplace 0 --input-file myfile.md --output-file myoutputfile.md
+   python -m urlfix --mode "f" --verbose 1 --inplace 0 --inpath myfile.md --output-file myoutputfile.md
 
 To get help:
 

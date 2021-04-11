@@ -39,7 +39,7 @@ jobs:
       run: bash <(curl -s https://codecov.io/bash)
 
     - name: Check that recursion works for script mode
-      run: python -m urlfix --mode d --verbose 1 --recurive 1 --inpath testfiles
+      run: python -m urlfix --mode d --verbose 1 --recursive 1 --inpath testfiles
 
     - name: Check that script mode works
       run:  |

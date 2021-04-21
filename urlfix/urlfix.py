@@ -13,6 +13,7 @@ def file_format(in_file):
     matches = re.findall(format_pattern, in_file)
     return matches[0] if len(matches) > 0 else ''
 
+
 class URLFix(object):
     def __init__(self, input_file, output_file=None):
         """
@@ -32,7 +33,7 @@ class URLFix(object):
         :return  Replaces outdated URL and writes to the specified file. It also returns the number of URLs that have
         changed. The latter is useful for tests.
         """
-        if self.input_format not in ("md", "txt"):
+        if self.input_format not in ("md", "txt", "rmd", "Rmd"):
             raise NotImplementedError(f"File format {self.input_format} is not yet supported.")
         else:
             pass
@@ -40,13 +41,13 @@ class URLFix(object):
         link_text = "[^]]+"
         # Better markdown link matching  taken from https://stackoverflow.com/a/23395483/10323798
         # http:// or https:// followed by anything but a closing paren
-        actual_link = "http[s]?://[^)|^\s|?<=\]]+"
+        actual_link = r"http[s]?://[^)|^\s|?<=\]]+"
         # Need to find more links if using double bracket Markdown hence define single md []() RegEx.
-        single_md = "\[([^]]+)\]\((http[s]?://[^\s|^\)]+)\)"
-        combined_regex = f"\[({link_text})\]\(({(actual_link)})\)\]\((http[s].*)\)|({single_md})"
+        single_md = r"\[([^]]+)\]\((http[s]?://[^\s|^\)]+)\)"
+        combined_regex = fr"\[({link_text})\]\(({actual_link})\)\]\((http[s].*)\)|({single_md})"
         # Match only links in a text file, do not text that follows.
         # Assumes that links will always be followed by a space.
-        final_regex = "http[s]?://[^\s]+" if self.input_format == "txt" else combined_regex
+        final_regex = r"http[s]?://[^\s]+" if self.input_format == "txt" else combined_regex
 
         if self.output_file is None:
             if not inplace:
@@ -62,16 +63,15 @@ class URLFix(object):
 
             output_file = open(self.output_file, "w")
 
-
         number_moved = 0
         number_of_urls = 0
-        
+
         with open(self.input_file, "r") as input_f, output_file as out_f:
-            
+
             for line in input_f:
                 matched_url = re.findall(final_regex, line)
                 # Drop empty strings
-                if self.input_format == "md":
+                if self.input_format in ["md", "rmd", "Rmd"]:
                     matched_url = [list(str(x) for x in texts_links if x != '') for texts_links in matched_url]
                     for link_texts in matched_url:
                         if len(link_texts) > 1:
@@ -97,7 +97,7 @@ class URLFix(object):
                             print(f"Found {final_link} in {input_f.name}, now validating.. ")
                         try:
                             visited_url = urllib.request.urlopen(
-                                    Request(final_link, headers={'User-Agent': 'XYZ/3.0'}))
+                                Request(final_link, headers={'User-Agent': 'XYZ/3.0'}))
                             url_used = visited_url.geturl()
 
                         except URLError as err:
@@ -109,13 +109,11 @@ class URLFix(object):
                         else:
                             if url_used != final_link:
                                 number_moved += 1
-                                line=line.replace(final_link, url_used)
+                                line = line.replace(final_link, url_used)
                                 if verbose:
                                     print(f"{final_link} replaced with {url_used} in {out_f.name}")
 
                     out_f.write(line)
-
-
 
         information = "URLs have changed" if number_moved != 1 else "URL has changed"
         print(f"{number_moved} {information} of the {number_of_urls} links found in {self.input_file}")
@@ -123,6 +121,5 @@ class URLFix(object):
             os.replace(out_f.name, self.input_file)
             if verbose:
                 print(f"Renamed temporary file {output_file} as {self.input_file}")
-
 
         return number_moved

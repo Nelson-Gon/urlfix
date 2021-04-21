@@ -42,6 +42,8 @@
 - [x] MarkDown (.md)
 - [x] Plain Text files (.txt)
 
+- [x] RMarkdown (.rmd)
+
 - [ ] ReStructured Text (.rst)
 
 - [ ] PDF (.pdf)

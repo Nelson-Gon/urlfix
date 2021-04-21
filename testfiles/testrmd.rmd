@@ -20,8 +20,8 @@ When you click the **Knit** button a document will be generated that includes bo
 install.packages(c("mde", "manymolder"))
 ```
 
-This is a [link](https://www.r-pkg.org/badges/version/manymodelr). We also have another link to [manymodelr](https://cran.r-project.org/web/packages/manymodelr/index.html) and 
-the famous [tidyverse](https://lifecycle.r-lib.org/articles/stages.html). 
+This is a [link](https://www.r-pkg.org/badges/version/manymodelr). We also have another link to [manymodelr](https://cran.r-project.org/package=manymodelr) and 
+the famous [tidyverse](https://tidyverse.org/lifecycle/#maturing). 
 
 That's it.Nothing fancy. 
 

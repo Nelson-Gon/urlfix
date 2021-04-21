@@ -110,6 +110,9 @@ urlfix: Check and Fix Outdated URLs
   [x] Plain Text files (.txt)
 
 * 
+  [x] RMarkdown (.rmd)
+
+* 
   [ ] ReStructured Text (.rst)
 
 * 

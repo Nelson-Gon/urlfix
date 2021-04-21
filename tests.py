@@ -15,6 +15,8 @@ use_file_txt = os.path.join(dir_path, "testurls.txt")
 use_object = URLFix(input_file=use_file, output_file=replacement_file)
 use_object_txt = URLFix(input_file=use_file_txt, output_file=replacement_file)
 use_object_non_existent = URLFix(input_file=use_file, output_file="not_valid.txt")
+# Check that rmd works
+use_rmd_file = URLFix(input_file=os.path.join(dir_path, "testrmd.rmd"), output_file=replacement_file)
 not_supported_files = URLFix(input_file=os.path.join(dir_path, "testurls.rst"), output_file=replacement_file)
 use_object_inplace = URLFix(input_file=use_file_txt)
 
@@ -55,6 +57,8 @@ class Testurlfix(unittest.TestCase):
         self.assertEqual(number_moved, 3)
         number_moved_txt = use_object_txt.replace_urls(verbose=True)
         self.assertEqual(number_moved_txt, 2)
+        number_moved_rmd = use_rmd_file.replace_urls(verbose=True)
+        self.assertEqual(number_moved_rmd, 2)
 
 
 class TestDirURLFix(unittest.TestCase):
@@ -63,7 +67,6 @@ class TestDirURLFix(unittest.TestCase):
         # Clean test folder of results so tests can be repeated.
 
     def test_replace_urls(self):
-        # TODO: Rethink tests based on recursive changes
         # Use known changed URLs doc
         with self.assertRaises(OSError) as err:
             use_dir_non_existent.replace_urls()

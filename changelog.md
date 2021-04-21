@@ -2,6 +2,8 @@
 
 **urlfix 0.2.2**
 
+* Added support for RMarkdown (`.rmd`) files. 
+
 * A `recursive` argument was added to script mode. The argument `input-file` was renamed `inpath` to reflect that
 this may be a file or directory. 
 

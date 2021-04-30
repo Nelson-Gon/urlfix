@@ -44,7 +44,7 @@
 
 - [x] RMarkdown (.rmd)
 
-- [ ] ReStructured Text (.rst)
+- [x] ReStructured Text (.rst)
 
 - [ ] PDF (.pdf)
 

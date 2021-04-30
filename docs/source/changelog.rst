@@ -6,6 +6,9 @@ Welcome to urlfix's changelog
 
 
 * 
+  Now supporting ReStructured text (\ ``.rst``\ ) files. 
+
+* 
   Added support for RMarkdown (\ ``.rmd``\ ) files. 
 
 * 

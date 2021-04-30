@@ -33,7 +33,7 @@ class URLFix(object):
         :return  Replaces outdated URL and writes to the specified file. It also returns the number of URLs that have
         changed. The latter is useful for tests.
         """
-        if self.input_format not in ("md", "txt", "rmd", "Rmd"):
+        if self.input_format not in ("md", "txt", "rmd", "Rmd", "rst"):
             raise NotImplementedError(f"File format {self.input_format} is not yet supported.")
         else:
             pass
@@ -47,7 +47,7 @@ class URLFix(object):
         combined_regex = fr"\[({link_text})\]\(({actual_link})\)\]\((http[s].*)\)|({single_md})"
         # Match only links in a text file, do not text that follows.
         # Assumes that links will always be followed by a space.
-        final_regex = r"http[s]?://[^\s]+" if self.input_format == "txt" else combined_regex
+        final_regex = r"http[s]?://[^\s]+" if self.input_format in ["rst", "txt"] else combined_regex
 
         if self.output_file is None:
             if not inplace:

@@ -2,6 +2,8 @@
 
 **urlfix 0.2.2**
 
+* `DirURLFix` now supports replacement of outdated links in sub-nested directories. 
+
 * Now supporting ReStructured text (`.rst`) files. 
 
 * Added support for RMarkdown (`.rmd`) files. 

@@ -3,11 +3,12 @@ import os
 from warnings import warn
 
 
-def replace_urls_root(in_dir, recursive=False, **kwargs):
+def replace_urls_root(in_dir, recursive=False, sub_recursive=False, **kwargs):
     """
     :param in_dir:  Input directory
     :param recursive: Bool, should URLs be replaced in sub-directories if they exist?
     :param kwargs: Other arguments to URLFix.replace_urls
+    :param sub_recursive: Bool, should URLs be replaced sub-recursively? Defaults to False.
     :return: Files with outdated links validated/replaced, as requested.
     """
 
@@ -49,8 +50,8 @@ def replace_urls_root(in_dir, recursive=False, **kwargs):
                         # Add verbosity
                         print(f"Now updating files in {full_sub_dir_path}")
                         # Create new dirurlfix object and recurse
-                        # Do not sub-recurse in this directory
-                        number_moved.append(replace_urls_root(full_sub_dir_path, recursive=False, **kwargs))
+                        # If sub directories, sub-recurse in this sub directory, currently set to one level
+                        number_moved.append(replace_urls_root(full_sub_dir_path, recursive=sub_recursive, **kwargs))
         print('All files have been updated, thank you for using urlfix.')
         # To flatten or not? For now, do not flatten so we know that the second and next are non-root replacements
         return number_moved
@@ -61,18 +62,21 @@ class DirURLFix(object):
     Replace Outdated URLs given a directory of files.
     """
 
-    def __init__(self, input_dir, recursive=False):
+    def __init__(self, input_dir, recursive=False, sub_recursive=False):
         """
         :param input_dir: Path to input_dir.
         :param recursive: Should links be replaced in sub directories? defaults to False
+        :param sub_recursive: Bool, should URLs be replaced sub-recursively? Defaults to False
         """
         self.input_dir = input_dir
         self.recursive = recursive
+        self.sub_recursive = sub_recursive
 
     def replace_urls(self, **kwargs):
         if not os.path.exists(self.input_dir):
-            raise OSError('Path does not exist!')
+            raise OSError("Path does not exist!")
         if not os.path.isdir(self.input_dir):
-            raise NotADirectoryError('Input path must be a directory!')
+            raise NotADirectoryError("Input path must be a directory!")
 
-        return replace_urls_root(in_dir=self.input_dir, recursive=self.recursive, **kwargs)
+        return replace_urls_root(in_dir=self.input_dir, recursive=self.recursive, sub_recursive=self.sub_recursive,
+                                 **kwargs)

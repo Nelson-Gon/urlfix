@@ -65,7 +65,6 @@ class Testurlfix(unittest.TestCase):
         self.assertEqual(number_moved_rst, 5)
 
 
-
 class TestDirURLFix(unittest.TestCase):
     def test_instance_creation(self):
         self.assertTrue(isinstance(use_dir_object, DirURLFix))
@@ -141,10 +140,18 @@ class TestDirURLFix(unittest.TestCase):
         # 3 because we have three files in the directory recursive/testdir
         self.assertEqual(len(number_moved_list_recurse[2]), 3)
         # Do not test since we have already tested the same directory before?
-
-        print(number_moved_list_recurse)
+        # test sub-recursion
         remove_output_files("recursive/testdir")
         remove_output_files("recursive")
+
+    def test_sub_recursion(self):
+        print("Testing sub-recursion")
+        recursive_path = os.path.join(dir_path, "recursive")
+        moved_list = DirURLFix(recursive_path, recursive=True, sub_recursive=True).replace_urls(verbose=1)
+        # Assert that we have the expected number of files:
+        self.assertEqual(len(moved_list), 3)
+        remove_output_files("recursive/testdir/subrecurse")
+        remove_output_files("recursive/testdir")
 
 
 if __name__ == "__main__":

@@ -6,6 +6,9 @@ Welcome to urlfix's changelog
 
 
 * 
+  ``DirURLFix`` now supports replacement of outdated links in sub-nested directories. 
+
+* 
   Now supporting ReStructured text (\ ``.rst``\ ) files. 
 
 * 

@@ -32,8 +32,8 @@
 
 - [x] Replace outdated URLs/links in the same file or in the same files in a directory i.e. inplace.
 
-- [x] Replace files in nested directories
-- [ ] Replace files in sub-nested directories 
+- [x] Replace outdated links in files in nested directories
+- [x] Replace outdated links in files in sub-nested directories 
 
 **Supported file formats**
 

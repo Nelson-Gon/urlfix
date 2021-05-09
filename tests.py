@@ -5,8 +5,7 @@ import os
 import glob
 from shutil import copytree, rmtree
 
-dir_path = os.path.dirname(os.path.abspath(__file__))
-dir_path = os.path.join("testfiles")
+dir_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "testfiles")
 replacement_file = os.path.join(dir_path, "replacement.txt")
 # Use the above to make paths to files, avoid changing directory just for tests.
 # Todo: Avoid manually creating file paths.

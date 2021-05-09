@@ -2,6 +2,8 @@
 
 **urlfix 0.2.2**
 
+* Script mode now supports updating links in sub-nested directories. 
+
 * `DirURLFix` now supports replacement of outdated links in sub-nested directories. 
 
 * Now supporting ReStructured text (`.rst`) files. 

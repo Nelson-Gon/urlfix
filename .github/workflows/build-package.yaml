@@ -41,6 +41,9 @@ jobs:
     - name: Check that recursion works for script mode
       run: python -m urlfix --mode d --verbose 1 --recursive 1 --inpath testfiles
 
+    - name: Check that sub-recursion works
+      run: python -m urlfix --mode d --verbose 1 --recursive 1 --inpath testfiles/recursive --sub-recursive 1
+
     - name: Check that script mode works
       run:  |
        pushd testfiles && touch replacement.md

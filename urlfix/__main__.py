@@ -66,6 +66,11 @@ def main():
                             help="Are you trying to replace links in nested directories?",
                             default="False",
                             choices=boolean_choices)
+    # Sub-recursive replacements?
+    arg_parser.add_argument("-sr", "--sub-recursive", type=str, required=False,
+                            help="Are you trying to replace links in sub-nested directories?",
+                            default="False",
+                            choices=boolean_choices)
 
     # Parse arguments
     arguments = arg_parser.parse_args()
@@ -76,7 +81,8 @@ def main():
     # convert recursion control to a bool
     arguments.recursive = make_bool(arguments.recursive)
     if arguments.mode == "d" and arguments.recursive:
-        script_mode = dirurlfix.DirURLFix(input_dir=arguments.inpath, recursive=arguments.recursive)
+        script_mode = dirurlfix.DirURLFix(input_dir=arguments.inpath, recursive=arguments.recursive,
+                                          sub_recursive=make_bool(arguments.sub_recursive))
 
     if arguments.mode == "f":
         script_mode = urlfix.URLFix(input_file=arguments.inpath, output_file=arguments.output_file)

@@ -6,6 +6,9 @@ Welcome to urlfix's changelog
 
 
 * 
+  Script mode now supports updating links in sub-nested directories. 
+
+* 
   ``DirURLFix`` now supports replacement of outdated links in sub-nested directories. 
 
 * 

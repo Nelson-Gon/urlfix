@@ -37,20 +37,13 @@ Please also update the docs using ``sphinx``
 
 .. code-block::
 
-   bash scripts/mkdocs.sh #projectnamehere
+   bash scripts/mkdocs.sh
 
+**Commit messages**
 
-* Releasing
+Please write commit messages in the format "Extends functionality" instead of "Extended functionality".
 
-Before running this script, ensure you have done the following:
-
-
-* 
-  Updated ``version`` in ``version.py``
-
-* 
-  Released on GitHub with a version number that starts with ``v`` and ends with
-  the version number in ``version.py``\ , no spaces. 
+**Releasing**
 
 .. code-block:: shell
 

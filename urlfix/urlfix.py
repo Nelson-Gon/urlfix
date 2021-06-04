@@ -4,7 +4,7 @@ import re
 import urllib.request
 from urllib.request import Request
 import tempfile
-from urllib.error import URLError
+from urllib.error import URLError, HTTPError
 import warnings
 
 
@@ -100,12 +100,17 @@ class URLFix(object):
                                 Request(final_link, headers={'User-Agent': 'XYZ/3.0'}))
                             url_used = visited_url.geturl()
 
+                        except HTTPError as err:
+                            # Put HTTPError before URLError to avoid issues with inheritance
+                            # This may be useful for 4xxs, 3xxs if we get past the URLError
+                            warnings.warn(f"{final_link} not updated, got HTTP error code: {err.code}.")
+                            pass
+
                         except URLError as err:
-                            # TODO: Figure out why getting the error code fails.
-                            # Leave intact
                             warnings.warn(f"{final_link} not updated. Reason: {err.reason}")
                             # Must be a way to skip, for now rewrite it in there
                             pass
+
                         else:
                             if url_used != final_link:
                                 number_moved += 1

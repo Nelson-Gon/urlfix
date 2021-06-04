@@ -1,5 +1,9 @@
 # Welcome to urlfix's changelog 
 
+**urlfix 0.2.3**
+
+* `URLFix` now warns with HTTP error codes, wherever applicable. 
+
 **urlfix 0.2.2**
 
 * Script mode now supports updating links in sub-nested directories. 

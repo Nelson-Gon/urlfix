@@ -6,7 +6,6 @@
 [![Project Status](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active) 
 [![Codecov](https://codecov.io/gh/Nelson-Gon/urlfix/branch/master/graph/badge.svg)](https://codecov.io/gh/Nelson-Gon/urlfix?branch=master)
 ![Test-Package](https://github.com/Nelson-Gon/urlfix/workflows/Test-Package/badge.svg)
-![Travis Build](https://travis-ci.com/Nelson-Gon/urlfix.svg?branch=master)
 [![PyPI license](https://img.shields.io/pypi/l/urlfix.svg)](https://pypi.python.org/pypi/urlfix/)
 [![Documentation Status](https://readthedocs.org/projects/urlfix/badge/?version=latest)](https://urlfix.readthedocs.io/en/latest/?badge=latest)
 [![Total Downloads](https://pepy.tech/badge/urlfix)](https://pepy.tech/project/urlfix)

@@ -35,7 +35,7 @@ jobs:
 
 
     - name: Run tests and show coverage on the command line
-      run: coverage run tests.py && coverage report -m
+      run: coverage run tests.py && coverage report -m && coverage xml
 
 
     - name: Upload reports to codecov
@@ -44,7 +44,7 @@ jobs:
       run: |
        curl -Os https://uploader.codecov.io/latest/linux/codecov
        chmod +x codecov
-       ./codecov -t ${CODECOV_TOKEN} -R /home/runner/work/urlfix -f ".coverage"
+       ./codecov -t ${CODECOV_TOKEN} -R /home/runner/work/urlfix -f "coverage.xml"
     
     - name: Check that recursion works for script mode
       run: python -m urlfix --mode d --verbose 1 --recursive 1 --inpath testfiles

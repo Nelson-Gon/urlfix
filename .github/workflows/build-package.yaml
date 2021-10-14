@@ -44,7 +44,8 @@ jobs:
       run: |
        curl -Os https://uploader.codecov.io/latest/linux/codecov
        chmod +x codecov
-       ./codecov -t ${CODECOV_TOKEN} -f /home/runner/work/pycite/.coverage
+       ./codecov -t ${CODECOV_TOKEN} -R /home/runner/work/urlfix -f ".coverage"
+    
     - name: Check that recursion works for script mode
       run: python -m urlfix --mode d --verbose 1 --recursive 1 --inpath testfiles
 

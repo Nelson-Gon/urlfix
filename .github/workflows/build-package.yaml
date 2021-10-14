@@ -37,9 +37,14 @@ jobs:
     - name: Run tests and show coverage on the command line
       run: coverage run tests.py && coverage report -m
 
-    - name: Upload reports to codecov
-      run: bash <(curl -s https://codecov.io/bash)
 
+    - name: Upload reports to codecov
+      env:
+        CODECOV_TOKEN: ${{secrets.CODECOV_TOKEN}}
+      run: |
+       curl -Os https://uploader.codecov.io/latest/linux/codecov
+       chmod +x codecov
+       ./codecov -t ${CODECOV_TOKEN} -f /home/runner/work/pycite/.coverage
     - name: Check that recursion works for script mode
       run: python -m urlfix --mode d --verbose 1 --recursive 1 --inpath testfiles
 

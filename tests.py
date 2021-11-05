@@ -32,9 +32,10 @@ class Testurlfix(unittest.TestCase):
 
 
     def test_replace_urls(self):
+        non_existent_path = os.path.join(dir_path, "doesnt_exist.txt")
         with self.assertRaises(FileNotFoundError) as err:
             create_test_object(in_f="doesnt_exist.txt", output_file=repl_f).replace_urls()
-        self.assertEqual(str(err.exception), f"Need both input and output files but {os.path.join(dir_path),'doesnt_exist.txt'} does not exist")
+        self.assertEqual(str(err.exception), f"Need both input and output files but {non_existent_path} does not exist"
         
 
     def test_md_files(self):    

@@ -5,7 +5,14 @@ Welcome to urlfix's changelog
 **urlfix 0.2.3**
 
 
-* ``URLFix`` now warns with HTTP error codes, wherever applicable. 
+* 
+  Output file deletion has been optimised to avoid errors when running tests repeatedly. 
+
+* 
+  Tests are now broken down into much simpler functions for easier debugging. 
+
+* 
+  ``URLFix`` now warns with HTTP error codes, wherever applicable. 
 
 **urlfix 0.2.2**
 

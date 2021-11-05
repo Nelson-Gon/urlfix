@@ -58,8 +58,10 @@ class URLFix(object):
                                                           mode="w")
 
         else:
-            if not all(os.path.exists(x) for x in [self.input_file, self.output_file]):
-                raise FileNotFoundError("input_file and output_file should be valid files.")
+            # if not all(os.path.exists(x) for x in [self.input_file, self.output_file]):
+            for file_ in [self.input_file, self.output_file]:
+                if not os.path.exists(file_): 
+                    raise FileNotFoundError(f"Need both input and output files but {file_} does not exist.")
 
             output_file = open(self.output_file, "w")
 

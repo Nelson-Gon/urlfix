@@ -52,7 +52,7 @@ def replace_urls_root(in_dir, recursive=False, sub_recursive=False, **kwargs):
                         # Create new dirurlfix object and recurse
                         # If sub directories, sub-recurse in this sub directory, currently set to one level
                         number_moved.append(replace_urls_root(full_sub_dir_path, recursive=sub_recursive, **kwargs))
-        print('All files have been updated, thank you for using urlfix.')
+        # print('All files have been updated, thank you for using urlfix.')
         # To flatten or not? For now, do not flatten so we know that the second and next are non-root replacements
         return number_moved
 

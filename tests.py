@@ -43,15 +43,15 @@ class Testurlfix(unittest.TestCase):
 
     def test_txt_files(self):
         txt_obj = create_test_object(in_f = "testurls.txt", output_file=repl_f)
-        self.assertEqual(txt_obj.replace_urls(verbose=True), 1)
+        self.assertEqual(txt_obj.replace_urls(verbose=True), 2)
 
     def test_rmd_files(self):
         rmd_obj = create_test_object(in_f = "testrmd.rmd", output_file=repl_f)
-        self.assertEqual(rmd_obj.replace_urls(verbose=True), 1)
+        self.assertEqual(rmd_obj.replace_urls(verbose=True), 2)
 
     def test_rst_files(self):
         rst_obj = create_test_object(in_f="testurls.rst", output_file= repl_f)
-        self.assertEqual(rst_obj.replace_urls(verbose=True), 4) 
+        self.assertEqual(rst_obj.replace_urls(verbose=True), 5) 
 
     def test_non_support(self):
          # Check that non-supported formats are skipped and an error raised
@@ -86,7 +86,7 @@ class TestDirURLFix(unittest.TestCase):
         # # 1 since we provided correct URLs. TODO: Figure out how to run both tests
         # # 3 since we match double links if []()[]()
         self.assertEqual(number_moved_list[1], 3)
-        self.assertEqual(number_moved_list[2], 1)
+        self.assertEqual(number_moved_list[2], 2)
         remove_output_files()
     
     def test_inplace_repls(self):
@@ -94,7 +94,7 @@ class TestDirURLFix(unittest.TestCase):
                 inplace=True)
         self.assertEqual(number_moved_l[0], 3)
         self.assertEqual(number_moved_l[1], 3)
-        self.assertEqual(number_moved_l[2], 1)
+        self.assertEqual(number_moved_l[2], 2)
 
         # If inplace replacement works, then these should all be zeros
         after_inplace = create_test_object("testinplace",kind="dir").replace_urls(verbose=1, inplace=True)
@@ -114,9 +114,9 @@ class TestDirURLFix(unittest.TestCase):
         number_moved_list = recursive_object.replace_urls(verbose=1)
         # Since we have two root files, then non-recursive replacements should be of length 2
         self.assertEqual(len(number_moved_list), 2)
-        # For the first file, we expect only 3 urls to have moved while for the second we expect 4
+        # For the first file, we expect only 3 urls to have moved while for the second we expect 5
         self.assertEqual(number_moved_list[0], 3)
-        self.assertEqual(number_moved_list[1], 4)
+        self.assertEqual(number_moved_list[1], 5)
         remove_output_files()
         # Next, we set recursion to true
         recursive_recursive_object = DirURLFix(recursive_path, recursive=True)

@@ -5,7 +5,6 @@ import urllib.request
 from urllib.request import Request
 import tempfile
 from urllib.error import URLError, HTTPError
-import warnings
 import logging
 
 log_format = "%(asctime)s %(message)s"
@@ -128,12 +127,12 @@ class URLFix(object):
                             # Put HTTPError before URLError to avoid issues with inheritance
                             # This may be useful for 4xxs, 3xxs if we get past the URLError
                             logger.warning(f"{final_link} not updated, got HTTP error code: {err.code}.")
-                            warnings.warn(f"{final_link} not updated, got HTTP error code: {err.code}.")
+                            #warnings.warn(f"{final_link} not updated, got HTTP error code: {err.code}.")
                             pass
 
                         except URLError as err:
                             logger.warning(f"{final_link} not updated. Reason: {err.reason}")
-                            warnings.warn(f"{final_link} not updated. Reason: {err.reason}")
+                            #warnings.warn(f"{final_link} not updated. Reason: {err.reason}")
                             # Must be a way to skip, for now rewrite it in there
                             pass
 

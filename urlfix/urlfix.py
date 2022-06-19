@@ -6,6 +6,25 @@ from urllib.request import Request
 import tempfile
 from urllib.error import URLError, HTTPError
 import warnings
+import logging
+
+log_format = "%(asctime)s %(message)s"
+
+log_filename = "urlfix_log.log"
+
+log_level = logging.DEBUG
+
+logging.basicConfig(
+    filename= log_filename,
+    format = log_format,
+    filemode = "a"
+    )
+
+logger = logging.getLogger("urlfix")
+
+logger.setLevel(log_level)
+
+
 
 
 def file_format(in_file):
@@ -34,6 +53,7 @@ class URLFix(object):
         changed. The latter is useful for tests.
         """
         if self.input_format not in ("md", "txt", "rmd", "Rmd", "rst"):
+            logger.error(f"File format {self.input_format} is not yet supported.")
             raise NotImplementedError(f"File format {self.input_format} is not yet supported.")
         else:
             pass
@@ -51,6 +71,7 @@ class URLFix(object):
 
         if self.output_file is None:
             if not inplace:
+                logger.error("Please provide an output file to write to.")
                 raise ValueError("Please provide an output file to write to.")
             else:
                 # Get directory name from input file path
@@ -61,6 +82,7 @@ class URLFix(object):
             # if not all(os.path.exists(x) for x in [self.input_file, self.output_file]):
             for file_ in [self.input_file, self.output_file]:
                 if not os.path.exists(file_): 
+                    logger.error(f"Need both input and output files but {file_} does not exist.")
                     raise FileNotFoundError(f"Need both input and output files but {file_} does not exist.")
 
             output_file = open(self.output_file, "w")
@@ -91,12 +113,12 @@ class URLFix(object):
                         number_of_urls += 1
                         if isinstance(correct_urls, Sequence) and final_link in correct_urls:
                             # skip current url if it's in 'correct_urls'
-                            print(f'{final_link} is already valid.')
+                            logger.info(f"{final_link} is already valid.")
                             continue
 
                         # This printing step while unnecessary may be useful to make sure things work as expected
                         if verbose:
-                            print(f"Found {final_link} in {input_f.name}, now validating.. ")
+                            logger.info(f"Found {final_link} in {input_f.name}, now validating.. ")
                         try:
                             visited_url = urllib.request.urlopen(
                                 Request(final_link, headers={'User-Agent': 'XYZ/3.0'}))
@@ -105,10 +127,12 @@ class URLFix(object):
                         except HTTPError as err:
                             # Put HTTPError before URLError to avoid issues with inheritance
                             # This may be useful for 4xxs, 3xxs if we get past the URLError
+                            logger.warning(f"{final_link} not updated, got HTTP error code: {err.code}.")
                             warnings.warn(f"{final_link} not updated, got HTTP error code: {err.code}.")
                             pass
 
                         except URLError as err:
+                            logger.warning(f"{final_link} not updated. Reason: {err.reason}")
                             warnings.warn(f"{final_link} not updated. Reason: {err.reason}")
                             # Must be a way to skip, for now rewrite it in there
                             pass
@@ -118,15 +142,17 @@ class URLFix(object):
                                 number_moved += 1
                                 line = line.replace(final_link, url_used)
                                 if verbose:
-                                    print(f"{final_link} replaced with {url_used} in {out_f.name}")
+                                    logger.info(f"{final_link} replaced with {url_used} in {out_f.name}")
+
 
                     out_f.write(line)
 
         information = "URLs have changed" if number_moved != 1 else "URL has changed"
+        logger.info(f"{number_moved} {information} of the {number_of_urls} links found in {self.input_file}")
+        # We leave this print message here as it is fairly useful 
         print(f"{number_moved} {information} of the {number_of_urls} links found in {self.input_file}")
         if inplace:
             os.replace(out_f.name, self.input_file)
             if verbose:
-                print(f"Renamed temporary file {output_file} as {self.input_file}")
-
+                logger.info(f"Renamed temporary file {output_file} as {self.input_file}")
         return number_moved

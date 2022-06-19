@@ -6,6 +6,9 @@ Welcome to urlfix's changelog
 
 
 * 
+  Verbose messages are now printed to a log file to make the console less convoluted. The log level is set to debug so we get as much information as possible. 
+
+* 
   Output file deletion has been optimised to avoid errors when running tests repeatedly. 
 
 * 

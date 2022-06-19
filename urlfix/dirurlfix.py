@@ -1,6 +1,21 @@
 from .urlfix import URLFix, file_format
 import os
 from warnings import warn
+import logging 
+
+log_level = logging.DEBUG
+log_filename = "dirurlfix_log.log"
+log_format = "%(asctime)s %(message)s"
+
+logging.basicConfig(
+    filename= log_filename,
+    format = log_format,
+    filemode = "a"
+    )
+
+logger = logging.getLogger("dirurlfix")
+
+logger.setLevel(log_level)
 
 
 def replace_urls_root(in_dir, recursive=False, sub_recursive=False, **kwargs):
@@ -20,11 +35,11 @@ def replace_urls_root(in_dir, recursive=False, sub_recursive=False, **kwargs):
             for root_file in root_files:
                 root_file = os.path.join(in_dir, root_file)
                 if file_format(root_file) not in ["md", "txt"]:
-                    print(f"{root_file} is of an unsupported file format, skipping...")
+                    logger.info(f"{root_file} is of an unsupported file format, skipping...")
                     continue
 
                 if '_output' in root_file:
-                    print(f"File {root_file} is a fix of another file")
+                    logger.info(f"File {root_file} is a fix of another file")
                     continue  # skip output files
                 if "inplace" in kwargs and kwargs["inplace"]:
                     number_moved.append(URLFix(root_file).replace_urls(**kwargs))
@@ -32,7 +47,7 @@ def replace_urls_root(in_dir, recursive=False, sub_recursive=False, **kwargs):
                     output_file = root_file.replace(f'.{file_format(root_file)}',
                                                     f'_output.{file_format(root_file)}')
                     if os.path.exists(output_file):
-                        print(f"File already fixed: {root_file}")
+                        logger.info(f"File already fixed: {root_file}")
                         continue  # skip file that's already been fixed
 
                     with open(output_file, 'w'):
@@ -41,6 +56,7 @@ def replace_urls_root(in_dir, recursive=False, sub_recursive=False, **kwargs):
             if sub_dirs:
                 if not recursive:
                     use_grammar = "sub-directory" if len(sub_dirs) == 1 else "sub-directories"
+                    logger.warning(f"Found {use_grammar} {','.join(sub_dirs)} but recursion was set to False, exiting..")
                     warn(f"Found {use_grammar} {','.join(sub_dirs)} but recursion was set to False, exiting..")
 
                 else:
@@ -48,7 +64,7 @@ def replace_urls_root(in_dir, recursive=False, sub_recursive=False, **kwargs):
                         # Create full paths to sub directories
                         full_sub_dir_path = os.path.join(in_dir, sub_dir)
                         # Add verbosity
-                        print(f"Now updating files in {full_sub_dir_path}")
+                        logger.info(f"Now updating files in {full_sub_dir_path}")
                         # Create new dirurlfix object and recurse
                         # If sub directories, sub-recurse in this sub directory, currently set to one level
                         number_moved.append(replace_urls_root(full_sub_dir_path, recursive=sub_recursive, **kwargs))
@@ -74,8 +90,10 @@ class DirURLFix(object):
 
     def replace_urls(self, **kwargs):
         if not os.path.exists(self.input_dir):
+            logger.error("Path does not exist!")
             raise OSError("Path does not exist!")
         if not os.path.isdir(self.input_dir):
+            logger.error("Input path must be a directory!")
             raise NotADirectoryError("Input path must be a directory!")
 
         return replace_urls_root(in_dir=self.input_dir, recursive=self.recursive, sub_recursive=self.sub_recursive,

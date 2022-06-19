@@ -16,3 +16,4 @@ __pycache__
 
 *_output.*
 \.vscode
+*.log

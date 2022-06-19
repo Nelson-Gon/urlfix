@@ -1,6 +1,5 @@
 from .urlfix import URLFix, file_format
 import os
-from warnings import warn
 import logging 
 
 log_level = logging.DEBUG
@@ -57,7 +56,8 @@ def replace_urls_root(in_dir, recursive=False, sub_recursive=False, **kwargs):
                 if not recursive:
                     use_grammar = "sub-directory" if len(sub_dirs) == 1 else "sub-directories"
                     logger.warning(f"Found {use_grammar} {','.join(sub_dirs)} but recursion was set to False, exiting..")
-                    warn(f"Found {use_grammar} {','.join(sub_dirs)} but recursion was set to False, exiting..")
+                    # This might be useful but maybe user can see what happened in log file instead
+                    #warn(f"Found {use_grammar} {','.join(sub_dirs)} but recursion was set to False, exiting..")
 
                 else:
                     for sub_dir in sub_dirs:

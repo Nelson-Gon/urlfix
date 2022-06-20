@@ -9,7 +9,7 @@ log_format = "%(asctime)s %(levelname)s %(message)s"
 logging.basicConfig(
     filename= log_filename,
     format = log_format,
-    filemode = "a"
+    filemode = "w"
     )
 
 logger = logging.getLogger(__name__)

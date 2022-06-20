@@ -146,7 +146,7 @@ Otherwise:
    # clone the repo
    git clone git@github.com:Nelson-Gon/urlfix.git
    cd urlfix
-   python3 setup.py install
+   pip install -e .
 
 **Sample usage**
 

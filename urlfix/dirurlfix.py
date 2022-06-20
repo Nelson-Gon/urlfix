@@ -4,7 +4,7 @@ import logging
 
 log_level = logging.DEBUG
 log_filename = "dirurlfix_log.log"
-log_format = "%(asctime)s %(message)s"
+log_format = "%(asctime)s %(levelname)s %(message)s"
 
 logging.basicConfig(
     filename= log_filename,
@@ -12,7 +12,7 @@ logging.basicConfig(
     filemode = "a"
     )
 
-logger = logging.getLogger("dirurlfix")
+logger = logging.getLogger(__name__)
 
 logger.setLevel(log_level)
 

@@ -7,7 +7,7 @@ import tempfile
 from urllib.error import URLError, HTTPError
 import logging
 
-log_format = "%(asctime)s %(message)s"
+log_format = "%(asctime)s %(levelname) s%(message)s"
 
 log_filename = "urlfix_log.log"
 
@@ -19,7 +19,7 @@ logging.basicConfig(
     filemode = "a"
     )
 
-logger = logging.getLogger("urlfix")
+logger = logging.getLogger(__name__)
 
 logger.setLevel(log_level)
 

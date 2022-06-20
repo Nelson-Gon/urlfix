@@ -1,23 +1,5 @@
-.. role:: raw-html-m2r(raw)
-   :format: html
+We need to replace links in this document https://www.r-pkg.org/badges/version/manymodelr but it also needs to have
+some text not just links. https://cran.r-project.org/web/packages/manymodelr/index.html not just links. 
+https://tidyverse.org/lifecycle/#maturing like this. 
 
 
-
-.. image:: https://www.r-pkg.org/badges/version/manymodelr
-   :target: https://cran.r-project.org/web/packages/manymodelr/index.html
-   :alt: CRAN\_Status\_Badge
-
-This document does not contain anything special. It is simply a test document to ensure that we actually match 
-and replace what is expected. We should replace
-
-.. image:: https://github.com/Nelson-Gon/manymodelr/workflows/test-coverage/badge.svg
-   :target: https://github.com/Nelson-Gon/manymodelr/workflows/test-coverage/badge.svg
-   :alt: test-coverage
- and 
-
-.. image:: https://zenodo.org/badge/DOI/10.5281/zenodo.3891106.svg
-   :target: https://zenodo.org/record/5211272
-   :alt: DOI
-.\ :raw-html-m2r:`<br>`
-https://zenodo.org/record/5211272 should also be replaced since it is outdated. Everything else should remain
-intact. 

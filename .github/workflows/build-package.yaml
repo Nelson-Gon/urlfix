@@ -57,6 +57,8 @@ jobs:
        pushd testfiles && touch replacement.md
        python -m urlfix --mode f --verbose 1 --inplace 0 --output-file replacement.md --inpath testurls.md
        cat replacement.md && rm replacement.md && popd
+    - name: Check that logging works 
+      run: if [ -f urlfix_log.log ]; then cat urlfix_log.log && rm urlfix_log.log;fi;
 
 
 

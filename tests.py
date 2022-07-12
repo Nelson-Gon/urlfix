@@ -4,7 +4,10 @@ from urlfix.dirurlfix import DirURLFix
 import os
 import glob
 from shutil import copytree, rmtree
-import tempfile 
+# better recursive glob unlike using glob
+# Only limitation is we are unable to figure out if something is null
+from pathlib import Path
+
 
 dir_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "testfiles")
 repl_f = os.path.join(dir_path, "replacement.txt")
@@ -16,10 +19,12 @@ def create_test_object(in_f="", kind="file", **kwargs):
     return URLFix(input_file=in_f, **kwargs) if kind=="file" else DirURLFix(in_f)
 
 def remove_output_files(dir_used=dir_path):
-    for output_file in glob.glob(os.path.join(dir_used, "**", "*_output.*")):
-        if os.path.isfile(output_file):
-            print(f"Removing no longer needed file: {output_file}")
-            os.remove(output_file)
+    # TODO: Check that we actually found whatever files we are looking for 
+    for dir_used in Path(dir_used).rglob("*_output.*"):
+        print(f"Removing no longer needed file: {dir_used}")
+        # The use of dir_used here is a bit misleading since we are actually 
+        # removing files and not directories as the name might imply. 
+        os.remove(dir_used)
 
 
 class Testurlfix(unittest.TestCase):

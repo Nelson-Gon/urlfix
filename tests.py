@@ -19,12 +19,9 @@ def create_test_object(in_f="", kind="file", **kwargs):
     return URLFix(input_file=in_f, **kwargs) if kind=="file" else DirURLFix(in_f)
 
 def remove_output_files(dir_used=dir_path):
-    # TODO: Check that we actually found whatever files we are looking for 
-    for dir_used in Path(dir_used).rglob("*_output.*"):
-        print(f"Removing no longer needed file: {dir_used}")
-        # The use of dir_used here is a bit misleading since we are actually 
-        # removing files and not directories as the name might imply. 
-        os.remove(dir_used)
+    for out_file in Path(dir_used).rglob("*_output.*"): 
+        print(f"Removing no longer needed file: {out_file}")
+        os.remove(out_file)
 
 
 class Testurlfix(unittest.TestCase):

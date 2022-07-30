@@ -35,7 +35,7 @@ jobs:
 
 
     - name: Run tests and show coverage on the command line
-      run: coverage run tests.py && coverage report -m && coverage xml
+      run: python3 -m pytest --cov-report term --cov-report xml:coverage.xml --cov=pycite 
 
 
     - name: Upload reports to codecov

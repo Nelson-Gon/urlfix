@@ -2,6 +2,8 @@
 
 **urlfix 0.2.3**
 
+* We now use pytest as our testing framework making our testing easier and more robust. 
+
 * Fixed issues with recursive replacements failing due to non-deleted intermediate files. 
 
 * Verbose messages are now printed to a log file to make the console less convoluted. The log level is set to debug so we get as much information as possible. Importantly, warnings are now also not printed on the console, the user should check the log files to see these too. This might be reverted in the future.  

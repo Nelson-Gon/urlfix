@@ -6,6 +6,9 @@ Welcome to urlfix's changelog
 
 
 * 
+  We now use pytest as our testing framework making our testing easier and more robust. 
+
+* 
   Fixed issues with recursive replacements failing due to non-deleted intermediate files. 
 
 * 

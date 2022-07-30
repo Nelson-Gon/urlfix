@@ -18,4 +18,3 @@ __pycache__
 \.vscode
 *.log
 testfiles/
-test_*

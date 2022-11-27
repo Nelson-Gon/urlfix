@@ -5,31 +5,23 @@ import urllib.request
 from urllib.request import Request
 import tempfile
 from urllib.error import URLError, HTTPError
-import logging
+from helpers import check_url, create_logger
+from multiprocessing import Pool 
 
-log_format = "%(asctime)s %(levelname)s %(message)s"
-
-log_filename = "urlfix_log.log"
-
-log_level = logging.WARNING
-
-logging.basicConfig(
-    filename= log_filename,
-    format = log_format,
-    filemode = "w"
-    )
-
-logger = logging.getLogger(__name__)
-
-logger.setLevel(log_level)
-
-
+logger = create_logger("urlfix_logs.log")
 
 
 def file_format(in_file):
-    format_pattern = r'.+\.(\w+)'
+    """_summary_
+
+    :param in_file: Path to input file that contains URLs to check/fix.
+    :type in_file: Accepts md, txt, or rst.
+    :return: URLs found in the file
+    :rtype: str
+    """
+    format_pattern = r".+\.(\w+)"
     matches = re.findall(format_pattern, in_file)
-    return matches[0] if len(matches) > 0 else ''
+    return matches[0] if len(matches) > 0 else ""
 
 
 class URLFix(object):
@@ -52,8 +44,11 @@ class URLFix(object):
         changed. The latter is useful for tests.
         """
         if self.input_format not in ("md", "txt", "rmd", "Rmd", "rst"):
-            logger.error(f"File format {self.input_format} is not yet supported.")
-            raise NotImplementedError(f"File format {self.input_format} is not yet supported.")
+            logger.error(
+                f"File format {self.input_format} is not yet supported.")
+            raise NotImplementedError(
+                f"File format {self.input_format} is not yet supported."
+            )
         else:
             pass
 
@@ -63,10 +58,16 @@ class URLFix(object):
         actual_link = r"http[s]?://[^)|^\s|?<=\]]+"
         # Need to find more links if using double bracket Markdown hence define single md []() RegEx.
         single_md = r"\[([^]]+)\]\((http[s]?://[^\s|^\)]+)\)"
-        combined_regex = fr"\[({link_text})\]\(({actual_link})\)\]\((http[s].*)\)|({single_md})"
+        combined_regex = (
+            rf"\[({link_text})\]\(({actual_link})\)\]\((http[s].*)\)|({single_md})"
+        )
         # Match only links in a text file, do not text that follows.
         # Assumes that links will always be followed by a space.
-        final_regex = r"http[s]?://[^\s]+" if self.input_format in ["rst", "txt"] else combined_regex
+        final_regex = (
+            r"http[s]?://[^\s]+"
+            if self.input_format in ["rst", "txt"]
+            else combined_regex
+        )
 
         if self.output_file is None:
             if not inplace:
@@ -74,15 +75,20 @@ class URLFix(object):
                 raise ValueError("Please provide an output file to write to.")
             else:
                 # Get directory name from input file path
-                output_file = tempfile.NamedTemporaryFile(dir=os.path.dirname(self.input_file), delete=False,
-                                                          mode="w")
+                output_file = tempfile.NamedTemporaryFile(
+                    dir=os.path.dirname(self.input_file), delete=False, mode="w"
+                )
 
         else:
             # if not all(os.path.exists(x) for x in [self.input_file, self.output_file]):
             for file_ in [self.input_file, self.output_file]:
-                if not os.path.exists(file_): 
-                    logger.error(f"Need both input and output files but {file_} does not exist.")
-                    raise FileNotFoundError(f"Need both input and output files but {file_} does not exist.")
+                if not os.path.exists(file_):
+                    logger.error(
+                        f"Need both input and output files but {file_} does not exist."
+                    )
+                    raise FileNotFoundError(
+                        f"Need both input and output files but {file_} does not exist."
+                    )
 
             output_file = open(self.output_file, "w")
 
@@ -95,63 +101,43 @@ class URLFix(object):
                 matched_url = re.findall(final_regex, line)
                 # Drop empty strings
                 if self.input_format in ["md", "rmd", "Rmd"]:
-                    matched_url = [list(str(x) for x in texts_links if x != '') for texts_links in matched_url]
+                    matched_url = [
+                        list(str(x) for x in texts_links if x != "")
+                        for texts_links in matched_url
+                    ]
                     for link_texts in matched_url:
                         if len(link_texts) > 1:
                             link_texts = link_texts[1:]
                             # This is used because for some reason we match links twice if single md []()
                             # This isn't ideal
                             # TODO: Use better Regular Expression that matches the target links at once
-                            matched_url = list(filter(lambda x: ("https" or "http") in x, link_texts))
+                            matched_url = list(
+                                filter(lambda x: ("https" or "http")
+                                       in x, link_texts)
+                            )
                 if len(matched_url) == 0:
                     # If no URL found, write this line so it is kept in the output file.
                     out_f.write(line)
                     pass
                 else:
-                    for final_link in matched_url:
-                        number_of_urls += 1
-                        if isinstance(correct_urls, Sequence) and final_link in correct_urls:
-                            # skip current url if it's in 'correct_urls'
-                            logger.info(f"{final_link} is already valid.")
-                            continue
-
-                        # This printing step while unnecessary may be useful to make sure things work as expected
-                        if verbose:
-                            logger.info(f"Found {final_link} in {input_f.name}, now validating.. ")
-                        try:
-                            visited_url = urllib.request.urlopen(
-                                Request(final_link, headers={'User-Agent': 'XYZ/3.0'}))
-                            url_used = visited_url.geturl()
-
-                        except HTTPError as err:
-                            # Put HTTPError before URLError to avoid issues with inheritance
-                            # This may be useful for 4xxs, 3xxs if we get past the URLError
-                            logger.warning(f"{final_link} not updated, got HTTP error code: {err.code}.")
-                            #warnings.warn(f"{final_link} not updated, got HTTP error code: {err.code}.")
-                            pass
-
-                        except URLError as err:
-                            logger.warning(f"{final_link} not updated. Reason: {err.reason}")
-                            #warnings.warn(f"{final_link} not updated. Reason: {err.reason}")
-                            # Must be a way to skip, for now rewrite it in there
-                            pass
-
-                        else:
-                            if url_used != final_link:
-                                number_moved += 1
-                                line = line.replace(final_link, url_used)
-                                if verbose:
-                                    logger.info(f"{final_link} replaced with {url_used} in {out_f.name}")
-
+                    # TODO: Find a way to use threads here. Might need functools partial 
+                    [check_url(x, correct_urls=correct_urls) for x in matched_url]
+                    
 
                     out_f.write(line)
 
         information = "URLs have changed" if number_moved != 1 else "URL has changed"
-        logger.info(f"{number_moved} {information} of the {number_of_urls} links found in {self.input_file}")
-        # We leave this print message here as it is fairly useful 
-        print(f"{number_moved} {information} of the {number_of_urls} links found in {self.input_file}")
+        logger.info(
+            f"{number_moved} {information} of the {number_of_urls} links found in {self.input_file}"
+        )
+        # We leave this print message here as it is fairly useful
+        print(
+            f"{number_moved} {information} of the {number_of_urls} links found in {self.input_file}"
+        )
         if inplace:
             os.replace(out_f.name, self.input_file)
             if verbose:
-                logger.info(f"Renamed temporary file {output_file} as {self.input_file}")
+                logger.info(
+                    f"Renamed temporary file {output_file} as {self.input_file}"
+                )
         return number_moved

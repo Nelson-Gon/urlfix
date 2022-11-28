@@ -121,7 +121,8 @@ class URLFix(object):
                     pass
                 else:
                     # TODO: Find a way to use threads here. Might need functools partial 
-                    [check_url(x, correct_urls=correct_urls) for x in matched_url]
+                    [check_url(x, correct_urls=correct_urls, input_line=line, changed_url_tracker=number_moved,
+                    url_tracker=number_of_urls, verbose=True, out_file=out_f, logger=logger) for x in matched_url]
                     
 
                     out_f.write(line)

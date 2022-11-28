@@ -27,7 +27,7 @@ def check_url(url_link, correct_urls, input_line, logger, url_tracker, changed_u
     :return: None
     """
     url_tracker += 1
-    if (not isinstance(correct_urls, Sequence) and not url_link in correct_urls):
+    if correct_urls is None:
         try:
             visited_url = urllib.request.urlopen(Request(url_link,
                                                      headers={'User-Agent': 'XYZ/3.0'}))
